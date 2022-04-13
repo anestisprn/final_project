@@ -11,7 +11,7 @@
 .bg-light{
     background-color: #ADD9D8 !important;
 }
-
+/* THIS WILL MAKE THE HEADER BE ON THE MAXIMUM VIEWPORT HEIGHT 100% AND MOVE THE NAVBAR -200 PX UP*/
 #carouselCaptions{
   height:100%;
   margin-top: -240px;
