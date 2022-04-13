@@ -47,12 +47,15 @@
       <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
         <img src="{% static 'media/images/pexels-alex-azabache-3722809.jpg'%}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          
+          {%for tour in allToursList%}
+          <h5 class="card-title">{{tour.tourTitle}} </h5>
+          <p class="card-text">{{tour.tourDescription}}</p>
+          <a href="#" class="btn btn-primary">Book now</a>
+          {%endfor%}
         </div>
       </div>
-
+      
       <div class="card col-sm mx-auto" style="width: 18rem; max-width: 400px;">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
@@ -74,4 +77,7 @@
     </div>
   </div>
 
+
+
+  
 {% endblock %}
