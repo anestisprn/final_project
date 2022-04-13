@@ -11,3 +11,8 @@
 .bg-light{
     background-color: #ADD9D8 !important;
 }
+
+#carouselCaptions{
+  height:100%;
+  margin-top: -240px;
+}
