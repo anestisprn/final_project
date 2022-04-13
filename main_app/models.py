@@ -1,3 +1,4 @@
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 import uuid
@@ -45,8 +46,10 @@ class TourExperience(models.Model):
     tourPrice = models.FloatField()
     tourAvailableDate = models.DateField()
     tourMaxNumberOfPeople = models.IntegerField()
-    tourDescription = models.TextField(max_length=300)
+    tourDescription = models.TextField(max_length=499)
     tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE)
+    tourImage = models.ImageField(
+        upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, null=True)
 
     def __str__(self):
         return self.tourTitle
