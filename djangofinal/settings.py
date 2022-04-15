@@ -128,5 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 # AUTH_USER_MODEL = 'main_app.CustomUser'

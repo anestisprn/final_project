@@ -48,6 +48,11 @@ def signup_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            guideList = request.POST.getlist("make_guide")
+            if guideList:
+                guide = TourGuide(user=request.user, is_guide=True)
+                guide.save()
+            return redirect("/")
     else:
         form = UserCreationForm()
     return render(request, "main_app/signup_user.html", {"form": form})

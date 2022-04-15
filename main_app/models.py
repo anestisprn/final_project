@@ -15,7 +15,7 @@ import uuid
 
 
 class EndUser(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     userFirstName = models.CharField(max_length=50)
     userLastName = models.CharField(max_length=50)
     userRegistration = models.DateField()
@@ -28,17 +28,19 @@ class EndUser(models.Model):
 
 
 class TourGuide(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     guideFirstName = models.CharField(max_length=50)
     guideLastName = models.CharField(max_length=50)
     guideDescription = models.TextField(max_length=300)
+    is_guide = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.guideFirstName} {self.guideLastName}"
 
 
 class TourExperience(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tourTitle = models.CharField(max_length=100)
     tourLocation = models.CharField(max_length=50)
     tourDuration = models.IntegerField()

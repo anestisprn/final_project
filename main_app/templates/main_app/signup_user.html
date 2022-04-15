@@ -7,6 +7,11 @@
         {% csrf_token %}
         <div class="form-group">
             {{ form.as_p }}
+            <br>
+            <label for ="make_guide"> i am a moderator </label>
+            <input type="checkbox" id="make_guide" name="make_guide" value="guide">
+            <br>
+            {% comment %} {{ form.as_table }} {% endcomment %}
             {% comment %} {{form|crispy}} {% endcomment %}
             <button type="submit" class="btn btn-primary"> sign up </button>
             <button type="reset" class="btn btn-secondary"> reset </button>
