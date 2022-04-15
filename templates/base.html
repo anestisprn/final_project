@@ -37,6 +37,9 @@
 
               {% if user.is_active %}
                 <li class="nav-item">
+                  <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="/logout/" tabindex="-1" aria-disabled="true">Logout</a>
                 </li>
               {% else %}
