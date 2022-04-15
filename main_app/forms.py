@@ -12,7 +12,7 @@ class LoginForm(forms.Form):
             'password': forms.PasswordInput(),
         }
 
-class RegistrationForm(ModelForm):
+class RegistrationForm(forms.Form):
     class Meta:
-        model = CustomUser
+        # model = CustomUser
         fields = ('username', 'password')

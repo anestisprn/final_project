@@ -5,7 +5,11 @@
 <h1> Sign up </h1>
     <form method='post'>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type='submit'>Sign up</button>
+        <div class="form-group">
+            {{ form.as_p }}
+            {% comment %} {{form|crispy}} {% endcomment %}
+            <button type="submit" class="btn btn-primary"> sign up </button>
+            <button type="reset" class="btn btn-secondary"> reset </button>
+        </div>
     </form>
 {% endblock %}

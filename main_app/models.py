@@ -4,27 +4,27 @@ import uuid
 # Create your models here.
 
 
-class CustomUser(AbstractUser):
-    USER_TYPE_CHOICES = (
-        ('end_user', 'end_user'),
-        ('tour_guide', 'tour_guide'),
-        ('moderator', 'moderator'),
-    )
-    user_type = models.CharField(max_length=50,
-                                 choices=USER_TYPE_CHOICES, null=True)
+# class CustomUser(AbstractUser):
+#     USER_TYPE_CHOICES = (
+#         ('end_user', 'end_user'),
+#         ('tour_guide', 'tour_guide'),
+#         ('moderator', 'moderator'),
+#     )
+#     user_type = models.CharField(max_length=50,
+#                                  choices=USER_TYPE_CHOICES, null=True)
 
 
 class EndUser(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     userFirstName = models.CharField(max_length=50)
     userLastName = models.CharField(max_length=50)
-    user_registration = models.DateField()
+    userRegistration = models.DateField()
     userDateOfBirth = models.DateField()
-    user = models.ForeignKey(
-        CustomUser,  on_delete=models.CASCADE, null=True)
+    # user = models.ForeignKey(
+    #     CustomUser,  on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.userFirstName
+        return f"{self.userFirstName} {self.userLastName}"
 
 
 class TourGuide(models.Model):
@@ -34,7 +34,7 @@ class TourGuide(models.Model):
     guideDescription = models.TextField(max_length=300)
 
     def __str__(self):
-        return self.guideFirstName
+        return f"{self.guideFirstName} {self.guideLastName}"
 
 
 class TourExperience(models.Model):

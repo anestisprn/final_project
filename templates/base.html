@@ -34,9 +34,20 @@
               <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="signup_user/" tabindex="-1" aria-disabled="true">SignUp</a>
-              </li>
+
+              {% if user.is_active %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout/" tabindex="-1" aria-disabled="true">Logout</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/login/" tabindex="-1" aria-disabled="true">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup_user/" tabindex="-1" aria-disabled="true">SignUp</a>
+                </li>
+              {% endif %}
+
             </ul>
           </div>
         </div>
