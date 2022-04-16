@@ -34,6 +34,8 @@ class TourGuide(models.Model):
     guideFirstName = models.CharField(max_length=50)
     guideLastName = models.CharField(max_length=50)
     guideDescription = models.CharField(max_length=300)
+    guideUsername = models.CharField(max_length=30)
+    guidePassword = models.CharField(max_length=30)
     # guideDob = models.DateField()
     dateCreated = models.DateField(auto_now = True)
     numberOfActivities = models.IntegerField(blank=True, null=True)
