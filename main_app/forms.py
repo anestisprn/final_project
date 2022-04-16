@@ -1,6 +1,8 @@
-# from django.forms import ModelForm
-# from .models import *
-# from django import forms
+from django.forms import ModelForm
+from .models import *
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
 
 
 # class LoginForm(forms.Form):
@@ -12,7 +14,16 @@
 #             'password': forms.PasswordInput(),
 #         }
 
-# class RegistrationForm(forms.Form):
+
+# class RegistrationForm(ModelForm):
 #     class Meta:
-#         model = User
+#         model = CustomUser
 #         fields = ('username', 'password')
+
+class GuideRegistrationForm(UserCreationForm):
+    class Meta:
+        model = TourGuide
+        fields = ('username', 'first_name', 'last_name', 'guideDescription')
+        # widgets = {
+        #     'guidePassword': forms.PasswordInput(),
+        # }

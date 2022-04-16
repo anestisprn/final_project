@@ -3,47 +3,33 @@ from django.contrib.auth.models import User, AbstractUser
 import uuid
 # Create your models here.
 
+# class EndUser(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#     userFirstName = models.CharField(max_length=50)
+#     userLastName = models.CharField(max_length=50)
+#     user_registration = models.DateField()
+#     userDateOfBirth = models.DateField()
+#     # user = models.ForeignKey(
+#     #     CustomUser,  on_delete=models.CASCADE, null=True)
 
-# class CustomUser(AbstractUser):
-#     USER_TYPE_CHOICES = (
-#         ('end_user', 'end_user'),
-#         ('tour_guide', 'tour_guide'),
-#         ('moderator', 'moderator'),
-#     )
-#     user_type = models.CharField(max_length=50,
-#                                  choices=USER_TYPE_CHOICES, null=True)
+#     def __str__(self):
+#         return self.userFirstName
 
-
-class EndUser(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    userFirstName = models.CharField(max_length=50)
-    userLastName = models.CharField(max_length=50)
-    userRegistration = models.DateField()
-    userDateOfBirth = models.DateField()
-    # user = models.ForeignKey(
-    #     CustomUser,  on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return f"{self.userFirstName} {self.userLastName}"
-
-
-class TourGuide(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    # isGuide = models.BooleanField(default=False)
-    # user = models.OneToOneField(EndUser, on_delete=models.CASCADE)
-    guideFirstName = models.CharField(max_length=50)
-    guideLastName = models.CharField(max_length=50)
+# #sign up as a tour guide
+class TourGuide(User):
     guideDescription = models.CharField(max_length=300)
-    # guideDob = models.DateField()
-    dateCreated = models.DateField(auto_now = True)
+    # guideDob = models.DateField(null=True)
     numberOfActivities = models.IntegerField(blank=True, null=True)
     income = models.IntegerField(blank=True, null=True)
     ratings = models.IntegerField(blank=True, null=True)
-    avgRating = models.IntegerField(blank=True, null=True)
-    isGuideApproved = models.BooleanField(default=False)
+    approvalChoices = (
+        ('Approved', True), 
+        ('Non-approved', False)
+    )
+    isGuideApproved = models.CharField(max_length=12, choices=approvalChoices)
 
-    def __str__(self):
-        return f"{self.guideFirstName} {self.guideLastName}"
+    # def __str__(self):
+    #     return self.guideFirstName
 
 
 class TourExperience(models.Model):
@@ -55,7 +41,7 @@ class TourExperience(models.Model):
     tourAvailableDate = models.DateField()
     tourMaxNumberOfPeople = models.IntegerField()
     tourDescription = models.TextField(max_length=499)
-    tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE)
+    tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE, related_name='tourexperience', null = True)
     tourImage = models.ImageField(
         upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, null=True)
 

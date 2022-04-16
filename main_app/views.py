@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import *
 
 
+
 from .models import *
 
 # Create your views here.
@@ -21,10 +22,11 @@ def signup_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            guideList = request.POST.getlist("make_guide")
-            if guideList:
-                guide = TourGuide(user=request.user, is_guide=True)
-                guide.save()
+
+            # guideList = request.POST.getlist("make_guide")
+            # if guideList:
+            #     guide = TourGuide(user=request.user, is_guide=True)
+            #     guide.save()
             return redirect("/")
     else:
         form = UserCreationForm()
@@ -33,7 +35,7 @@ def signup_user(request):
 
 def signup_guide(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = GuideRegistrationForm(request.POST)
         if form.is_valid():
             form.save()            
             username = form.cleaned_data.get('username')
@@ -42,8 +44,7 @@ def signup_guide(request):
             login(request,user)
             return redirect('homepage')
     else:
-        form = UserCreationForm()
-
+        form = GuideRegistrationForm()
     return render(request, 'main_app/signup_guide.html', {'form':form})
 
 
@@ -74,3 +75,12 @@ def dashboard(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
     return render(request, 'main_app/dashboard.html', context)
+
+
+def guideActivities(request):
+    pass
+
+# def approveGuide(request):
+#     if TourGuide.isGuideApproved == True:
+#         show him the content and allow him to create activities.
+

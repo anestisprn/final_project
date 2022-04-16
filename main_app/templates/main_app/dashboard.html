@@ -4,6 +4,39 @@
 {% block title %} dashboard {% endblock %}
 
 {% block content %}
-    <h2> {{ request.user.username }} dashboard </h2>
-{% endblock %}
 
+    <h2> {{ request.user.username }} dashboard </h2>
+
+    {%if user.tourguide.isGuideApproved == 'Approved' %}
+        <h1> Congratulations you have now been approved. </h1>
+
+        <h2> {{user.tourguide}}</h2>
+        <h2> {{TourExperience.tourTitle}}</h2>
+
+            <ul>
+                {%for tour in allToursList%}
+                {%if tour.tourGuide.id == user.tourguide.id %} 
+
+                <li>
+                    <span class="tourName"> Name: {{tour.tourTitle}} </span>
+                </li>
+                <li>
+                    <span class="tourName"> Name: {{tour.tourGuide}} </span>
+                </li>
+                {%endif%}
+                {%endfor%}
+                
+            </ul>
+    
+
+
+
+
+
+
+    {%else %}
+        <h1> You have not been approved yet. Please contact us at support@e-tours.gr</h1>
+    {%endif %}
+
+{% endblock %}
+>>>>>>> richter-branch
