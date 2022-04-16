@@ -21,9 +21,8 @@ from django.contrib.auth.forms import UserCreationForm
 
 class GuideRegistrationForm(UserCreationForm):
     class Meta:
-        model = User
-        # fields = ('guideUsername', 'guidePassword', 'guideFirstName', 'guideLastName', 'guideDescription' )
-        fields = ('__all__')
+        model = TourGuide
+        fields = ('username', 'first_name', 'last_name', 'guideDescription')
         # widgets = {
         #     'guidePassword': forms.PasswordInput(),
         # }
