@@ -20,6 +20,12 @@ from django.contrib.auth.forms import UserCreationForm
 #         model = CustomUser
 #         fields = ('username', 'password')
 
+
+class UserRegistrationForm(UserCreationForm):
+    class Meta:
+        model = EndUser
+        fields = ('username', 'first_name', 'last_name', 'userDescription')
+
 class GuideRegistrationForm(UserCreationForm):
     class Meta:
         model = TourGuide

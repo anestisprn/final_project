@@ -3,21 +3,18 @@ from django.contrib.auth.models import User, AbstractUser
 import uuid
 # Create your models here.
 
-# class EndUser(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-#     userFirstName = models.CharField(max_length=50)
-#     userLastName = models.CharField(max_length=50)
-#     user_registration = models.DateField()
-#     userDateOfBirth = models.DateField()
-#     # user = models.ForeignKey(
-#     #     CustomUser,  on_delete=models.CASCADE, null=True)
+class EndUser(User):
+    userDescription = models.CharField(max_length=300, blank=True, null=True)
+    # userDateOfBirth = models.DateField()
+    # user = models.ForeignKey(
+    #     CustomUser,  on_delete=models.CASCADE, null=True)
 
-#     def __str__(self):
-#         return self.userFirstName
+    # def __str__(self):
+    #     return self.userFirstName
 
-# #sign up as a tour guide
+
 class TourGuide(User):
-    guideDescription = models.CharField(max_length=300)
+    guideDescription = models.CharField(max_length=300, blank=True, null=True)
     # guideDob = models.DateField(null=True)
     numberOfActivities = models.IntegerField(blank=True, null=True)
     income = models.IntegerField(blank=True, null=True)

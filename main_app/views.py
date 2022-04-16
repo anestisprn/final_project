@@ -15,7 +15,7 @@ def homepage(request):
 def signup_user(request):
     if request.method == "POST":
         # form validation, save new user object, authenticate and login user
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
@@ -29,7 +29,7 @@ def signup_user(request):
             #     guide.save()
             return redirect("/")
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
     return render(request, "main_app/signup_user.html", {"form": form})
 
 
