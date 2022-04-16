@@ -7,6 +7,6 @@ urlpatterns = [
     path('signup_user/', signup_user, name='signup_user'),
     path('signup_guide/', signup_guide, name='signup_guide'),
     path('dashboard/', dashboard, name='dashboard'),
-    [
+]
 
 
