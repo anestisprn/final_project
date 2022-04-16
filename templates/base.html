@@ -31,10 +31,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li>
-
+            </div>
+          </ul>
+            <div class="collapse navbar-collapse justify-content-end me-5" id="navbarNav">
+              <ul class="navbar-nav">
               {% if user.is_active %}
                 <li class="nav-item">
                   <a class="nav-link text-danger" href="#" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
@@ -46,12 +46,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/login/" tabindex="-1" aria-disabled="true">Login</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/signup_user/" tabindex="-1" aria-disabled="true">SignUp</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link" href="/signup_user/" tabindex="-1" aria-disabled="true">Sign up</a>
                 </li>
               {% endif %}
-
             </ul>
+            </div>
           </div>
         </div>
       </nav>
