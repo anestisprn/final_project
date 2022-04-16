@@ -26,7 +26,11 @@ class TourGuide(User):
     numberOfActivities = models.IntegerField(blank=True, null=True)
     income = models.IntegerField(blank=True, null=True)
     ratings = models.IntegerField(blank=True, null=True)
-    isGuideApproved = models.BooleanField(default=False)
+    approvalChoices = (
+        ('Approved', True), 
+        ('Non-approved', False)
+    )
+    isGuideApproved = models.CharField(max_length=12, choices=approvalChoices)
 
 
 #     # def __str__(self):
@@ -41,7 +45,7 @@ class TourExperience(models.Model):
     tourAvailableDate = models.DateField()
     tourMaxNumberOfPeople = models.IntegerField()
     tourDescription = models.TextField(max_length=499)
-    tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE)
+    tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE, related_name='tourexperience', null = True)
     tourImage = models.ImageField(
         upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, null=True)
 

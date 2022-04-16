@@ -4,5 +4,32 @@
 {% block title %} dashboard {% endblock %}
 
 {% block content %}
+
     <h2> {{ request.user.username }} dashboard </h2>
+
+    {%if user.tourguide.isGuideApproved == 'Approved' %}
+        <h1> Congratulations you have now been approved. </h1>
+
+        <h2> {{user.tourguide}}</h2>
+        {%if tourexperience.tourGuide == user.tourguide %} 
+            <ul>
+                {%for tour in allToursList%}
+                <li>
+                    <span class="tourName"> Name: {{tour.tourTitle}} </span>
+                </li>
+                {%endfor%}
+                
+            </ul>
+        {%endif%}
+    
+
+
+
+
+
+
+    {%else %}
+        <h1> You have not been approved yet. Please contact us at support@e-tours.gr</h1>
+    {%endif %}
+
 {% endblock %}
