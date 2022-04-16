@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
-{%load static%}
+{% load static%}
+
 {% block title %} Homepage {% endblock %}
+
 {% block content %}
 <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -43,7 +45,7 @@
 
   <div class="container p-4" >
     <div class="row">
-      {%for tour in allToursList%}
+      {% for tour in allToursList %}
       <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
         <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
         <div class="card-body">
@@ -53,7 +55,7 @@
           <a href="#" class="btn btn-primary">Book now</a>
         </div>
       </div>
-      {%endfor%}   
+      {% endfor %}   
     </div>
   </div>
 {% endblock %}
