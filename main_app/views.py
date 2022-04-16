@@ -43,8 +43,7 @@ def signup_guide(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = raw_password)
             login(request,user)
-            # return redirect('homepage')
-            # login(request, user)
+            return redirect('homepage')
     else:
         form = UserCreationForm()
 
