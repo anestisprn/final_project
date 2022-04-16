@@ -11,16 +11,22 @@
         <h1> Congratulations you have now been approved. </h1>
 
         <h2> {{user.tourguide}}</h2>
-        {%if tourexperience.tourGuide == user.tourguide %} 
+        <h2> {{TourExperience.tourTitle}}</h2>
+
             <ul>
                 {%for tour in allToursList%}
+                {%if tour.tourGuide.id == user.tourguide.id %} 
+
                 <li>
                     <span class="tourName"> Name: {{tour.tourTitle}} </span>
                 </li>
+                <li>
+                    <span class="tourName"> Name: {{tour.tourGuide}} </span>
+                </li>
+                {%endif%}
                 {%endfor%}
                 
             </ul>
-        {%endif%}
     
 
 

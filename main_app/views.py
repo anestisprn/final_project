@@ -69,7 +69,7 @@ def logout_user(request):
     logout(request)
     return redirect("homepage")
 
-def dashboard(request, id):
+def dashboard(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
     return render(request, 'main_app/dashboard.html', context)
