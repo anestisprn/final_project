@@ -36,7 +36,7 @@ def signup_user(request):
 
 def signup_guide(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = GuideRegistrationForm(request.POST)
         if form.is_valid():
             form.save()            
             username = form.cleaned_data.get('username')
@@ -45,7 +45,7 @@ def signup_guide(request):
             login(request,user)
             return redirect('homepage')
     else:
-        form = UserCreationForm()
+        form = GuideRegistrationForm()
 
     return render(request, 'main_app/signup_guide.html', {'form':form})
 
