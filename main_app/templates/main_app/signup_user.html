@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
-{%load static%}
+{% load static %}
+
 {% block title %} Sign up page {% endblock %}
+
 {% block content %}
-<h1> Sign up </h1>
+    <h1> Sign up </h1>
     <form method='post'>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type='submit'>Sign up</button>
+        <div class="form-group">
+            {{ form.as_p }}
+            <br>
+            <label for ="make_guide"> i am a Tour Guide </label>
+            <input type="checkbox" id="make_guide" name="make_guide" value="guide">
+            <br>
+            {% comment %} {{ form.as_table }} {% endcomment %}
+            {% comment %} {{form|crispy}} {% endcomment %}
+            <button type="submit" class="btn btn-primary"> sign up </button>
+            <button type="reset" class="btn btn-secondary"> reset </button>
+        </div>
     </form>
 {% endblock %}

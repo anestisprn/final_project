@@ -34,6 +34,28 @@
               <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
               </li>
+              {% if user.is_active %}
+                <li class="nav-item">
+                  {% if user.is_superuser%}
+                    <a class="nav-link text-danger" href="/admin/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
+                  {% else %}
+                    <a class="nav-link text-danger" href="/dashboard/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
+              {%endif%}
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout/" tabindex="-1" aria-disabled="true">Logout</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/login/" tabindex="-1" aria-disabled="true">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup_user/" tabindex="-1" aria-disabled="true">SignUp</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup_guide/" tabindex="-1" aria-disabled="true">Become a guide</a>
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>
