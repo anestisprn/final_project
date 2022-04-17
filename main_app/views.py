@@ -79,7 +79,7 @@ def dashboard_user(request):
     context = {'allToursList': allToursList}
     return render(request, 'main_app/dashboard_user.html', context)
 
-def guide_creates_activity(request):
+def guide_creates_activity(request, id):
     errors = {}
     if request.method == 'POST':
         newExperienceTitle = request.POST['experience_title']
@@ -89,7 +89,7 @@ def guide_creates_activity(request):
         newTourAvailableDate = request.POST['experience_available_date']
         newTourMaxNumberOfPeople = request.POST['experience_tour_max_num_people']
         newTourDescription = request.POST['experience_description']
-        newTourGuide = request.POST['experience_tour_guide'] #to get guide based on id
+        currentGuide = User.objects.get(pk = request.user.id)
         newTourImage = request.POST['experience_tour_image']
 
         if request.user.tourguide.isGuideApproved == 'Approved': 
@@ -101,8 +101,10 @@ def guide_creates_activity(request):
             createExperience.tourAvailableDate = newTourAvailableDate
             createExperience.tourMaxNumberOfPeople = newTourMaxNumberOfPeople
             createExperience.tourDescription = newTourDescription
-            createExperience.tourGuide = newTourGuide #to get guide based on id
+            # createExperience.tourGuide = newTourGuide #to get guide based on id
+            createExperience.tourGuide = currentGuide
             createExperience.tourImage = newTourImage
+            createExperience.save()
 
             if not newExperienceTitle:
                 errors['empty_experience_title'] = 'Please enter an experience title'

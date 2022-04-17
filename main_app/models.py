@@ -29,7 +29,7 @@ class TourExperience(models.Model):
     tourAvailableDate = models.DateField()
     tourMaxNumberOfPeople = models.IntegerField()
     tourDescription = models.TextField(max_length=499)
-    tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE, related_name='tourexperience', null = True)
+    tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE, related_name='tourexperience')
     tourImage = models.ImageField(
         upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, null=True)
 

@@ -15,9 +15,12 @@
             <ul>
                 {%for tour in allToursList%}
                 {%if tour.tourGuide.id == user.tourguide.id %} 
-
+                <h1> {{user.tourguide.id}} </h1>
+                <h1> {{tour.tourGuide}} </h1>
+            
                 <li>
                     <span class="tourName"> Tour Name: {{tour.tourTitle}} </span>
+                    
                 </li>
                 <li>
                     <span class="TourLocation"> Tour Location: {{tour.tourLocation}} </span>
@@ -34,25 +37,25 @@
                 <input type='text' name='experience_title' id='experience_title' value={{tourExperience.newExperienceTitle}}> <br>
         
                 <label for='experience_location'>Experience Location:</label>
-                <input type='text' name='trainer_pronoun' id='trainer_pronoun' value={{trainer.pronoun}}> <br>
+                <input type='text' name='experience_location' id='experience_location' value={{tourExperience.newExperienceLocation}}> <br>
                 
-                <label for='trainer_pronoun'>Pronoun:</label>
-                <input type='text' name='trainer_pronoun' id='trainer_pronoun' value={{trainer.pronoun}}> <br>
+                <label for='experience_duration'>Experience Duration:</label>
+                <input type='text' name='experience_duration' id='experience_duration' value={{tourExperience.newExperienceDuration}}> <br>
                 
-                <label for='trainer_pronoun'>Pronoun:</label>
-                <input type='text' name='trainer_pronoun' id='trainer_pronoun' value={{trainer.pronoun}}> <br>
+                <label for='experience_price'>Experience Price:</label>
+                <input type='text' name='experience_price' id='experience_price' value={{tourExperience.newExperiencePrice}}> <br>
                 
-                <label for='trainer_pronoun'>Pronoun:</label>
-                <input type='text' name='trainer_pronoun' id='trainer_pronoun' value={{trainer.pronoun}}> <br>
+                <label for='experience_available_date'>Experience Available Dates:</label>
+                <input type='date' name='experience_available_date' id='experience_available_date' value={{tourExperience.newTourAvailableDate}}> <br>
         
-                <label for='trainer_first_name'>First Name:</label>
-                <input type='text' name='trainer_first_name' id='trainer_first_name' value={{trainer.first_name}}>
+                <label for='experience_tour_max_num_people'>Experience Max Number of People:</label>
+                <input type='text' name='experience_tour_max_num_people' id='experience_tour_max_num_people' value={{tourExperience.newTourMaxNumberOfPeople}}>
         
-                <label for='trainer_last_name'>Last Name:</label>
-                <input type='text' name='trainer_last_name' id='trainer_last_name' value={{trainer.last_name}}>
+                <label for='experience_description'>Experience Description:</label>
+                <input type='text' name='experience_description' id='experience_description' value={{tourExperience.newTourDescription}}>
         
-                <label for='trainer_subjectt'>Subject:</label>
-                <input type='text' name='trainer_subject' id='trainer_subject' value={{trainer.subject}}>
+                <label for='experience_tour_image'>Experience Image:</label>
+                <input type='text' name='experience_tour_image' id='trainerexperience_tour_image_subject' value={{tourExperience.newTourImage}}>
                 
                 {% if empty_first_name %}
                     <div>{{ empty_first_name }}</div>
