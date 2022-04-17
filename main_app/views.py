@@ -69,10 +69,15 @@ def logout_user(request):
     logout(request)
     return redirect("homepage")
 
-def dashboard(request):
+def dashboard_guide(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
-    return render(request, 'main_app/dashboard.html', context)
+    return render(request, 'main_app/dashboard_guide.html', context)
+
+def dashboard_user(request):
+    allToursList = TourExperience.objects.all()
+    context = {'allToursList': allToursList}
+    return render(request, 'main_app/dashboard_user.html', context)
 
 def guide_creates_activity(request):
     errors = {}

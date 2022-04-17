@@ -3,19 +3,6 @@ from django.contrib.auth.models import User, AbstractUser
 import uuid
 # Create your models here.
 
-
-# class EndUser(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-#     userFirstName = models.CharField(max_length=50)
-#     userLastName = models.CharField(max_length=50)
-#     user_registration = models.DateField()
-#     userDateOfBirth = models.DateField()
-#     # user = models.ForeignKey(
-#     #     CustomUser,  on_delete=models.CASCADE, null=True)
-
-#     def __str__(self):
-#         return self.userFirstName
-
 # #sign up as a tour guide
 class TourGuide(User):
     guideDescription = models.CharField(max_length=300)
@@ -30,11 +17,10 @@ class TourGuide(User):
     isGuideApproved = models.CharField(max_length=12, choices=approvalChoices)
 
 
-#     # def __str__(self):
-#     #     return self.guideFirstName
+    # def __str__(self):
+    #     return self.guideFirstName
 
 class TourExperience(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tourTitle = models.CharField(max_length=100)
     tourLocation = models.CharField(max_length=50)
     tourDuration = models.IntegerField()
@@ -48,3 +34,12 @@ class TourExperience(models.Model):
 
     def __str__(self):
         return self.tourTitle
+
+class EndUser(User):
+    userDateOfBirth = models.DateField()
+    tourExperiences = models.ManyToManyField(TourExperience)
+    # user = models.ForeignKey(
+    #     CustomUser,  on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.userFirstName

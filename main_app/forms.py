@@ -26,3 +26,14 @@ class GuideRegistrationForm(UserCreationForm):
         # widgets = {
         #     'guidePassword': forms.PasswordInput(),
         # }
+
+
+class UserRegistrationForm(UserCreationForm):
+    class Meta:
+        model = EndUser
+        fields = ('username', 'first_name', 'last_name', 'userDateOfBirth')
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
