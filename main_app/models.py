@@ -4,7 +4,6 @@ import uuid
 # Create your models here.
 
 
-# sign up as a tour guide
 class EndUser(User):
     userDateOfBirth = models.DateField(blank=True, null=True)
     class Meta:

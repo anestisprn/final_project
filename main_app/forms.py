@@ -4,10 +4,14 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 
-
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -20,12 +24,6 @@ class GuideRegistrationForm(UserCreationForm):
     class Meta:
         model = TourGuide
         fields = ('username', 'first_name', 'last_name', 'guideDescription')
-
-
-#     class Meta:
-#         widgets = {
-#             'password': forms.PasswordInput(),
-#         }
 
 
 # class RegistrationForm(ModelForm):
