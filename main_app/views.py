@@ -9,6 +9,14 @@ def homepage(request):
     context = {'allToursList': TourExperience.objects.all()}
     return render(request, 'main_app/homepage.html', context)
 
+def tourExperience(request):
+    context = {'allToursList': TourExperience.objects.all()}
+    return render(request, 'main_app/tourExperience.html', context)
+
+def contactUs(request):
+    context = {}
+    return render(request, 'main_app/contactUs.html', context)
+
 
 def signupUser(request):
     if request.method == "POST":
@@ -25,7 +33,6 @@ def signupUser(request):
         form = UserRegistrationForm()
     return render(request, "main_app/signupUser.html", {"form": form})
 
-
 def signupGuide(request):
     if request.method == 'POST':
         form = GuideRegistrationForm(request.POST)
@@ -40,7 +47,6 @@ def signupGuide(request):
         form = GuideRegistrationForm()
     return render(request, 'main_app/signupGuide.html', {'form':form})
 
-
 def loginUser(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -54,6 +60,9 @@ def loginUser(request):
         form = LoginForm()
     return render (request, "main_app/login.html", {'form':form})
 
+def logoutUser(request):
+    logout(request)
+    return redirect("homepage")
 
 # def loginUser(request):
 #     myErrors = {}
@@ -74,16 +83,10 @@ def loginUser(request):
 #     return render (request, "main_app/login.html", myErrors)
 
 
-def logoutUser(request):
-    logout(request)
-    return redirect("homepage")
-
-
 def dashboardGuide(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
     return render(request,'main_app/dashboardGuide.html', context)
-
 
 def createActivity(request, id):
     context = {}
@@ -122,16 +125,27 @@ def createActivity(request, id):
             return redirect("homepage")
     return render(request,'main_app/createActivity.html', context)
 
+def updateActivity(request, id):
+    context = {}    
+    return render(request, 'main_app/updateActivity.html', context)
+
+def deleteActivity(request, id):
+    context = {}    
+    return render(request, 'main_app/deleteActivity.html', context)
+
+
 def dashboardUser(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
     return render(request, 'main_app/dashboardUser.html', context)
 
-
 def joinActivity(request):
     context = {}    
     return render(request, 'main_app/joinActivity.html', context)
 
+def dropActivity(request):
+    context = {}    
+    return render(request, 'main_app/dropActivity.html', context)
 
 
 

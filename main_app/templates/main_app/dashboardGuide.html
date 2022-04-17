@@ -9,8 +9,8 @@
 
     {%if user.tourguide.isGuideApproved == 'Approved' %}
         <h5> Congratulations you have now been approved. </h5>
-        <span><a href="/dashboardGuide/createActivity/{{user.tourguide.id}}">create new experience</a></span>
-        <h2> Your tours: </h2>
+        <span><a href="/dashboardGuide/createActivity/{{user.tourguide.id}}">create new activity</a></span>
+        <h2> My tours: </h2>
 
             <ul>
                 {%for tour in allToursList%}

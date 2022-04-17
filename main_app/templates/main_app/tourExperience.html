@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tour Experience {% endblock %}
+
+{% block content %}
+<div class="container p-4" >
+    <div class="row">
+      {% for tour in allToursList %}
+      <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
+        <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{tour.tourTitle}} </h5>
+          <p class="card-text">{{tour.tourDescription}}</p>
+          <a href="#" class="btn btn-primary">Book now</a>
+        </div>
+      </div>
+      {% endfor %}   
+    </div>
+  </div>
+{% endblock %}

@@ -7,6 +7,8 @@ import uuid
 # sign up as a tour guide
 class EndUser(User):
     userDateOfBirth = models.DateField(blank=True, null=True)
+    class Meta:
+        verbose_name = 'EndUser'
 
 
 class TourGuide(User):
@@ -16,10 +18,12 @@ class TourGuide(User):
     income = models.IntegerField(blank=True, null=True)
     ratings = models.IntegerField(blank=True, null=True)
     approvalChoices = (
-        ('Approved', True), 
+        ('Approved', True),
         ('Non-approved', False)
     )
     isGuideApproved = models.CharField(max_length=12, choices=approvalChoices)
+    class Meta:
+        verbose_name = 'TourGuide'
 
 
 class TourExperience(models.Model):
