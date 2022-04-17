@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} login {% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
-    <h2> login user: </h2>
-    <form method="post">
+    <h2> Login </h2>
+    <form method='post'>
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+            <small class="form-text text-danger">{{typeError}}</small>
+            <small class="form-text text-danger">{{attributeError}}</small>
+            <br>
+            <button type="submit" class="btn btn-primary"> login </button>
+            <button type="reset" class="btn btn-secondary"> reset </button>
+        </div>
+    </form>
+
+    {% comment %} <form method="post">
         {% csrf_token %}
         <div class="form-group">
             <label for="username"> username : </label>
@@ -19,6 +31,6 @@
             <button type="submit" class="btn btn-primary"> login </button>
             <button type="reset" class="btn btn-secondary"> reset </button>
         </div>
-    </form>
+    </form> {% endcomment %}
 {% endblock %}
 

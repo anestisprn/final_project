@@ -5,9 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 
-# class LoginForm(forms.Form):
-#     username = forms.CharField()
-#     password = forms.CharField(widget=forms.PasswordInput)
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
 #     class Meta:
 #         widgets = {
@@ -26,10 +26,9 @@ class UserRegistrationForm(UserCreationForm):
         model = EndUser
         fields = ('username', 'first_name', 'last_name', 'userDescription')
 
+
 class GuideRegistrationForm(UserCreationForm):
     class Meta:
         model = TourGuide
         fields = ('username', 'first_name', 'last_name', 'guideDescription')
-        # widgets = {
-        #     'guidePassword': forms.PasswordInput(),
-        # }
+

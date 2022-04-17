@@ -1,42 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} dashboard {% endblock %}
+{% block title %} Dashboard {% endblock %}
 
 {% block content %}
 
     <h2> {{ request.user.username }} dashboard </h2>
 
     {%if user.tourguide.isGuideApproved == 'Approved' %}
-        <h1> Congratulations you have now been approved. </h1>
+        <h5 class="text-success"> Congratulations you have now been approved. </h5>
 
         <h2> {{user.tourguide}}</h2>
-        <h2> {{TourExperience.tourTitle}}</h2>
+        <h2> my tour experiences </h2>
 
             <ul>
                 {%for tour in allToursList%}
-                {%if tour.tourGuide.id == user.tourguide.id %} 
+                {%if tour.id == user.tourguide.tourExperience.id %} 
 
                 <li>
-                    <span class="tourName"> Name: {{tour.tourTitle}} </span>
+                    <span class="tourName"> Title: {{tour.tourTitle}} </span>
                 </li>
                 <li>
-                    <span class="tourName"> Name: {{tour.tourGuide}} </span>
+                    <span class="tourName"> Location: {{tour.tourLocation}} </span>
                 </li>
-                {%endif%}
-                {%endfor%}
-                
+                <li>
+                    <span class="tourName"> Duration: {{tour.tourDuration}} </span>
+                </li>
+                <li>
+                    <span class="tourName"> Price: {{tour.tourPrice}} </span>
+                </li>
+                <li>
+                    <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
+                </li>
+                {% endif %}
+                {% endfor %}
             </ul>
-    
-
-
-
-
-
-
     {%else %}
-        <h1> You have not been approved yet. Please contact us at support@e-tours.gr</h1>
+        <h5 class="text-danger"> You have not been approved yet. Please contact us at support@e-tours.gr</h5>
     {%endif %}
 
 {% endblock %}
->>>>>>> richter-branch
