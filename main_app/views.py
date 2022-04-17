@@ -42,7 +42,6 @@ def signup_guide(request):
 
 
 def login_user(request):
-    errors = {}
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():

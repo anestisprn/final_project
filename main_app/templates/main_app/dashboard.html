@@ -15,7 +15,7 @@
 
             <ul>
                 {%for tour in allToursList%}
-                {%if tour.id == user.tourguide.tourExperience.id %} 
+                {%if tour.tourGuide.id == user.tourguide.id %} 
 
                 <li>
                     <span class="tourName"> Title: {{tour.tourTitle}} </span>
