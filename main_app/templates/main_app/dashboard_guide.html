@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} dashboard {% endblock %}
+
+{% block content %}
+
+    <h2> {{ request.user.username }} dashboard </h2>
+
+    {%if user.tourguide.isGuideApproved == 'Approved' %}
+        <h1> Congratulations you have now been approved. </h1>
+
+        <h2> Your tours: </h2>
+
+            <ul>
+                {%for tour in allToursList%}
+                {%if tour.tourGuide.id == user.tourguide.id %} 
+                <h1> {{user.tourguide.id}} </h1>
+                <h1> {{tour.tourGuide}} </h1>
+            
+                <li>
+                    <span class="tourName"> Tour Name: {{tour.tourTitle}} </span>
+                    
+                </li>
+                <li>
+                    <span class="TourLocation"> Tour Location: {{tour.tourLocation}} </span>
+                </li>
+                {%endif%}
+                {%endfor%}
+            </ul>
+
+            <form method='post'>
+                {% csrf_token %}
+                <h1>Create activity</h1>
+        
+                <label for='experience_title'>Experience Title:</label>
+                <input type='text' name='experience_title' id='experience_title' value={{tourExperience.newExperienceTitle}}> <br>
+        
+                <label for='experience_location'>Experience Location:</label>
+                <input type='text' name='experience_location' id='experience_location' value={{tourExperience.newExperienceLocation}}> <br>
+                
+                <label for='experience_duration'>Experience Duration:</label>
+                <input type='text' name='experience_duration' id='experience_duration' value={{tourExperience.newExperienceDuration}}> <br>
+                
+                <label for='experience_price'>Experience Price:</label>
+                <input type='text' name='experience_price' id='experience_price' value={{tourExperience.newExperiencePrice}}> <br>
+                
+                <label for='experience_available_date'>Experience Available Dates:</label>
+                <input type='date' name='experience_available_date' id='experience_available_date' value={{tourExperience.newTourAvailableDate}}> <br>
+        
+                <label for='experience_tour_max_num_people'>Experience Max Number of People:</label>
+                <input type='text' name='experience_tour_max_num_people' id='experience_tour_max_num_people' value={{tourExperience.newTourMaxNumberOfPeople}}>
+        
+                <label for='experience_description'>Experience Description:</label>
+                <input type='text' name='experience_description' id='experience_description' value={{tourExperience.newTourDescription}}>
+        
+                <label for='experience_tour_image'>Experience Image:</label>
+                <input type='text' name='experience_tour_image' id='trainerexperience_tour_image_subject' value={{tourExperience.newTourImage}}>
+                
+                {% if empty_first_name %}
+                    <div>{{ empty_first_name }}</div>
+                {% elif empty_last_name %}
+                    <div>{{ empty_last_name }}</div>
+                {% elif empty_subject %}
+                    <div>{{ empty_subject }}</div>
+                {% endif %}
+                <br>
+                <button type='submit'>Create</button>
+            </form>
+        
+    {%else %}
+        <h1> You have not been approved yet. Please contact us at support@e-tours.gr</h1>
+    {%endif %}
+
+
+{% endblock %}

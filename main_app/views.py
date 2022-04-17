@@ -79,10 +79,62 @@ def logout_user(request):
     return redirect("homepage")
 
 
-def dashboard(request):
+def dashboard_guide(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
-    return render(request, 'main_app/dashboard.html', context)
+    return render(request, 'main_app/dashboard_guide.html', context)
+
+
+def dashboard_user(request):
+    allToursList = TourExperience.objects.all()
+    context = {'allToursList': allToursList}
+    return render(request, 'main_app/dashboard_user.html', context)
+
+def guide_creates_activity(request, id):
+    errors = {}
+    if request.method == 'POST':
+        newExperienceTitle = request.POST['experience_title']
+        newExperienceLocation = request.POST['experience_location']
+        newExperienceDuration = request.POST['experience_duration']
+        newExperiencePrice = request.POST['experience_price']
+        newTourAvailableDate = request.POST['experience_available_date']
+        newTourMaxNumberOfPeople = request.POST['experience_tour_max_num_people']
+        newTourDescription = request.POST['experience_description']
+        currentGuide = User.objects.get(pk = request.user.id)
+        newTourImage = request.POST['experience_tour_image']
+
+        if request.user.tourguide.isGuideApproved == 'Approved': 
+            createExperience = TourExperience()
+            createExperience.tourTitle = newExperienceTitle
+            createExperience.tourLocation = newExperienceLocation
+            createExperience.tourDuration = newExperienceDuration
+            createExperience.tourPrice = newExperiencePrice
+            createExperience.tourAvailableDate = newTourAvailableDate
+            createExperience.tourMaxNumberOfPeople = newTourMaxNumberOfPeople
+            createExperience.tourDescription = newTourDescription
+            # createExperience.tourGuide = newTourGuide #to get guide based on id
+            createExperience.tourGuide = currentGuide
+            createExperience.tourImage = newTourImage
+            createExperience.save()
+
+            if not newExperienceTitle:
+                errors['empty_experience_title'] = 'Please enter an experience title'
+            if not newExperienceLocation:
+                errors['empty_experience_location'] = 'Please enter an experience location'            
+            if not newExperienceDuration:
+                errors['empty_experience_duration'] = 'Please enter an experience duration'     
+            if not newExperiencePrice:
+                errors['empty_experience_price'] = 'Please enter an experience price'     
+            if not newTourAvailableDate:
+                errors['empty_experience_available_date'] = 'Please enter an experience date'                    
+            if not newTourMaxNumberOfPeople:
+                errors['empty_experience_max_num_people'] = 'Please enter a maximum number of people'     
+            if not newTourDescription:
+                errors['empty_experience_description'] = 'Please enter an experience description'     
+            if not newTourImage:
+                errors['empty_experience_image'] = 'Please enter an experience image'    
+
+    return render(request,'main_app/dashboard.html', errors)
 
 
 def addTour(request, id):
