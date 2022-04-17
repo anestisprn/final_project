@@ -17,8 +17,8 @@ class TourGuide(User):
     isGuideApproved = models.CharField(max_length=12, choices=approvalChoices)
 
 
-    def __str__(self):
-        return f"{User.first_name} {User.last_name}"
+    # def __str__(self):
+    #     return f"{User.first_name} {User.last_name}"
 
 
 class TourExperience(models.Model):

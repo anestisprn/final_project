@@ -89,8 +89,7 @@ def guide_creates_activity(request, id):
         newTourAvailableDate = request.POST['experience_available_date']
         newTourMaxNumberOfPeople = request.POST['experience_tour_max_num_people']
         newTourDescription = request.POST['experience_description']
-        currentGuide = User.objects.get(pk = request.user.id)
-        newTourImage = request.POST['experience_tour_image']
+        # newTourImage = request.POST['experience_tour_image']
 
         if request.user.tourguide.isGuideApproved == 'Approved': 
             createExperience = TourExperience()
@@ -101,9 +100,8 @@ def guide_creates_activity(request, id):
             createExperience.tourAvailableDate = newTourAvailableDate
             createExperience.tourMaxNumberOfPeople = newTourMaxNumberOfPeople
             createExperience.tourDescription = newTourDescription
-            # createExperience.tourGuide = newTourGuide #to get guide based on id
-            createExperience.tourGuide = currentGuide
-            createExperience.tourImage = newTourImage
+            createExperience.tourGuide = User.objects.get(user=request.user)
+            # createExperience.tourImage = newTourImage
             createExperience.save()
 
             if not newExperienceTitle:

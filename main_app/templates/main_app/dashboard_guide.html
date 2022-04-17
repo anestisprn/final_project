@@ -54,16 +54,9 @@
                 <label for='experience_description'>Experience Description:</label>
                 <input type='text' name='experience_description' id='experience_description' value={{tourExperience.newTourDescription}}>
         
-                <label for='experience_tour_image'>Experience Image:</label>
-                <input type='text' name='experience_tour_image' id='trainerexperience_tour_image_subject' value={{tourExperience.newTourImage}}>
-                
-                {% if empty_first_name %}
-                    <div>{{ empty_first_name }}</div>
-                {% elif empty_last_name %}
-                    <div>{{ empty_last_name }}</div>
-                {% elif empty_subject %}
-                    <div>{{ empty_subject }}</div>
-                {% endif %}
+                {% comment %} <label for='experience_tour_image'>Experience Image:</label>
+                <input type='text' name='experience_tour_image' id='experience_tour_image' value={{tourExperience.newTourImage}}>
+                 {% endcomment %}
                 <br>
                 <button type='submit'>Create</button>
             </form>
