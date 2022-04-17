@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} dashboard {% endblock %}
+
+{% block content %}
+
+    <h2> {{ request.user.username }} dashboard </h2>
+
+    <h2> Your tours: </h2>
+
+        <ul>
+            {%for tour in allToursList%}
+            {%if tour.endUser.id == user.enduser.id %} 
+
+            <li>
+                <span class="tourName"> Tour Name: {{tour.tourTitle}} </span>
+            </li>
+            <li>
+                <span class="TourLocation"> Tour Location: {{tour.tourLocation}} </span>
+            </li>
+            {%endif%}
+            {%endfor%}
+        </ul>
+
+{% endblock %}

@@ -43,9 +43,9 @@
                   {% if user.is_superuser %}
                     <a class="nav-link text-danger" href="/admin/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
                   {% elif user.tourguide %}
-                    <a class="nav-link text-danger" href="/dashboard_guide/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
+                    <a class="nav-link text-danger" href="/dashboardGuide/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
                   {% else %}
-                  <a class="nav-link text-danger" href="/dashboard_user/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
+                  <a class="nav-link text-danger" href="/dashboardUser/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
                   {%endif%}
                 </li>
                 <li class="nav-item">
@@ -56,10 +56,10 @@
                   <a class="nav-link" href="/login/" tabindex="-1" aria-disabled="true">Login</a>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link" href="/signup_user/" tabindex="-1" aria-disabled="true">Sign up</a>
+                  <a class="nav-link" href="/signupUser/" tabindex="-1" aria-disabled="true">Sign up</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/signup_guide/" tabindex="-1" aria-disabled="true">Become a guide</a>
+                  <a class="nav-link" href="/signupGuide/" tabindex="-1" aria-disabled="true">Become a guide</a>
                 </li>
               {% endif %}
             </ul>

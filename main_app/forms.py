@@ -9,6 +9,19 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+
+class UserRegistrationForm(UserCreationForm):
+    class Meta:
+        model = EndUser
+        fields = ('username', 'first_name', 'last_name')
+
+
+class GuideRegistrationForm(UserCreationForm):
+    class Meta:
+        model = TourGuide
+        fields = ('username', 'first_name', 'last_name', 'guideDescription')
+
+
 #     class Meta:
 #         widgets = {
 #             'password': forms.PasswordInput(),
@@ -19,16 +32,3 @@ class LoginForm(forms.Form):
 #     class Meta:
 #         model = CustomUser
 #         fields = ('username', 'password')
-
-
-class UserRegistrationForm(UserCreationForm):
-    class Meta:
-        model = EndUser
-        fields = ('username', 'first_name', 'last_name', 'userDescription')
-
-
-class GuideRegistrationForm(UserCreationForm):
-    class Meta:
-        model = TourGuide
-        fields = ('username', 'first_name', 'last_name', 'guideDescription')
-

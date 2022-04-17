@@ -10,7 +10,7 @@ def homepage(request):
     return render(request, 'main_app/homepage.html', context)
 
 
-def signup_user(request):
+def signupUser(request):
     if request.method == "POST":
         # form validation, save new user object, authenticate and login user
         form = UserRegistrationForm(request.POST)
@@ -23,10 +23,10 @@ def signup_user(request):
             return redirect("homepage")
     else:
         form = UserRegistrationForm()
-    return render(request, "main_app/signup_user.html", {"form": form})
+    return render(request, "main_app/signupUser.html", {"form": form})
 
 
-def signup_guide(request):
+def signupGuide(request):
     if request.method == 'POST':
         form = GuideRegistrationForm(request.POST)
         if form.is_valid():
@@ -38,10 +38,10 @@ def signup_guide(request):
             return redirect('homepage')
     else:
         form = GuideRegistrationForm()
-    return render(request, 'main_app/signup_guide.html', {'form':form})
+    return render(request, 'main_app/signupGuide.html', {'form':form})
 
 
-def login_user(request):
+def loginUser(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -55,7 +55,7 @@ def login_user(request):
     return render (request, "main_app/login.html", {'form':form})
 
 
-# def login_user(request):
+# def loginUser(request):
 #     myErrors = {}
 #     if request.method == "POST":
 #         username = request.POST["username"]
@@ -74,81 +74,64 @@ def login_user(request):
 #     return render (request, "main_app/login.html", myErrors)
 
 
-def logout_user(request):
+def logoutUser(request):
     logout(request)
     return redirect("homepage")
 
 
-def dashboard_guide(request):
+def dashboardGuide(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
-    return render(request, 'main_app/dashboard_guide.html', context)
+    return render(request,'main_app/dashboardGuide.html', context)
 
 
-def dashboard_user(request):
-    allToursList = TourExperience.objects.all()
-    context = {'allToursList': allToursList}
-    return render(request, 'main_app/dashboard_user.html', context)
-
-def guide_creates_activity(request, id):
-    errors = {}
+def createActivity(request, id):
+    context = {}
     if request.method == 'POST':
-        newExperienceTitle = request.POST['experience_title']
-        newExperienceLocation = request.POST['experience_location']
-        newExperienceDuration = request.POST['experience_duration']
-        newExperiencePrice = request.POST['experience_price']
-        newTourAvailableDate = request.POST['experience_available_date']
-        newTourMaxNumberOfPeople = request.POST['experience_tour_max_num_people']
-        newTourDescription = request.POST['experience_description']
-        currentGuide = User.objects.get(pk = request.user.id)
-        newTourImage = request.POST['experience_tour_image']
-
         if request.user.tourguide.isGuideApproved == 'Approved': 
-            createExperience = TourExperience()
-            createExperience.tourTitle = newExperienceTitle
-            createExperience.tourLocation = newExperienceLocation
-            createExperience.tourDuration = newExperienceDuration
-            createExperience.tourPrice = newExperiencePrice
-            createExperience.tourAvailableDate = newTourAvailableDate
-            createExperience.tourMaxNumberOfPeople = newTourMaxNumberOfPeople
-            createExperience.tourDescription = newTourDescription
-            # createExperience.tourGuide = newTourGuide #to get guide based on id
-            createExperience.tourGuide = currentGuide
-            createExperience.tourImage = newTourImage
-            createExperience.save()
+            newExperience = TourExperience()
+            newExperience.tourTitle = request.POST['experienceTitle']
+            newExperience.tourLocation = request.POST['experienceLocation']
+            newExperience.tourDuration = request.POST['experienceDuration']
+            newExperience.tourPrice = request.POST['experiencePrice']
+            newExperience.tourAvailableDate = request.POST['experienceAvailableDate']
+            newExperience.tourMaxNumberOfPeople = request.POST['experienceMaxNumPeople']
+            newExperience.tourDescription = request.POST['experienceDescription']
+            # newExperience.tourImage = request.POST['experienceImage']
+            currentGuide = TourGuide.objects.get(id=id)
+            newExperience.tourGuide = currentGuide
 
-            if not newExperienceTitle:
-                errors['empty_experience_title'] = 'Please enter an experience title'
-            if not newExperienceLocation:
-                errors['empty_experience_location'] = 'Please enter an experience location'            
-            if not newExperienceDuration:
-                errors['empty_experience_duration'] = 'Please enter an experience duration'     
-            if not newExperiencePrice:
-                errors['empty_experience_price'] = 'Please enter an experience price'     
-            if not newTourAvailableDate:
-                errors['empty_experience_available_date'] = 'Please enter an experience date'                    
-            if not newTourMaxNumberOfPeople:
-                errors['empty_experience_max_num_people'] = 'Please enter a maximum number of people'     
-            if not newTourDescription:
-                errors['empty_experience_description'] = 'Please enter an experience description'     
-            if not newTourImage:
-                errors['empty_experience_image'] = 'Please enter an experience image'    
+            if not newExperience.tourTitle:
+                context['emptyExperienceTitle'] = 'Please enter an experience title'
+            elif not newExperience.tourLocation:
+                context['emptyExperienceLocation'] = 'Please enter an experience location'            
+            elif not newExperience.tourDuration:
+                context['emptyExperienceDuration'] = 'Please enter an experience duration'     
+            elif not newExperience.tourPrice:
+                context['emptyExperiencePrice'] = 'Please enter an experience price'     
+            elif not newExperience.tourAvailableDate:
+                context['emptyExperienceAvailableDate'] = 'Please enter an experience date'                    
+            elif not newExperience.tourMaxNumberOfPeople:
+                context['emptyExperienceMaxNumPeople'] = 'Please enter a maximum number of people'     
+            elif not newExperience.tourDescription:
+                context['emptyExperienceDescription'] = 'Please enter an experience description'     
+            # elif not newExperience.tourImage:
+            #     context['emptyExperienceImage'] = 'Please enter an experience image'  
+            # elif newExperience is not None:
+            newExperience.save()
+            return redirect("homepage")
+    return render(request,'main_app/createActivity.html', context)
 
-    return render(request,'main_app/dashboard.html', errors)
-
-
-def addTour(request, id):
-    tourToAdd = TourExperience.objects.get(id=id)
-    userToGet = EndUser.objects.get(user=request.user)
-    tourToAdd.tourexperiences.add(userToGet)
-    return redirect("homepage")
-
-
-def tourExperience(request):
-    userTourList = TourExperience.objects.get(user=request.user)
+def dashboardUser(request):
+    allToursList = TourExperience.objects.all()
+    context = {'allToursList': allToursList}
+    return render(request, 'main_app/dashboardUser.html', context)
 
 
-# def approveGuide(request):
-#     if TourGuide.isGuideApproved == True:
-#         show him the content and allow him to create activities.
+def joinActivity(request):
+    context = {}    
+    return render(request, 'main_app/joinActivity.html', context)
+
+
+
 

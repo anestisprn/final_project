@@ -1,13 +1,16 @@
 from django.urls import path
 from .views import *
+
 urlpatterns = [
     path('', homepage, name='homepage'),
-    path("login/", login_user, name="login_user"),
-    path("logout/", logout_user, name="logout_user"),
-    path('signup_user/', signup_user, name='signup_user'),
-    path('signup_guide/', signup_guide, name='signup_guide'),
-    path('dashboard_guide/', dashboard_guide, name='dashboard_guide'),
-    path('dashboard_user/', dashboard_user, name='dashboard_user'),
+    path("login/", loginUser, name="loginUser"),
+    path("logout/", logoutUser, name="logoutUser"),
+    path('signupUser/', signupUser, name='signupUser'),
+    path('signupGuide/', signupGuide, name='signupGuide'),
+    path('dashboardGuide/', dashboardGuide, name='dashboardGuide'),
+    path('dashboardUser/', dashboardUser, name='dashboardUser'),
+    path("dashboardGuide/createActivity/<int:id>", createActivity, name="createActivity"),
+    path("dashboardUser/joinActivity/<int:id>", joinActivity, name="joinActivity"),
 ]
 
 
