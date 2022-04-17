@@ -17,8 +17,9 @@ class TourGuide(User):
     isGuideApproved = models.CharField(max_length=12, choices=approvalChoices)
 
 
-    # def __str__(self):
-    #     return self.guideFirstName
+    def __str__(self):
+        return f"{User.first_name} {User.last_name}"
+
 
 class TourExperience(models.Model):
     tourTitle = models.CharField(max_length=100)
@@ -42,4 +43,4 @@ class EndUser(User):
     #     CustomUser,  on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.userFirstName
+        return f"{User.first_name} {User.last_name}"
