@@ -19,4 +19,6 @@ urlpatterns = [
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/joinActivity/<int:idUser>/<int:idTour>", joinActivity, name="joinActivity"),
     path("dashboardUser/dropActivity/<int:id>", dropActivity, name="dropActivity"),
+
+    path("tourExperience/experienceDetails/<str:tourTitle>", experienceDetails, name="experienceDetails"),
 ]

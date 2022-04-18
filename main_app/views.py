@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.forms import PasswordChangeForm
 from .forms import *
 from .models import *
+from django.views.generic import DetailView, TemplateView
+import stripe
+from django.conf import settings
+from django.http.response import HttpResponseNotFound, JsonResponse
+
 
 # Create your views here.
 def homepage(request):
@@ -179,3 +184,34 @@ def dropActivity(request, id):
 
 
 
+def experienceDetails(request):
+    experienceDetails
+
+class ExperienceDetails(DetailView):
+    model = TourExperience
+    template_name = "main_app/experienceDetail.html"
+    pk_url_kwarg = 'id'
+
+    def get_context_data(self, **kwargs):
+        context = super(ExperienceDetails, self).get_context_data(**kwargs)
+        context['stripe_publishable_key'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
+
+class PaymentSuccessView(TemplateView):
+    template_name = "main_app/paymentSuccess.html"
+
+    def get(self, request, *args, **kwargs):
+        session_id = request.GET.get('session_id')
+        if session_id is None:
+            return HttpResponseNotFound()
+        
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        session = stripe.checkout.Session.retrieve(session_id)
+
+        order = get_object_or_404(OrderDetail, stripe_payment_intent=session.payment_intent)
+        order.has_paid = True
+        order.save()
+        return render(request, self.template_name)
+
+class PaymentFailedView(TemplateView):
+    template_name = "main_app/paymentFailed.html"

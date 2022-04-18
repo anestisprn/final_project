@@ -14,59 +14,10 @@
     <title>e-tours {% block title %} {% endblock %} </title>
 </head>
 <body>
-      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img src="{% static 'media/logo.png'%}" class="d-block w-100 h-100 " alt="..."></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/tourExperience/">Tour Experience</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contactUs/">Contact us</a>
-              </li>
-            </ul>
-          </div>
-          <div class="collapse navbar-collapse justify-content-end me-5" id="navbarNav">
-            <ul class="navbar-nav">
-              {% if user.is_active %}
-                <li class="nav-item">
-                  {% if user.is_superuser %}
-                    <a class="nav-link text-danger" href="/admin/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
-                  {% elif user.tourguide %}
-                    <a class="nav-link text-danger" href="/dashboardGuide/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
-                  {% else %}
-                  <a class="nav-link text-danger" href="/dashboardUser/" tabindex="-1" aria-disabled="true"> {{ request.user.username }} </a>
-                  {%endif%}
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout/" tabindex="-1" aria-disabled="true">Logout</a>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/login/" tabindex="-1" aria-disabled="true">Login</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link" href="/signupUser/" tabindex="-1" aria-disabled="true">Sign up</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/signupGuide/" tabindex="-1" aria-disabled="true">Become a guide</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    
+  {% include 'main_app/navbar.html' %}
       <!-- BLOCK CONTENT -->
       {% block content %}
-      {% endblock %}
+      {% endblock content %}
 
 
             <!-- Footer -->
@@ -197,5 +148,11 @@
       <!-- Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+	  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
