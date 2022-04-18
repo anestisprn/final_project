@@ -98,10 +98,10 @@ def dashboardGuide(request):
 
 
 @ login_required(login_url='login')
-def createActivity(request, id):
+def createActivity(request, idUser):
     context = {}
     if request.method == 'POST':
-        if request.user.tourguide.isGuideApproved == 'Approved': 
+        if request.user.tourguide.isGuideApproved == 'Approved':
             newExperience = TourExperience()
             newExperience.tourTitle = request.POST['experienceTitle']
             newExperience.tourLocation = request.POST['experienceLocation']
@@ -111,7 +111,7 @@ def createActivity(request, id):
             newExperience.tourMaxNumberOfPeople = request.POST['experienceMaxNumPeople']
             newExperience.tourDescription = request.POST['experienceDescription']
             # newExperience.tourImage = request.POST['experienceImage']
-            currentGuide = TourGuide.objects.get(id=id)
+            currentGuide = TourGuide.objects.get(id=idUser)
             newExperience.tourGuide = currentGuide
 
             if not newExperience.tourTitle:
@@ -160,10 +160,10 @@ def joinActivity(request, idUser, idTour):
     context = {}
     if request.method == 'POST':
         # if request.user.enduser:
-            newTour = TourExperience.objects.get(id=idTour)
-            currentUser = EndUser.objects.get(id=idUser)
-            newTour.endUser.add(currentUser)
-            return redirect("dashboardUser")
+        currentTour = TourExperience.objects.get(id=idTour)
+        currentUser = EndUser.objects.get(id=idUser)
+        currentTour.endUser.add(currentUser)
+        return redirect("dashboardUser")
     return render(request, 'main_app/joinActivity.html', context)
 
 

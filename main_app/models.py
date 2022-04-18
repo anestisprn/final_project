@@ -35,7 +35,7 @@ class TourExperience(models.Model):
     tourImage = models.ImageField(
         upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, blank=True, null=True)
 
-    endUser = models.ManyToManyField(EndUser, blank=True, null=True)
+    endUser = models.ManyToManyField(EndUser, related_name="tourExperiences", blank=True)
     tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
