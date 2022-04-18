@@ -9,15 +9,16 @@
 
     <h2> My tours: </h2>
         <ul>
-            {%for tour in allToursList%}
-            {%if tour.endUser.id == user.enduser.id %} <!-- tour.endUser.id= none ??? -->
-
+            {%for book in allBookingsList %}
+            {% if request.user.id == book.endUser.id %}
             <li>
-                <span class="tourName"> Tour Name: {{tour.tourTitle}} </span>
+                <span class="tourName"> Tour Name: {{book.tourExperience.tourTitle}} </span>
             </li>
             <li>
-                <span class="TourLocation"> Tour Location: {{tour.tourLocation}} </span>
+                <span class="TourLocation"> Tour Location: {{book.tourExperience.tourLocation}} </span>
             </li>
+            {% comment %} <button type="submit" class="btn btn-success"> purchase </button>
+            <button href="" type="reset" class="btn btn-danger"> drop </button> {% endcomment %}
             </br>
             {%endif%}
             {%endfor%}

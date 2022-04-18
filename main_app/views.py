@@ -151,7 +151,11 @@ def deleteActivity(request, id):
 @ login_required(login_url='login')
 def dashboardUser(request):
     allToursList = TourExperience.objects.all()
-    context = {'allToursList': allToursList}
+    allBookingsList = Booking.objects.all()
+    context = {
+        'allToursList': allToursList,
+        'allBookingsList': allBookingsList
+    }
     return render(request, 'main_app/dashboardUser.html', context)
 
 
@@ -159,15 +163,16 @@ def dashboardUser(request):
 def joinActivity(request, idUser, idTour):
     context = {}
     if request.method == 'POST':
-        # if request.user.enduser:
-        currentTour = TourExperience.objects.get(id=idTour)
         currentUser = EndUser.objects.get(id=idUser)
-        currentTour.endUser.add(currentUser)
+        currentExperience = TourExperience.objects.get(id=idTour)
+        bookings = Booking(endUser=currentUser, tourExperience=currentExperience)
+        bookings.save()
+        context = {"bookings":bookings}
         return redirect("dashboardUser")
     return render(request, 'main_app/joinActivity.html', context)
 
 
 @ login_required(login_url='login')
 def dropActivity(request, id):
-    context = {}    
-    return render(request, 'main_app/dropActivity.html', context)
+    context = {}
+    return render(request, 'main_app/dashboardUser.html', context)

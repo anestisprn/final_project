@@ -45,7 +45,6 @@ class TourExperience(models.Model):
         verbose_name = 'TourExperience'
 
 
-# class Booking(models.Model):
-#     tourExperience = models.ForeignKey(TourExperience, on_delete=models.CASCADE)
-#     endUser = models.ForeignKey(EndUser, on_delete=models.CASCADE)
-#     transactionDate = models.DateField(auto_now=True)
+class Booking(models.Model):
+    tourExperience = models.ForeignKey(TourExperience, on_delete=models.CASCADE, blank=True)
+    endUser = models.ForeignKey(EndUser, on_delete=models.CASCADE, blank=True)
