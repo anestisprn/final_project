@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from matplotlib.style import context
 # from django.contrib.auth.forms import PasswordChangeForm
 from .forms import *
 from .models import *
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView
 import stripe
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
@@ -185,13 +186,10 @@ def dashboardUser(request):
 #     context = {}
 #     return render(request, 'main_app/dashboardUser.html', context)
 
-
-
-def experienceDetails(request, id):
-    currentExperience = TourExperience.objects.get(id=id)
-    context = {"currentExperience":currentExperience}
-    return render(request, 'main_app/experienceDetail.html', context)
-
+class ExperienceListView(ListView):
+    model = TourExperience
+    template_name = "main_app/dashboardUser.html"
+    context_object_name = "experienceList"
 
 class ExperienceDetails(DetailView):
     model = TourExperience
@@ -222,7 +220,9 @@ class PaymentSuccessView(TemplateView):
 class PaymentFailedView(TemplateView):
     template_name = "main_app/paymentFailed.html"
 
-
+class OrderHistoryListView(ListView):
+    model = OrderDetail
+    template_name = "main_app/dashboardUser.html"
 
 @csrf_exempt
 def create_checkout_session(request, id):
@@ -243,7 +243,7 @@ def create_checkout_session(request, id):
                     'product_data': {
                     'name': tourExperience.tourTitle,
                     },
-                    'unit_amount': int(tourExperience.tourPrice),
+                    'unit_amount': int(tourExperience.tourPrice*100),
                 },
                 'quantity': 1,
             }
@@ -259,7 +259,7 @@ def create_checkout_session(request, id):
     order.customer_email = request_data['email']
     order.tourExperience = tourExperience
     order.stripe_payment_intent = checkout_session['payment_intent']
-    order.amount = int(tourExperience.tourPrice)
+    order.amount = int(tourExperience.tourPrice*100)
     order.save()
 
     # return JsonResponse({'data': checkout_session})

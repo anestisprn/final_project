@@ -16,7 +16,7 @@ urlpatterns = [
     path("dashboardGuide/updateActivity/<int:id>", updateActivity, name="updateActivity"),
     path("dashboardGuide/deleteActivity/<int:id>", deleteActivity, name="deleteActivity"),
 
-    path("dashboardUser/", dashboardUser, name="dashboardUser"),
+    # path("dashboardUser/", dashboardUser, name="dashboardUser"),
     # path("dashboardUser/joinActivity/<int:idUser>/<int:idTour>", joinActivity, name="joinActivity"),
     # path("dashboardUser/dropActivity/<int:id>", dropActivity, name="dropActivity"),
 
@@ -24,4 +24,6 @@ urlpatterns = [
     path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
 
     path('success/', PaymentSuccessView.as_view(), name="success" ),
+    path('failed/', PaymentFailedView.as_view(), name='failed'),
+    path('dashboardUser/', OrderHistoryListView.as_view(), name='dashboardUser'),
 ]

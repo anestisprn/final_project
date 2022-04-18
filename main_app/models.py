@@ -6,10 +6,10 @@ from django.core import validators
 
 
 class EndUser(User):
+    # userEmail = models.EmailField(
+    #     verbose_name='Customer Email'
+    # )
     userDateOfBirth = models.DateField(blank=True, null=True)
-    userEmail = models.EmailField(
-        verbose_name='Customer Email'
-    )
     class Meta:
         verbose_name = 'EndUser'
 
@@ -53,7 +53,7 @@ class TourExperience(models.Model):
 class OrderDetail(models.Model):
     id = models.BigAutoField(primary_key=True)
     # You can change as a Foreign Key to the user model
-    customer_email = models.ForeignKey(EndUser, on_delete=models.CASCADE)
+    customer_email = models.EmailField(verbose_name='Customer Email')
     tourExperience = models.ForeignKey(to=TourExperience, verbose_name='TourExperience',on_delete=models.PROTECT)
     amount = models.IntegerField(verbose_name='Amount')
     stripe_payment_intent = models.CharField(max_length=200)

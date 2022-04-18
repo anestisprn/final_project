@@ -1,26 +1,45 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %} dashboard {% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-
-    <h2> {{ request.user.username }} dashboard </h2>
-
-    <h2> My tours: </h2>
-        <ul>
-            {%for book in allBookingsList %}
-            {% if request.user.id == book.endUser.id %}
-            <li>
-                <span class="tourName"> Tour Name: {{book.tourExperience.tourTitle}} </span>
-            </li>
-            <li>
-                <span class="TourLocation"> Tour Location: {{book.tourExperience.tourLocation}} </span>
-            </li>
-            {% comment %} <button type="submit" class="btn btn-success"> purchase </button>
-            <button href="" type="reset" class="btn btn-danger"> drop </button> {% endcomment %}
-            </br>
-            {%endif%}
-            {%endfor%}
-        </ul>
-{% endblock %}
+    <h1 class="text-center">Order History</h1>
+    <div class="container">
+        
+        {% if object_list %}
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Experience</th>
+                    <th>Customer Email</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for i in object_list %}
+                    <tr>
+                        <td>{{ i.tourExperience.tourTitle }}</td>
+                        <td>{{ i.customer_email }}</td>
+                        <td>{{ i.amount }}</td>
+                        <td>
+                            {% if i.has_paid %}
+                                <b class="text-success">Success</b>
+                            {% else %}
+                                <b class="text-danger">Failed</b>
+                            {% endif %}
+                        </td>
+                        <td>{{ i.created_on }}</td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info">
+            Payment history is empty.
+        </div>
+        {% endif %}
+            
+    </div>
+{% endblock content %}
