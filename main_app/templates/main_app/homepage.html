@@ -52,7 +52,7 @@
             <h5 class="card-title">{{tour.tourTitle}} </h5>
             <p class="card-text">{{tour.tourDescription}}</p>
             {% if user.enduser %}
-            <a href="{% url 'joinActivity' user.enduser.id tour.id %}" class="btn btn-primary">Book now</a>
+            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-primary">Book now</a>
             {% else %}
             <a href="#" class="btn btn-primary">Book now</a>
             {% endif %}  

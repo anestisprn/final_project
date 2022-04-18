@@ -9,6 +9,9 @@ from django.views.generic import DetailView, TemplateView
 import stripe
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.urls import reverse
 
 
 # Create your views here.
@@ -164,28 +167,31 @@ def dashboardUser(request):
     return render(request, 'main_app/dashboardUser.html', context)
 
 
-@ login_required(login_url='login')
-def joinActivity(request, idUser, idTour):
-    context = {}
-    if request.method == 'POST':
-        currentUser = EndUser.objects.get(id=idUser)
-        currentExperience = TourExperience.objects.get(id=idTour)
-        bookings = Booking(endUser=currentUser, tourExperience=currentExperience)
-        bookings.save()
-        context = {"bookings":bookings}
-        return redirect("dashboardUser")
-    return render(request, 'main_app/joinActivity.html', context)
+# @ login_required(login_url='login')
+# def joinActivity(request, idUser, idTour):
+#     context = {}
+#     if request.method == 'POST':
+#         currentUser = EndUser.objects.get(id=idUser)
+#         currentExperience = TourExperience.objects.get(id=idTour)
+#         bookings = Booking(endUser=currentUser, tourExperience=currentExperience)
+#         bookings.save()
+#         context = {"bookings":bookings}
+#         return redirect("dashboardUser")
+#     return render(request, 'main_app/joinActivity.html', context)
 
 
-@ login_required(login_url='login')
-def dropActivity(request, id):
-    context = {}
-    return render(request, 'main_app/dashboardUser.html', context)
+# @ login_required(login_url='login')
+# def dropActivity(request, id):
+#     context = {}
+#     return render(request, 'main_app/dashboardUser.html', context)
 
 
 
-def experienceDetails(request):
-    experienceDetails
+def experienceDetails(request, id):
+    currentExperience = TourExperience.objects.get(id=id)
+    context = {"currentExperience":currentExperience}
+    return render(request, 'main_app/experienceDetail.html', context)
+
 
 class ExperienceDetails(DetailView):
     model = TourExperience
@@ -215,3 +221,46 @@ class PaymentSuccessView(TemplateView):
 
 class PaymentFailedView(TemplateView):
     template_name = "main_app/paymentFailed.html"
+
+
+
+@csrf_exempt
+def create_checkout_session(request, id):
+
+    request_data = json.loads(request.body)
+    tourExperience = get_object_or_404(TourExperience, pk=id)
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    checkout_session = stripe.checkout.Session.create(
+        # Customer Email is optional,
+        # It is not safe to accept email directly from the client side
+        customer_email = request_data['email'],
+        payment_method_types=['card'],
+        line_items=[
+            {
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                    'name': tourExperience.tourTitle,
+                    },
+                    'unit_amount': int(tourExperience.tourPrice * 100),
+                },
+                'quantity': 1,
+            }
+        ],
+        mode='payment',
+        success_url=request.build_absolute_uri(
+            reverse('success')
+        ) + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url=request.build_absolute_uri(reverse('failed')),
+    )
+
+    order = OrderDetail()
+    order.customer_email = request_data['email']
+    order.tourExperience = tourExperience
+    order.stripe_payment_intent = checkout_session['payment_intent']
+    order.amount = int(tourExperience.tourPrice * 100)
+    order.save()
+
+    # return JsonResponse({'data': checkout_session})
+    return JsonResponse({'sessionId': checkout_session.id})

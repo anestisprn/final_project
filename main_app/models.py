@@ -51,7 +51,7 @@ class TourExperience(models.Model):
 
 
 class OrderDetail(models.Model):
-    # id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(primary_key=True)
     # You can change as a Foreign Key to the user model
     customer_email = models.ForeignKey(EndUser, on_delete=models.CASCADE)
     tourExperience = models.ForeignKey(to=TourExperience, verbose_name='TourExperience',on_delete=models.PROTECT)

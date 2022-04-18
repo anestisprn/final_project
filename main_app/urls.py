@@ -17,8 +17,9 @@ urlpatterns = [
     path("dashboardGuide/deleteActivity/<int:id>", deleteActivity, name="deleteActivity"),
 
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
-    path("dashboardUser/joinActivity/<int:idUser>/<int:idTour>", joinActivity, name="joinActivity"),
-    path("dashboardUser/dropActivity/<int:id>", dropActivity, name="dropActivity"),
+    # path("dashboardUser/joinActivity/<int:idUser>/<int:idTour>", joinActivity, name="joinActivity"),
+    # path("dashboardUser/dropActivity/<int:id>", dropActivity, name="dropActivity"),
 
-    path("tourExperience/experienceDetails/<str:tourTitle>", experienceDetails, name="experienceDetails"),
+    path("experienceDetails/<int:id>", ExperienceDetails.as_view(), name="experienceDetails"),
+    path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
 ]
