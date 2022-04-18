@@ -51,7 +51,11 @@
           <div class="card-body">
             <h5 class="card-title">{{tour.tourTitle}} </h5>
             <p class="card-text">{{tour.tourDescription}}</p>
-            <a href="/dashboardUser/joinActivity/{{user.enduser.id}}" class="btn btn-primary">Book now</a>
+            {% if user.enduser %}
+            <a href="{% url 'joinActivity' user.enduser.id tour.id %}" class="btn btn-primary">Book now</a>
+            {% else %}
+            <a href="#" class="btn btn-primary">Book now</a>
+            {% endif %}  
           </div>
         </div>
         {% endfor %}   

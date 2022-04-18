@@ -132,7 +132,7 @@ def createActivity(request, id):
             #     context['emptyExperienceImage'] = 'Please enter an experience image'  
             # elif newExperience is not None:
             newExperience.save()
-            return redirect("homepage")
+            return redirect("dashboardGuide")
     return render(request,'main_app/createActivity.html', context)
 
 
@@ -156,8 +156,14 @@ def dashboardUser(request):
 
 
 @ login_required(login_url='login')
-def joinActivity(request, id):
-    context = {}    
+def joinActivity(request, idUser, idTour):
+    context = {}
+    if request.method == 'POST':
+        # if request.user.enduser:
+            newTour = TourExperience.objects.get(id=idTour)
+            currentUser = EndUser.objects.get(id=idUser)
+            newTour.endUser.add(currentUser)
+            return redirect("dashboardUser")
     return render(request, 'main_app/joinActivity.html', context)
 
 

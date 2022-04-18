@@ -17,7 +17,7 @@ urlpatterns = [
     path("dashboardGuide/deleteActivity/<int:id>", deleteActivity, name="deleteActivity"),
 
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
-    path("dashboardUser/joinActivity/<int:id>", joinActivity, name="joinActivity"),
+    path("dashboardUser/joinActivity/<int:idUser>/<int:idTour>", joinActivity, name="joinActivity"),
     path("dashboardUser/dropActivity/<int:id>", dropActivity, name="dropActivity"),
 ]
 

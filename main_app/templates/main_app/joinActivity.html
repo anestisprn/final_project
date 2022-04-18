@@ -2,3 +2,20 @@
 {% load static%}
 
 {% block title %} Join Activity {% endblock %}
+
+{% block content %}
+
+<form method='post'>
+    {% csrf_token %}
+    <div class="form-group">
+        <h1>Join activity</h1>
+
+        <h1>Are you sure you want to book?</h1>
+
+        <br>
+        <button type="submit" class="btn btn-success"> create </button>
+        <button value="reset" class="btn btn-secondary"> reset </button>
+    </div>
+</form>
+
+{% endblock %}
