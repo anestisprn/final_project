@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'main_app',
     'crispy_forms',
     "crispy_bootstrap5",
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # AUTH_USER_MODEL = 'main_app.CustomUser'
+
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51KpxvVJLOsvnT9wMQXRBItRC2HG7XbBdC3lKTnLxWtKFB0aGaI2HumRIBd2APpe0AblL4oNZxMhiZmIHLQ9dm4dM0095DnJNYP'
+STRIPE_SECRET_KEY = 'sk_test_51KpxvVJLOsvnT9wMSeGI2CMhftaKi6k9P3XbnVqmwpdlwaSGALKH8dK96uCagfSekiR1I0J8qpojyEjEfjCm6ur700gy8F416r'

@@ -176,3 +176,6 @@ def joinActivity(request, idUser, idTour):
 def dropActivity(request, id):
     context = {}
     return render(request, 'main_app/dashboardUser.html', context)
+
+
+
