@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load static%}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %} Sign up as guide {% endblock %}
 
@@ -8,10 +9,8 @@
     <form method='post'>
         {% csrf_token %}
         <div class="form-group">
-            {{ form.as_p }}
+            {{form|crispy}}
             <br>
-            {% comment %} {{ form.as_table }} {% endcomment %}
-            {% comment %} {{form|crispy}} {% endcomment %}
             <button type="submit" class="btn btn-primary"> sign up </button>
             <button type="reset" class="btn btn-secondary"> reset </button>
         </div>

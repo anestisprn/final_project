@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %} Login {% endblock %}
 
@@ -8,7 +9,7 @@
     <form method='post'>
         {% csrf_token %}
         <div class="form-group">
-            {{ form.as_p }}
+            {{form|crispy}}
             <small class="form-text text-danger">{{typeError}}</small>
             <small class="form-text text-danger">{{attributeError}}</small>
             <br>

@@ -6,13 +6,13 @@ from matplotlib.style import context
 # from django.contrib.auth.forms import PasswordChangeForm
 from .forms import *
 from .models import *
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, CreateView, DetailView, TemplateView
 import stripe
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 
 # Create your views here.
@@ -20,9 +20,9 @@ def homepage(request):
     context = {'allToursList': TourExperience.objects.all()}
     return render(request, 'main_app/homepage.html', context)
 
-def tourExperience(request):
-    context = {'allToursList': TourExperience.objects.all()}
-    return render(request, 'main_app/tourExperience.html', context)
+# def tourExperience(request):
+#     context = {'allToursList': TourExperience.objects.all()}
+#     return render(request, 'main_app/tourExperience.html', context)
 
 def contactUs(request):
     context = {}
@@ -186,10 +186,17 @@ def dashboardUser(request):
 #     context = {}
 #     return render(request, 'main_app/dashboardUser.html', context)
 
+
 class ExperienceListView(ListView):
     model = TourExperience
-    template_name = "main_app/dashboardUser.html"
-    context_object_name = "experienceList"
+    template_name = "main_app/tourExperience.html"
+    context_object_name = "allToursList"
+
+# class ExperienceCreateView(CreateView):
+#     model = TourExperience
+#     fields = '__all__'
+#     template_name = "main_app/experienceCreate.html"
+#     success_url = reverse_lazy("homepage")
 
 class ExperienceDetails(DetailView):
     model = TourExperience

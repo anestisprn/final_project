@@ -1,6 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block content %}
+<h1 class="text-center">Experience List</h1>
+<div class="container">
+    {% if allToursList %}
+    <div class="row">
+        {% for tour in allToursList %}
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="{{tour.tourImage}}" class="card-img-top" alt="..."> 
+                <div class="card-body">
+                    <h4 class="card-title">{{tour.tourTitle}}</h4>
+                    <p class="card-text">{{tour.tourDescription}}</p>
+                </div>
+                <div class="card-footer d-flex">
+                    <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-success ml-auto">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center mt-5">
+        The experience list is empty. Please add some products first.
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
 {% block title %} Tour Experience {% endblock %}
 
 {% block content %}
@@ -18,4 +50,4 @@
       {% endfor %}   
     </div>
   </div>
-{% endblock %}
+{% endblock %} {% endcomment %}

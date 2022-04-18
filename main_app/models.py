@@ -6,9 +6,6 @@ from django.core import validators
 
 
 class EndUser(User):
-    # userEmail = models.EmailField(
-    #     verbose_name='Customer Email'
-    # )
     userDateOfBirth = models.DateField(blank=True, null=True)
     class Meta:
         verbose_name = 'EndUser'
@@ -16,7 +13,6 @@ class EndUser(User):
 
 class TourGuide(User):
     guideDescription = models.CharField(max_length=300, blank=True, null=True)
-    # guideDob = models.DateField(null=True)
     numberOfActivities = models.IntegerField(blank=True, null=True)
     income = models.IntegerField(blank=True, null=True)
     ratings = models.IntegerField(blank=True, null=True)
@@ -38,7 +34,7 @@ class TourExperience(models.Model):
     tourMaxNumberOfPeople = models.IntegerField(verbose_name='Tour Max Number of People', validators = [validators.MinValueValidator(1),validators.MaxValueValidator(20)])
     tourDescription = models.TextField(max_length=500, verbose_name='Tour Title')
     tourImage = models.ImageField(
-        upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, blank=True, null=True, verbose_name='Tour Title')
+        upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, blank=True, null=True, verbose_name='Tour Image')
 
     endUser = models.ManyToManyField(EndUser, related_name="tourExperiences", blank=True)
     tourGuide = models.ForeignKey(TourGuide, on_delete=models.CASCADE, blank=True, null=True)

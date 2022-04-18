@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <h1 class="text-center">Experience Detail</h1>
@@ -11,12 +12,12 @@
         <div class="card-body">
             <div class="container row">
                 <div class="col-md-2">
-                    <img src="https://dummyimage.com/150x150.gif?text={{ object.name }}" alt="">
+                    <img src="{{object.tourImage}}" class="card-img-top" alt="..."> 
                 </div>
                 <div class="col-md-10">
-                    <h1>Name: {{ object.name }}</h1>
-                    <p>Description: {{ object.description }}</p>
-                    <p>Price: {{ object.price }}</p>
+                    <h1>Name: {{object.tourTitle}}</h1>
+                    <p>Description: {{object.tourDescription}}</p>
+                    <p>Price: {{object.tourPrice}}</p>
 
                     <div class="form-group">
                         <label for="email">Email: </label>
@@ -47,7 +48,6 @@
         }
 
         // Create a new Checkout Session using the server-side endpoint you
-        // created in step 3.
         fetch("{% url 'api_checkout_session' id=object.id %}", {
             method: 'POST',
             body: JSON.stringify(
