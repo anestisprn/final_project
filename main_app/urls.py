@@ -22,4 +22,6 @@ urlpatterns = [
 
     path("experienceDetails/<int:id>", ExperienceDetails.as_view(), name="experienceDetails"),
     path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
+
+    path('success/', PaymentSuccessView.as_view(), name="success" ),
 ]

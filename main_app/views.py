@@ -243,7 +243,7 @@ def create_checkout_session(request, id):
                     'product_data': {
                     'name': tourExperience.tourTitle,
                     },
-                    'unit_amount': int(tourExperience.tourPrice * 100),
+                    'unit_amount': int(tourExperience.tourPrice),
                 },
                 'quantity': 1,
             }
@@ -259,7 +259,7 @@ def create_checkout_session(request, id):
     order.customer_email = request_data['email']
     order.tourExperience = tourExperience
     order.stripe_payment_intent = checkout_session['payment_intent']
-    order.amount = int(tourExperience.tourPrice * 100)
+    order.amount = int(tourExperience.tourPrice)
     order.save()
 
     # return JsonResponse({'data': checkout_session})
