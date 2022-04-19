@@ -21,7 +21,7 @@ urlpatterns = [
     # path("tourExperience/", tourExperience, name="tourExperience"),
 
     path('dashboardUser/', OrderHistoryListView.as_view(), name='dashboardUser'),
-    path('dashboardUser/editUser/<int:id>', editUser, name='editUser'),
+    path('dashboardUser/editUser/', editUser, name='editUser'),
     # path('create/', ExperienceCreateView.as_view(), name='create'),
     path('tourExperience/', ExperienceListView.as_view(), name='tourExperience'),
     path("experienceDetails/<int:id>", ExperienceDetails.as_view(), name="experienceDetails"),

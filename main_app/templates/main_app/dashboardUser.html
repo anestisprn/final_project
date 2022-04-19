@@ -19,6 +19,7 @@
             <tbody>
                 
                 {% for i in object_list %}
+                
                     <tr>
                         <td>{{ i.tourExperience.tourTitle }}</td>
                         <td>{{ i.customer_email }}</td>
@@ -37,7 +38,7 @@
             </tbody>
         </table>
 
-        <span><a href="/dashboardUser/editUser/{{request.user.id}}">edit your details</a></span>
+        <span><a href="{% url 'editUser' %}">edit your details</a></span>
 
         {% else %}
         <div class="alert alert-info">

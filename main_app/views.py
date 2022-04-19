@@ -13,9 +13,11 @@ from django.http.response import HttpResponseNotFound, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.urls import reverse, reverse_lazy
-
+from django.contrib import messages
 
 # Create your views here.
+
+
 def homepage(request):
     context = {'allToursList': TourExperience.objects.all()}
     return render(request, 'main_app/homepage.html', context)
@@ -23,6 +25,7 @@ def homepage(request):
 # def tourExperience(request):
 #     context = {'allToursList': TourExperience.objects.all()}
 #     return render(request, 'main_app/tourExperience.html', context)
+
 
 def contactUs(request):
     context = {}
@@ -49,57 +52,46 @@ def signupGuide(request):
     if request.method == 'POST':
         form = GuideRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()            
+            form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username = username, password = raw_password)
-            login(request,user)
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
             return redirect('homepage')
     else:
         form = GuideRegistrationForm()
-    return render(request, 'main_app/signupGuide.html', {'form':form})
-
+    return render(request, 'main_app/signupGuide.html', {'form': form})
 
 
 def loginUser(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request,user)
+                login(request, user)
                 return redirect("homepage")
             else:
                 return redirect('login')
     else:
         form = LoginForm()
-    return render (request, "main_app/login.html", {'form':form})
+    return render(request, "main_app/login.html", {'form': form})
 
 
-def editUser(request,id):
-    userToEdit = EndUser.objects.get(id=id)
-    context = {'userToEdit': userToEdit}
+@login_required
+def editUser(request):
     if request.method == 'POST':
-        newUsername = request.POST['user.username']
-        # newPassword = request.POST['user_password']
-        newFirstName = request.POST['first_name']
-        newLastName = request.POST['last_name']
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='dashboardUser')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
 
-        if request.user:
-            userToEdit.username = newUsername
-            # userToEdit.password = newPassword
-            userToEdit.first_name = newFirstName
-            userToEdit.last_name = newLastName
-        
-        return redirect('homepage')
-
-    return render(request, 'main_app/editUser.html', context)
-
-
-
-
+    return render(request, 'main_app/editUser.html', {'user_form': user_form})
 
 
 # @ login_required(login_url='login')
@@ -128,7 +120,7 @@ def logoutUser(request):
 def dashboardGuide(request):
     allToursList = TourExperience.objects.all()
     context = {'allToursList': allToursList}
-    return render(request,'main_app/dashboardGuide.html', context)
+    return render(request, 'main_app/dashboardGuide.html', context)
 
 
 @ login_required(login_url='login')
@@ -151,37 +143,39 @@ def createActivity(request, idUser):
             if not newExperience.tourTitle:
                 context['emptyExperienceTitle'] = 'Please enter an experience title'
             elif not newExperience.tourLocation:
-                context['emptyExperienceLocation'] = 'Please enter an experience location'            
+                context['emptyExperienceLocation'] = 'Please enter an experience location'
             elif not newExperience.tourDuration:
-                context['emptyExperienceDuration'] = 'Please enter an experience duration'     
+                context['emptyExperienceDuration'] = 'Please enter an experience duration'
             elif not newExperience.tourPrice:
-                context['emptyExperiencePrice'] = 'Please enter an experience price'     
+                context['emptyExperiencePrice'] = 'Please enter an experience price'
             elif not newExperience.tourAvailableDate:
-                context['emptyExperienceAvailableDate'] = 'Please enter an experience date'                    
+                context['emptyExperienceAvailableDate'] = 'Please enter an experience date'
             elif not newExperience.tourMaxNumberOfPeople:
-                context['emptyExperienceMaxNumPeople'] = 'Please enter a maximum number of people'     
+                context['emptyExperienceMaxNumPeople'] = 'Please enter a maximum number of people'
             elif not newExperience.tourDescription:
-                context['emptyExperienceDescription'] = 'Please enter an experience description'     
+                context['emptyExperienceDescription'] = 'Please enter an experience description'
             # elif not newExperience.tourImage:
-            #     context['emptyExperienceImage'] = 'Please enter an experience image'  
+            #     context['emptyExperienceImage'] = 'Please enter an experience image'
             # elif newExperience is not None:
             newExperience.save()
             return redirect("dashboardGuide")
-    return render(request,'main_app/createActivity.html', context)
+    return render(request, 'main_app/createActivity.html', context)
 
 
 @ login_required(login_url='login')
 def updateActivity(request, id):
-    context = {}    
+    context = {}
     return render(request, 'main_app/updateActivity.html', context)
 
 
 @ login_required(login_url='login')
 def deleteActivity(request, id):
-    context = {}    
+    context = {}
     return render(request, 'main_app/deleteActivity.html', context)
 
 ###############################################################################
+
+
 @ login_required(login_url='login')
 def dashboardUser(request):
     allToursList = TourExperience.objects.all()
@@ -199,9 +193,10 @@ def joinActivity(request, idUser, idTour):
     if request.method == 'POST':
         currentUser = EndUser.objects.get(id=idUser)
         currentExperience = TourExperience.objects.get(id=idTour)
-        bookings = Booking(endUser=currentUser, tourExperience=currentExperience)
+        bookings = Booking(endUser=currentUser,
+                           tourExperience=currentExperience)
         bookings.save()
-        context = {"bookings":bookings}
+        context = {"bookings": bookings}
         return redirect("dashboardUser")
     return render(request, 'main_app/dashboardUser.html', context)
 
@@ -224,6 +219,7 @@ class ExperienceListView(ListView):
 #     template_name = "main_app/experienceCreate.html"
 #     success_url = reverse_lazy("homepage")
 
+
 class ExperienceDetails(DetailView):
     model = TourExperience
     template_name = "main_app/experienceDetail.html"
@@ -234,6 +230,7 @@ class ExperienceDetails(DetailView):
         context['stripe_publishable_key'] = settings.STRIPE_PUBLISHABLE_KEY
         return context
 
+
 class PaymentSuccessView(TemplateView):
     template_name = "main_app/paymentSuccess.html"
 
@@ -241,21 +238,25 @@ class PaymentSuccessView(TemplateView):
         session_id = request.GET.get('session_id')
         if session_id is None:
             return HttpResponseNotFound()
-        
+
         stripe.api_key = settings.STRIPE_SECRET_KEY
         session = stripe.checkout.Session.retrieve(session_id)
 
-        order = get_object_or_404(OrderDetail, stripe_payment_intent=session.payment_intent)
+        order = get_object_or_404(
+            OrderDetail, stripe_payment_intent=session.payment_intent)
         order.has_paid = True
         order.save()
         return render(request, self.template_name)
 
+
 class PaymentFailedView(TemplateView):
     template_name = "main_app/paymentFailed.html"
+
 
 class OrderHistoryListView(ListView):
     model = OrderDetail
     template_name = "main_app/dashboardUser.html"
+
 
 @csrf_exempt
 def create_checkout_session(request, id):
@@ -267,14 +268,14 @@ def create_checkout_session(request, id):
     checkout_session = stripe.checkout.Session.create(
         # Customer Email is optional,
         # It is not safe to accept email directly from the client side
-        customer_email = request_data['email'],
+        customer_email=request_data['email'],
         payment_method_types=['card'],
         line_items=[
             {
                 'price_data': {
                     'currency': 'usd',
                     'product_data': {
-                    'name': tourExperience.tourTitle,
+                        'name': tourExperience.tourTitle,
                     },
                     'unit_amount': int(tourExperience.tourPrice*100),
                 },

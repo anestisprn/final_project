@@ -1,29 +1,37 @@
-{% extends 'base.html' %}
-{% load static %}
-
+{% extends "base.html" %}
+{% block title %}Edit Page{% endblock title %}
 {% block content %}
 
-<h1> Change your account details </h1>
-<h1> {{request.user.username}}</h1>
-<h1> {{request.user.password}}</h1>
-<h1> {{request.user.first_name}}</h1>
-<h1> {{request.user.last_name}}</h1>
-<form method='post'>
-    {% csrf_token %}
-        <label for='username'> Username: </label>
-        <input type='text' name='username' id='username' placeholder = {{request.user.username}} value= {{userToEdit.username}}> <br>
+{% if user_form.errors %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+    <div id="form_errors">
+        {% for key, value in user_form.errors.items %}
+        <strong>{{ value }}</strong>
+        {% endfor %}
+    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
 
-        {% comment %} <label for='user_password'> Password: </label>
-        <input type='password' name='user_password' id='user_password' value= {{request.user.password}}> <br> {% endcomment %}
-
-        <label for='first_name'> First Name: </label>
-        <input type='text' name='first_name' id='first_name' placeholder = {{request.user.first_name}} value= {{userToEdit.first_name}}> <br>
-
-        <label for='last_name'> Last Name: </label>
-        <input type='text' name='last_name' id='last_name' placeholder = {{request.user.last_name}} value= {{userToEdit.last_name}}> <br>
-            
-        
-    <button type='submit'> Update details </button>
-</form>
+<div class="form-content w-100 p-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row ">
+            <div class="col-md-5">
+                <div class="form-group ">
+                    <label class="small mb-1">Username:</label>
+                    {{ user_form.username }}
+                    <label class="small mb-1">Email:</label>
+                    {{ user_form.email}}
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+        <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+    </form>
+</div>
 
 {% endblock content %}
