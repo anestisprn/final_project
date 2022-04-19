@@ -2,22 +2,20 @@
 {% load static %}
 
 {% block content %}
-<h1 class="text-center">Product List</h1>
+<h1 class="text-center">Experience List</h1>
 <div class="container">
-    {% if product_list %}
+    {% if allToursList %}
     <div class="row">
-
-
-        {% for p in experienceList %}
+        {% for tour in allToursList %}
         <div class="col-sm-4">
             <div class="card">
-                <img class="card-img-top" src="https://dummyimage.com/200x150.jpg?text={{ p.name }}" alt="">
+                <img src="{{tour.tourImage}}" class="card-img-top" alt="..."> 
                 <div class="card-body">
-                    <h4 class="card-title">{{ p.name }}</h4>
-                    <p class="card-text">{{ p.description }}</p>
+                    <h4 class="card-title">{{tour.tourTitle}}</h4>
+                    <p class="card-text">{{tour.tourDescription}}</p>
                 </div>
                 <div class="card-footer d-flex">
-                    <a href="{% url 'detail' id=p.id %}" class="btn btn-success ml-auto">Buy Now</a>
+                    <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-success ml-auto">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -26,8 +24,9 @@
     </div>
     {% else %}
     <div class="alert alert-info text-center mt-5">
-        The product list is empty. Please add some products first.
+        The experience list is empty. Please add some products first.
     </div>
     {% endif %}
 </div>
 {% endblock content %}
+

@@ -22,9 +22,9 @@ def homepage(request):
     context = {'allToursList': TourExperience.objects.all()}
     return render(request, 'main_app/homepage.html', context)
 
-# def tourExperience(request):
-#     context = {'allToursList': TourExperience.objects.all()}
-#     return render(request, 'main_app/tourExperience.html', context)
+# def experienceList(request):
+#     context = {'allToursList': experienceList.objects.all()}
+#     return render(request, 'main_app/experienceList.html', context)
 
 
 def contactUs(request):
@@ -173,33 +173,44 @@ def deleteActivity(request, id):
     context = {}
     return render(request, 'main_app/deleteActivity.html', context)
 
-###############################################################################
-
 
 @ login_required(login_url='login')
 def dashboardUser(request):
     allToursList = TourExperience.objects.all()
-    allBookingsList = Booking.objects.all()
+    allWishList = WishList.objects.all()
     context = {
         'allToursList': allToursList,
-        'allBookingsList': allBookingsList
+        'allBookingsList': allWishList
     }
     return render(request, 'main_app/dashboardUser.html', context)
 
+@ login_required(login_url='login')
+def wishList(request):
+    allToursList = TourExperience.objects.all()
+    allWishList = WishList.objects.all()
+    context = {
+        'allToursList': allToursList,
+        'allWishList': allWishList
+    }
+    return render(request, 'main_app/wishList.html', context)
+
 
 @ login_required(login_url='login')
-def joinActivity(request, idUser, idTour):
+def wishListAdd(request, idUser, idTour):
     context = {}
     if request.method == 'POST':
         currentUser = EndUser.objects.get(id=idUser)
         currentExperience = TourExperience.objects.get(id=idTour)
-        bookings = Booking(endUser=currentUser,
+        addWishList = WishList(endUser=currentUser,
                            tourExperience=currentExperience)
-        bookings.save()
-        context = {"bookings": bookings}
+        addWishList.save()
+        context = {
+            'addWishList': addWishList
+        }
         return redirect("dashboardUser")
-    return render(request, 'main_app/dashboardUser.html', context)
+    return render(request, 'main_app/homepage.html', context)
 
+###############################################################################
 
 # @ login_required(login_url='login')
 # def dropActivity(request, id):
@@ -210,7 +221,7 @@ def joinActivity(request, idUser, idTour):
 
 class ExperienceListView(ListView):
     model = TourExperience
-    template_name = "main_app/tourExperience.html"
+    template_name = "main_app/experienceList.html"
     context_object_name = "allToursList"
 
 # class ExperienceCreateView(CreateView):
@@ -255,7 +266,7 @@ class PaymentFailedView(TemplateView):
 
 class OrderHistoryListView(ListView):
     model = OrderDetail
-    template_name = "main_app/dashboardUser.html"
+    template_name = "main_app/orderHistory.html"
 
 
 @csrf_exempt

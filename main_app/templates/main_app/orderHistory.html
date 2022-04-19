@@ -17,14 +17,15 @@
                 </tr>
             </thead>
             <tbody>
-
-                {% for object in object_list %}
+                
+                {% for i in object_list %}
+                
                     <tr>
-                        <td>{{ object.tourExperience.tourTitle }}</td>
-                        <td>{{ object.customer_email }}</td>
-                        <td>{{ object.amount }}</td>
+                        <td>{{ i.tourExperience.tourTitle }}</td>
+                        <td>{{ i.customer_email }}</td>
+                        <td>{{ i.amount }}</td>
                         <td>
-                            {% if object.has_paid %}
+                            {% if i.has_paid %}
                                 <b class="text-success">Success</b>
                             {% else %}
                                 <b class="text-danger">Failed</b>
@@ -36,6 +37,7 @@
                     
             </tbody>
         </table>
+
         {% else %}
         <div class="alert alert-info">
             Payment history is empty.

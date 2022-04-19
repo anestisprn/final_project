@@ -5,5 +5,5 @@ from .models import *
 admin.site.register(EndUser)
 admin.site.register(TourGuide)
 admin.site.register(TourExperience)
-admin.site.register(Booking)
 admin.site.register(OrderDetail)
+admin.site.register(WishList)

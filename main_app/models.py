@@ -69,9 +69,8 @@ class OrderDetail(models.Model):
     updated_on = models.DateTimeField(auto_now_add=True)
 
 
-class Booking(models.Model):
+class WishList(models.Model):
     tourExperience = models.ForeignKey(
         TourExperience, on_delete=models.CASCADE, blank=True)
     endUser = models.ForeignKey(EndUser, on_delete=models.CASCADE, blank=True)
-    orderDetail = models.OneToOneField(
-        OrderDetail, on_delete=models.CASCADE, null=True)
+
