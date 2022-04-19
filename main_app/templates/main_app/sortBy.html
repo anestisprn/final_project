@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+    <div class="container p-4" >
+      <div class="row">
+        {% for tour in all_tours_list %}
+        <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
+          <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Tour title: {{tour.tourTitle}} </h5>
+            <h2 class="card-title">Tour price: {{tour.tourPrice}} </h2>
+            <h2 class="card-title">Tour max num people: {{tour.tourMaxNumberOfPeople}} </h2>
+            <h2 class="card-title">Tour duration: {{tour.tourDuration}} </h2>
+            <h2 class="card-title">Tour date:{{tour.tourAvailableDate}} </h2>
+            <h2 class="card-title">Tour category: {{tour.tourCategory}} </h2>
+            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-primary">Book now</a>
+            {% if user.is_active %}
+            <a href="{% url 'wishListAdd' idUser=request.user.id idTour=tour.id  %}" class="btn btn-success">Favourite</a>
+            {% endif %} 
+          </div>
+        </div>
+        {% endfor %}   
+      </div>
+    </div>
+{% endblock %}

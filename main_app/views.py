@@ -210,6 +210,71 @@ def wishListAdd(request, idUser, idTour):
         return redirect("dashboardUser")
     return render(request, 'main_app/homepage.html', context)
 
+
+
+############################SORTING VIEWS######################################
+
+
+
+def sortByPriceAscending(request):
+    all_tours_list = TourExperience.objects.order_by('tourPrice')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+def sortByPriceDescending(request):
+    all_tours_list = TourExperience.objects.order_by('-tourPrice')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+
+def sortByNumberOfPeopleAscending(request):
+    all_tours_list = TourExperience.objects.order_by('tourMaxNumberOfPeople')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+
+def sortByNumberOfPeopleDescending(request):
+    all_tours_list = TourExperience.objects.order_by('-tourMaxNumberOfPeople')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+
+def sortByDurationAscending(request):
+    all_tours_list = TourExperience.objects.order_by('-tourDuration')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+def sortByDurationDescending(request):
+    all_tours_list = TourExperience.objects.order_by('-tourDuration')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+def sortByDateAscending(request):
+    all_tours_list = TourExperience.objects.order_by('tourAvailableDate')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+def sortByDateDescending(request):
+    all_tours_list = TourExperience.objects.order_by('-tourAvailableDate')
+    context = {'all_tours_list': all_tours_list}
+    return render(request, 'main_app/sortBy.html', context)
+
+#########################################################################
+
+
+
+# class ExperienceListView(ListView):
+#     all_tours_list = TourExperience.objects.all()
+#     sortByPriceAscending = all_tours_list.order_by('-tourPrice')
+#     sortByPriceDescending = all_tours_list.order_by('tourPrice')
+#     def sortBy():
+#         if sortByPriceAscending:
+#             context = {'sorted_tour_list': sortByPriceAscending}
+#         elif sortByPriceDescending:
+#             context = {'sorted_tour_list': sortByPriceDescending}
+
+#         return render(request,'main_app/sortBy.html', context)
+
 ###############################################################################
 
 # @ login_required(login_url='login')

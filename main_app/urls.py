@@ -31,4 +31,20 @@ urlpatterns = [
 
 
     path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
+
+    #sorting paths for price
+    path('sortByPriceAscending/', sortByPriceAscending, name="sortByPriceAscending"),
+    path('sortByPriceDescending/', sortByPriceDescending, name="sortByPriceDescending"),
+
+    #sorting paths for maximum number of people
+    path('sortByNumberOfPeopleAscending/', sortByNumberOfPeopleAscending, name="sortByNumberOfPeopleAscending"),
+    path('sortByNumberOfPeopleDescending/', sortByNumberOfPeopleDescending, name="sortByNumberOfPeopleDescending"),
+
+    #sorting paths for maximum number of people
+    path('sortByDurationAscending/', sortByDurationAscending, name="sortByDurationAscending"),
+    path('sortByDurationDescending/', sortByDurationDescending, name="sortByDurationDescending"),
+
+    #sorting paths for maximum number of people
+    path('sortByDateAscending/', sortByDateAscending, name="sortByDateAscending"),
+    path('sortByDateDescending/', sortByDateDescending, name="sortByDateDescending"),
 ]
