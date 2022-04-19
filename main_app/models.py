@@ -70,7 +70,8 @@ class OrderDetail(models.Model):
 
 
 class WishList(models.Model):
-    tourExperience = models.ForeignKey(
-        TourExperience, on_delete=models.CASCADE, blank=True)
+    tourExperience = models.ForeignKey(TourExperience, on_delete=models.CASCADE, blank=True)
     endUser = models.ForeignKey(EndUser, on_delete=models.CASCADE, blank=True)
 
+    def __str__(self):
+        return f"{self.tourExperience.tourTitle} - {self.endUser.username}"

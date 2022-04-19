@@ -19,11 +19,6 @@
                     <p>Description: {{object.tourDescription}}</p>
                     <p>Price: {{object.tourPrice}}</p>
 
-                    <div class="form-group">
-                        <label for="email">Email: </label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
-                        <small>Please enter your email address</small>
-                    </div>
                 </div>
             </div>
         </div>
@@ -40,12 +35,7 @@
     var checkoutButton = document.getElementById('checkout-button');
 
     checkoutButton.addEventListener('click', function () {
-
-        var email = document.getElementById('email').value;
-        if (email.length == 0) {
-            alert("Please enter your email address.");
-            return;
-        }
+        var email = "{{request.user.email}}"
 
         // Create a new Checkout Session using the server-side endpoint you
         fetch("{% url 'api_checkout_session' id=object.id %}", {

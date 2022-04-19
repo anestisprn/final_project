@@ -180,14 +180,14 @@ def dashboardUser(request):
     allWishList = WishList.objects.all()
     context = {
         'allToursList': allToursList,
-        'allBookingsList': allWishList
+        'allWishList': allWishList
     }
     return render(request, 'main_app/dashboardUser.html', context)
 
 @ login_required(login_url='login')
 def wishList(request):
     allToursList = TourExperience.objects.all()
-    allWishList = WishList.objects.all()
+    allWishList = WishList.objects.filter(endUser=request.user)
     context = {
         'allToursList': allToursList,
         'allWishList': allWishList
@@ -217,7 +217,7 @@ def wishListAdd(request, idUser, idTour):
 #     context = {}
 #     return render(request, 'main_app/dashboardUser.html', context)
 
-#################################################################################
+###############################################################################
 
 class ExperienceListView(ListView):
     model = TourExperience

@@ -6,16 +6,15 @@
 {{book.endUser.id}}
 
 {% for item in allWishList %}
-{% if item.endUser.id == request.user.id %} 
+
 <li>
     <span class="tourName"> Tour Name: {{item.tourExperience.tourTitle}} </span>
-    
 </li>
 <li>
     <span class="TourLocation"> Tour Location: {{item.tourExperience.tourLocation}} </span>
 </li>
 </br>
-{% endif %}
+
 {% endfor %}
 
 {% endblock content %}
