@@ -5,7 +5,8 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-    <h2> Login </h2>
+<h2 class="text-center"> Login </h2>
+<div class="container w-50 p-3">
     <form method='post'>
         {% csrf_token %}
         <div class="form-group">
@@ -17,21 +18,5 @@
             <button type="reset" class="btn btn-secondary"> reset </button>
         </div>
     </form>
-
-    {% comment %} <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="username"> username : </label>
-            <input type="text" class="form-control" name="username" id="username" autofocus/>
-            <small class="form-text text-danger">{{empty_username}}</small>
-            <br/>
-            <label for="password"> password : </label>
-            <input type="password" class="form-control" name="password" id="password" />
-            <small class="form-text text-danger">{{empty_password}}</small>
-            <br/><br/>
-            <button type="submit" class="btn btn-primary"> login </button>
-            <button type="reset" class="btn btn-secondary"> reset </button>
-        </div>
-    </form> {% endcomment %}
+</div>
 {% endblock %}
-

@@ -5,16 +5,16 @@
 {% block title %} Sign up as user {% endblock %}
 
 {% block content %}
-    <h2> Sign up </h2>
+<h2 class="text-center"> Sign up </h2>
+<div class="container w-50 p-3">
     <form method='post'>
         {% csrf_token %}
         <div class="form-group">
             {{form|crispy}}
             <br>
-            {% comment %} {{ form.as_table }} {% endcomment %}
-            {% comment %} {{form|crispy}} {% endcomment %}
             <button type="submit" class="btn btn-primary"> sign up </button>
             <button type="reset" class="btn btn-secondary"> reset </button>
         </div>
     </form>
+</div>
 {% endblock %}
