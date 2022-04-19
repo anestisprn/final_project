@@ -2,20 +2,20 @@
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="{% static 'media/logo.png'%}" class="d-block w-100 h-100 " alt="..."></a>
+      <a class="navbar-brand" href="{% url 'homepage'%}"><img src="{% static 'media/logo.png'%}" class="d-block w-100 h-100 " alt="..."></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="{%url 'homepage'%}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/tourExperience/">Tour Experience</a>
+            <a class="nav-link" href="{% url 'tourExperience'%}">Tour Experience</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/contactUs/">Contact us</a>
+            <a class="nav-link" href="{% url 'contactUs'%}">Contact us</a>
           </li>
         </ul>
       </div>
@@ -32,17 +32,17 @@
               {%endif%}
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/logout/" tabindex="-1" aria-disabled="true">Logout</a>
+              <a class="nav-link" href="{%url 'logoutUser'%}" tabindex="-1" aria-disabled="true">Logout</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="/login/" tabindex="-1" aria-disabled="true">Login</a>
+              <a class="nav-link" href="{% url 'loginUser'%}" tabindex="-1" aria-disabled="true">Login</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="/signupUser/" tabindex="-1" aria-disabled="true">Sign up</a>
+              <a class="nav-link" href="{%url 'signupUser' %}" tabindex="-1" aria-disabled="true">Sign up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signupGuide/" tabindex="-1" aria-disabled="true">Become a guide</a>
+              <a class="nav-link" href="{%url 'signupGuide'%}" tabindex="-1" aria-disabled="true">Become a guide</a>
             </li>
           {% endif %}
         </ul>

@@ -30,3 +30,6 @@ class GuideRegistrationForm(UserCreationForm):
 #     class Meta:
 #         model = CustomUser
 #         fields = ('username', 'password')
+
+class UpdateUserForm(UserRegistrationForm):
+    pass

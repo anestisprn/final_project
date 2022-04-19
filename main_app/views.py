@@ -60,6 +60,7 @@ def signupGuide(request):
     return render(request, 'main_app/signupGuide.html', {'form':form})
 
 
+
 def loginUser(request):
     if request.method =='POST':
         form = LoginForm(request.POST)
@@ -75,6 +76,30 @@ def loginUser(request):
     else:
         form = LoginForm()
     return render (request, "main_app/login.html", {'form':form})
+
+
+def editUser(request,id):
+    userToEdit = EndUser.objects.get(id=id)
+    context = {'userToEdit': userToEdit}
+    if request.method == 'POST':
+        newUsername = request.POST['user.username']
+        # newPassword = request.POST['user_password']
+        newFirstName = request.POST['first_name']
+        newLastName = request.POST['last_name']
+
+        if request.user:
+            userToEdit.username = newUsername
+            # userToEdit.password = newPassword
+            userToEdit.first_name = newFirstName
+            userToEdit.last_name = newLastName
+        
+        return redirect('homepage')
+
+    return render(request, 'main_app/editUser.html', context)
+
+
+
+
 
 
 # @ login_required(login_url='login')
