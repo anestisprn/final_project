@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from matplotlib.style import context
+# from matplotlib.style import context
 # from django.contrib.auth.forms import PasswordChangeForm
 from .forms import *
 from .models import *

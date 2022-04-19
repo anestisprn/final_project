@@ -47,7 +47,7 @@
       <div class="row">
         {% for tour in allToursList %}
         <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
-          <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
+          <img src="{{tour.tourImage.url}}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{tour.tourTitle}} </h5>
             <p class="card-text">{{tour.tourDescription}}</p>

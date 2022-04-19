@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'crispy_forms',
-    "crispy_bootstrap5",
+    # "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -120,15 +120,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_ROOT= '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

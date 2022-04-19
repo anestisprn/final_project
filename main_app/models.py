@@ -40,7 +40,7 @@ class TourExperience(models.Model):
     tourDescription = models.TextField(
         max_length=500, verbose_name='Tour Title')
     tourImage = models.ImageField(
-        upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, blank=True, null=True, verbose_name='Tour Image')
+        upload_to="images/", height_field=None, width_field=None, max_length=100, blank=True, null=True, verbose_name='Tour Image')
 
     endUser = models.ManyToManyField(
         EndUser, related_name="tourExperiences", blank=True)
