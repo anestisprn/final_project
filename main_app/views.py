@@ -156,7 +156,7 @@ def deleteActivity(request, id):
     context = {}    
     return render(request, 'main_app/deleteActivity.html', context)
 
-
+###############################################################################
 @ login_required(login_url='login')
 def dashboardUser(request):
     allToursList = TourExperience.objects.all()
@@ -168,17 +168,17 @@ def dashboardUser(request):
     return render(request, 'main_app/dashboardUser.html', context)
 
 
-# @ login_required(login_url='login')
-# def joinActivity(request, idUser, idTour):
-#     context = {}
-#     if request.method == 'POST':
-#         currentUser = EndUser.objects.get(id=idUser)
-#         currentExperience = TourExperience.objects.get(id=idTour)
-#         bookings = Booking(endUser=currentUser, tourExperience=currentExperience)
-#         bookings.save()
-#         context = {"bookings":bookings}
-#         return redirect("dashboardUser")
-#     return render(request, 'main_app/joinActivity.html', context)
+@ login_required(login_url='login')
+def joinActivity(request, idUser, idTour):
+    context = {}
+    if request.method == 'POST':
+        currentUser = EndUser.objects.get(id=idUser)
+        currentExperience = TourExperience.objects.get(id=idTour)
+        bookings = Booking(endUser=currentUser, tourExperience=currentExperience)
+        bookings.save()
+        context = {"bookings":bookings}
+        return redirect("dashboardUser")
+    return render(request, 'main_app/dashboardUser.html', context)
 
 
 # @ login_required(login_url='login')
@@ -186,6 +186,7 @@ def dashboardUser(request):
 #     context = {}
 #     return render(request, 'main_app/dashboardUser.html', context)
 
+#################################################################################
 
 class ExperienceListView(ListView):
     model = TourExperience
