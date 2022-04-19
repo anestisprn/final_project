@@ -259,11 +259,14 @@ def sortByDateDescending(request):
     context = {'all_tours_list': all_tours_list}
     return render(request, 'main_app/sortBy.html', context)
 
+# def sortByCategoryDrinking(request):
+#     all_tours_list = TourExperience.objects.filter(tourCategory = 'drinking')
+
 #########################################################################
 
 
 
-# class ExperienceListView(ListView):
+# class SortByView(ListView):
 #     all_tours_list = TourExperience.objects.all()
 #     sortByPriceAscending = all_tours_list.order_by('-tourPrice')
 #     sortByPriceDescending = all_tours_list.order_by('tourPrice')
