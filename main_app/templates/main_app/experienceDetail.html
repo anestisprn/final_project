@@ -2,6 +2,10 @@
 {% load static %}
 
 {% block content %}
+<head>
+    <script src="{% static 'js/jquery.js'%}"></script>
+    {{form.media}}
+ </head>
 <h1 class="text-center">Experience Detail</h1>
 <div class="container">
 
@@ -21,6 +25,7 @@
                     <p>Location: {{object.tourLocation}}</p>
                     <p>Duration: {{object.tourDuration}}</p>
                     <p>Price: {{object.tourPrice}}</p>
+                    <p> {{object.tourLocation}}</p>
                 </div>
             </div>
         </div>
@@ -29,6 +34,8 @@
         </div>
     </div>
 </div>
+
+
 <!-- Add JavaScript Here-->
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
