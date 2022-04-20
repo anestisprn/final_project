@@ -7,6 +7,7 @@ from location_field.models.plain import PlainLocationField
 
 
 
+
 class EndUser(User):
     userDateOfBirth = models.DateField(blank=True, null=True)
     
@@ -88,3 +89,6 @@ class WishList(models.Model):
 
     def __str__(self):
         return f"{self.tourExperience.tourTitle} - {self.endUser.username}"
+
+
+

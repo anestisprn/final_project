@@ -1,18 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import *
-from .models import *
+from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
-import stripe
-from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
+from django.conf import settings
 from django.urls import reverse, reverse_lazy
-from django.contrib import messages
 
+from .forms import *
+from .models import *
+import stripe
+import json
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import TourSerializer
+from .mock_tours import tours
 # Create your views here.
 
 def homepage(request):
@@ -324,3 +329,30 @@ def sortByDateDescending(request):
 #         return render(request,'main_app/sortBy.html', context)
 
 ###############################################################################
+
+############# API ##############
+@api_view(['GET'])
+def getRoutes(request):
+    routes =[
+        '/api/tours/',
+        '/api/tours/create/',
+        '/api/tours/<id>/reviews/',
+        '/api/tours/top/',
+        '/api/tours/<id>/',
+        '/api/tours/delete/<id>/',
+        '/api/tours/<update>/<id>/',
+    ]
+    return Response(routes)
+
+@api_view(['GET'])
+def getTours(request):
+    # tours = TourExperience.objects.all()
+    # serializer = TourSerializer(tours, many=True)
+    # return Response(serializer.data)
+    return JsonResponse(tours, safe=False)
+
+@api_view(['GET'])
+def getTour(request, pk):
+    tour=TourExperience.objects.get(id=pk)
+    serializer = TourSerializer(tour, many=False)
+    return Response(serializer.data)

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
@@ -10,7 +10,6 @@ urlpatterns = [
     path("logout/", logoutUser, name="logoutUser"),
     path("signupUser/", signupUser, name="signupUser"),
     path("signupGuide/", signupGuide, name="signupGuide"),
-
 
 
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
@@ -46,4 +45,9 @@ urlpatterns = [
     #sorting paths for maximum number of people
     path('experienceList/sortByDateAscending/', sortByDateAscending, name="sortByDateAscending"),
     path('experienceList/sortByDateDescending/', sortByDateDescending, name="sortByDateDescending"),
+
+    # API
+    path('',getRoutes, name="routes"),
+    path('tours/',getTours, name="tours"),
+    path('tours/<str:pk>/',getTour, name="tour"),
 ]
