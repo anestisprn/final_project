@@ -18,21 +18,22 @@
             </thead>
             <tbody>
                 
-                {% for i in object_list %}
-                
+                {% for item in object_list %}
+                {% if item.customer_email == request.user.email %}
                     <tr>
-                        <td>{{ i.tourExperience.tourTitle }}</td>
-                        <td>{{ i.customer_email }}</td>
-                        <td>{{ i.amount }}</td>
+                        <td>{{ item.tourExperience.tourTitle }}</td>
+                        <td>{{ item.customer_email }}</td>
+                        <td>{{ item.amount }}</td>
                         <td>
-                            {% if i.has_paid %}
+                            {% if item.has_paid %}
                                 <b class="text-success">Success</b>
                             {% else %}
                                 <b class="text-danger">Failed</b>
                             {% endif %}
                         </td>
-                        <td>{{ i.created_on }}</td>
+                        <td>{{ item.created_on }}</td>
                     </tr>
+                {% endif %}
                 {% endfor %}
                     
             </tbody>
