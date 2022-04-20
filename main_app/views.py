@@ -234,7 +234,7 @@ class ExperienceListView(ListView):
 
 class ExperienceCreateView(CreateView):
     model = TourExperience
-    fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
+    fields = ('tourTitle', 'tourCity', 'tourCategory', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
     initial = {"tourAvailableDate":"YYYY-MM-DD"}
     template_name = "main_app/experienceCreate.html"
     success_url = reverse_lazy("dashboardGuide")
