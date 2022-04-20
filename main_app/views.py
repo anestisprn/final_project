@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from .forms import *
 from .models import *
+from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
 import stripe
 from django.conf import settings
-from django.http.response import HttpResponseNotFound, JsonResponse
+from django.http.response import HttpResponseNotFound, JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.urls import reverse, reverse_lazy
@@ -69,8 +68,10 @@ def loginUser(request):
             if user is not None:
                 login(request, user)
                 return redirect("homepage")
-            else:
-                return redirect('login')
+        else:
+            messages.warning(request, 'Your profile is wrong')
+            # return render(request, "main_app/login.html", {'error': 'mitsotaki gamiesai'})
+            return redirect('loginUser')
     else:
         form = LoginForm()
     return render(request, "main_app/login.html", {'form': form})
@@ -86,6 +87,11 @@ def editUser(request):
     else:
         user_form = UpdateUserForm(instance=request.user)
     return render(request, 'main_app/editUser.html', {'user_form': user_form})
+
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('homepage')
 
 
 def logoutUser(request):
@@ -159,7 +165,7 @@ def wishListAdd(request, idTour):
     return render(request, 'main_app/wishList.html', context)
 
 
-class WishListDropView(DeleteView):
+class WishListDeleteView(DeleteView):
     model = WishList
     success_url = reverse_lazy("wishList")
 

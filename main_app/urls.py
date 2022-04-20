@@ -16,14 +16,14 @@ urlpatterns = [
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/wishList/", wishList, name="wishList"),
     path("dashboardUser/wishList/<int:idTour>", wishListAdd, name="wishListAdd"),
-    path("<pk>/delete", WishListDropView.as_view(), name="wishListDrop"),
+    path("<pk>/dashboardUser/delete", WishListDeleteView.as_view(), name="wishListDelete"),
     path('dashboardUser/editUser/', editUser, name='editUser'),
     path('dashboardUser/orderHistory/', OrderHistoryListView.as_view(), name='orderHistory'),
 
     path("dashboardGuide/", dashboardGuide, name="dashboardGuide"),
     path('dashboardGuide/experienceCreate/', ExperienceCreateView.as_view(), name='experienceCreate'),
-    path("<pk>/update", ExperienceUpdateView.as_view(), name="experienceUpdate"),
-    path("<pk>/delete", ExperienceDeleteView.as_view(), name="experienceDelete"),
+    path("<pk>/dashboardGuide/update", ExperienceUpdateView.as_view(), name="experienceUpdate"),
+    path("<pk>/dashboardGuide/delete", ExperienceDeleteView.as_view(), name="experienceDelete"),
 
     path("experienceDetails/<int:id>", ExperienceDetails.as_view(), name="experienceDetails"),
     path('experienceDetails/success/', PaymentSuccessView.as_view(), name="success"),

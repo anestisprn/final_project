@@ -15,6 +15,7 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
     class Meta:
         model = EndUser
         fields = ('username', 'first_name', 'last_name', 'email')

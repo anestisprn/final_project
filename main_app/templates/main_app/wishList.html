@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-footer d-flex">
                     <a href="{% url 'experienceDetails' id=wish.tourExperience.id %}" class="btn btn-primary ml-auto">Buy Now</a>
-                    <a href="{% url 'wishListDrop' pk=wish.id %}" class="btn btn-danger ml-auto" type="submit">Remove</a>
+                    <a href="{% url 'wishListDelete' pk=wish.id %}" class="btn btn-danger ml-auto" type="submit">Remove</a>
                 </div>
             </div>
             <br>
