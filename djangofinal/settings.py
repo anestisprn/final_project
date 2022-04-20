@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'main_app',
     'crispy_forms',
     "crispy_bootstrap5",
+    "location_field.apps.DefaultConfig",
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,29 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51KpxvVJLOsvnT9wMQXRBItRC2HG7XbBdC3lKTnLxWtKFB0aGaI2HumRIBd2APpe0AblL4oNZxMhiZmIHLQ9dm4dM0095DnJNYP'
 STRIPE_SECRET_KEY = 'sk_test_51KpxvVJLOsvnT9wMSeGI2CMhftaKi6k9P3XbnVqmwpdlwaSGALKH8dK96uCagfSekiR1I0J8qpojyEjEfjCm6ur700gy8F416r'
+
+LOCATION_FIELD_PATH = settings.STATIC_URL + 'location_field'
+
+LOCATION_FIELD = {
+    'map.provider': 'google',
+    'map.zoom': 13,
+
+    'search.provider': 'google',
+    'search.suffix': '',
+
+    # OpenStreetMap
+    'provider.openstreetmap.max_zoom': 18,
+
+    # misc
+    'resources.root_path': LOCATION_FIELD_PATH,
+    'resources.media': {
+        'js': (
+            LOCATION_FIELD_PATH + '/js/form.js',
+        ),
+    },
+}
+
+LOCATION_FIELD = {
+    'map.provider': 'openstreetmap',
+    'search.provider': 'nominatim',
+}

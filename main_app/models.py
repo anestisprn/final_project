@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 # Create your models here.
 from django.core import validators
+from location_field.models.plain import PlainLocationField
+
 
 
 class EndUser(User):
@@ -29,8 +31,7 @@ class TourGuide(User):
 
 class TourExperience(models.Model):
     tourTitle = models.CharField(max_length=100, verbose_name='Tour Title')
-    tourLocation = models.CharField(
-        max_length=50, verbose_name='Tour Location')
+    # tourLocation = models.DateTimeField(verbose_name='Tour Location')
     tourDuration = models.IntegerField(verbose_name='Tour Duration')
     tourPrice = models.FloatField(verbose_name='Tour Price',  validators=[
                                   validators.MinValueValidator(1), validators.MaxValueValidator(10000)])
@@ -47,12 +48,25 @@ class TourExperience(models.Model):
     tourGuide = models.ForeignKey(
         TourGuide, on_delete=models.CASCADE, blank=True, null=True)
 
+    tourTypeOptions = (
+        ('Food Experience', 'food_experience'),
+        ('Activities in Nature', 'activities_in_nature'),
+        ('Drinking experience', 'drinking_experience'),
+        ('Spiritual experience', 'spiritual_experience'),
+        ('Sighseeing experience', 'sightseeing_experience')
+    )
+
+    tourCategory = models.CharField(max_length=50, choices=tourTypeOptions)
+    tourCity = models.CharField(max_length=255, blank = True)
+    tourLocation = PlainLocationField(based_fields=['tourCity'], zoom=7, blank = True)
+
     def __str__(self):
         return self.tourTitle
 
     class Meta:
         verbose_name = 'TourExperience'
 
+ 
 
 class OrderDetail(models.Model):
     id = models.BigAutoField(primary_key=True)
