@@ -13,18 +13,16 @@ urlpatterns = [
 
     path("dashboardGuide/", dashboardGuide, name="dashboardGuide"),
 
-    path("dashboardGuide/experienceUpdate/<int:id>", experienceUpdate, name="experienceUpdate"),
-    path("dashboardGuide/experienceDelete/<int:id>", experienceDelete, name="experienceDelete"),
-
-
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/wishList/", wishList, name="wishList"),
-    path("dashboardUser/wishList/<int:idUser>/<int:idTour>", wishListAdd, name="wishListAdd"),
+    path("dashboardUser/wishList/<int:idTour>", wishListAdd, name="wishListAdd"),
     path("dashboardUser/wishList/<int:id>", wishListDrop, name="wishListDrop"),
     path('dashboardUser/editUser/', editUser, name='editUser'),
 
     path('dashboardUser/orderHistory/', OrderHistoryListView.as_view(), name='orderHistory'),
-    path('dashboardGuide/create/', ExperienceCreateView.as_view(), name='create'),
+    path('dashboardGuide/experienceCreate/', ExperienceCreateView.as_view(), name='experienceCreate'),
+    path("dashboardGuide/experienceUpdate/<int:id>", ExperienceUpdateView.as_view(), name="experienceUpdate"),
+    path("dashboardGuide/experienceDelete/<int:id>", ExperienceDeleteView.as_view(), name="experienceDelete"),
     path('experienceList/', ExperienceListView.as_view(), name='experienceList'),
     path("experienceDetails/<int:id>", ExperienceDetails.as_view(), name="experienceDetails"),
     

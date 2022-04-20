@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.forms import PasswordChangeForm
 from .forms import *
 from .models import *
-from django.views.generic import ListView, CreateView, DetailView, TemplateView
+from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
 import stripe
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
@@ -83,7 +83,6 @@ def editUser(request):
             return redirect(to='dashboardUser')
     else:
         user_form = UpdateUserForm(instance=request.user)
-
     return render(request, 'main_app/editUser.html', {'user_form': user_form})
 
 
@@ -109,16 +108,6 @@ def dashboardUser(request):
 
 ########################################################################
 
-def experienceUpdate(request, id):
-    context = {}
-    return render(request, 'main_app/updateActivity.html', context)
-
-
-def experienceDelete(request, id):
-    context = {}
-    return render(request, 'main_app/deleteActivity.html', context)
-
-
 def wishListDrop(request, id):
     currentUser = EndUser.objects.get(id=request.user.id)
     currentExperience = TourExperience.objects.get(id=id)
@@ -127,6 +116,16 @@ def wishListDrop(request, id):
     dropWishList.delete()
     return render(request, 'main_app/wishList.html')
 
+class ExperienceUpdateView(UpdateView):
+    model = TourExperience
+    fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
+    success_url = reverse_lazy("dashboardGuide")
+
+
+class ExperienceDeleteView(DeleteView):
+    pass
+
+########################################################################
 
 def wishList(request):
     allWishList = WishList.objects.filter(endUser=request.user)
@@ -136,79 +135,20 @@ def wishList(request):
     return render(request, 'main_app/wishList.html', context)
 
 
-def wishListAdd(request, idUser, idTour):
+def wishListAdd(request, idTour):
     context = {}
-    currentUser = EndUser.objects.get(id=idUser)
-    currentExperience = TourExperience.objects.get(id=idTour)
-    addWishList = WishList(endUser=currentUser,
-                        tourExperience=currentExperience)
-    addWishList.save()
-    context = {
-        'addWishList': addWishList
-    }
-    return render(request, 'main_app/homepage.html', context)
+    if request.method == 'GET':
+        currentUser = EndUser.objects.get(id=request.user.id)
+        currentExperience = TourExperience.objects.get(id=idTour)
+        addWishList = WishList(endUser=currentUser,
+                            tourExperience=currentExperience)
+        addWishList.save()
+        context = {
+            'addWishList': addWishList
+        }
+        return redirect("homepage")
+    return render(request, 'main_app/wishList.html', context)
 
-########################################################################
-
-# def experienceList(request):
-#     context = {'allToursList': experienceList.objects.all()}
-#     return render(request, 'main_app/experienceList.html', context)
-
-
-# def createActivity(request, idUser):
-#     context = {}
-#     if request.method == 'POST':
-#         if request.user.tourguide.isGuideApproved == 'Approved':
-#             newExperience = TourExperience()
-#             newExperience.tourTitle = request.POST['experienceTitle']
-#             newExperience.tourLocation = request.POST['experienceLocation']
-#             newExperience.tourDuration = request.POST['experienceDuration']
-#             newExperience.tourPrice = request.POST['experiencePrice']
-#             newExperience.tourAvailableDate = request.POST['experienceAvailableDate']
-#             newExperience.tourMaxNumberOfPeople = request.POST['experienceMaxNumPeople']
-#             newExperience.tourDescription = request.POST['experienceDescription']
-#             # newExperience.tourImage = request.POST['experienceImage']
-#             currentGuide = TourGuide.objects.get(id=idUser)
-#             newExperience.tourGuide = currentGuide
-#             if not newExperience.tourTitle:
-#                 context['emptyExperienceTitle'] = 'Please enter an experience title'
-#             elif not newExperience.tourLocation:
-#                 context['emptyExperienceLocation'] = 'Please enter an experience location'
-#             elif not newExperience.tourDuration:
-#                 context['emptyExperienceDuration'] = 'Please enter an experience duration'
-#             elif not newExperience.tourPrice:
-#                 context['emptyExperiencePrice'] = 'Please enter an experience price'
-#             elif not newExperience.tourAvailableDate:
-#                 context['emptyExperienceAvailableDate'] = 'Please enter an experience date'
-#             elif not newExperience.tourMaxNumberOfPeople:
-#                 context['emptyExperienceMaxNumPeople'] = 'Please enter a maximum number of people'
-#             elif not newExperience.tourDescription:
-#                 context['emptyExperienceDescription'] = 'Please enter an experience description'
-#             # elif not newExperience.tourImage:
-#             #     context['emptyExperienceImage'] = 'Please enter an experience image'
-#             # elif newExperience is not None:
-#             newExperience.save()
-#             return redirect("dashboardGuide")
-#     return render(request, 'main_app/createActivity.html', context)
-
-
-# @ login_required(login_url='login')
-# def changePassword(request):
-#     if request.method == 'POST':
-#         form = PasswordChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             form.save()
-#             user = authenticate(request, username=request.user.username,
-#                                 password=form.cleaned_data.get('new_password2'))
-#             login(request, user)
-#             message = 'You have successfully changed your password'
-#             return redirect('success', message=message)
-#     else:
-#         form = PasswordChangeForm(request.user)
-#     return render(request, 'main_app/changePassword.html', {'form': form})
-
-
-###############################################################################
 
 class ExperienceListView(ListView):
     model = TourExperience
