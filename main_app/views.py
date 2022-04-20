@@ -25,6 +25,7 @@ def contactUs(request):
     context = {}
     return render(request, 'main_app/contactUs.html', context)
 
+
 ############################ REGISTRATION VIEWS ###################################
 
 def signupUser(request):
@@ -91,6 +92,7 @@ def logoutUser(request):
     logout(request)
     return redirect("homepage")
 
+
 ############################ DASHBOARD VIEWS ###################################
 
 def dashboardGuide(request):
@@ -108,26 +110,31 @@ def dashboardUser(request):
     }
     return render(request, 'main_app/dashboardUser.html', context)
 
-########################################################################
 
-def wishListDrop(request, id):
-    currentUser = EndUser.objects.get(id=request.user.id)
-    currentExperience = TourExperience.objects.get(id=id)
-    dropWishList = WishList(endUser=currentUser,
-                        tourExperience=currentExperience)
-    dropWishList.delete()
-    return render(request, 'main_app/wishList.html')
+class ExperienceCreateView(CreateView):
+    model = TourExperience
+    fields = ('tourTitle', 'tourCity', 'tourCategory', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
+    initial = {"tourAvailableDate":"YYYY-MM-DD"}
+    template_name = "main_app/experienceCreate.html"
+    success_url = reverse_lazy("dashboardGuide")
+
+    def form_valid(self, form):
+        form.instance.tourGuide = TourGuide.objects.get(id=self.request.user.id)
+        return super(ExperienceCreateView, self).form_valid(form)
+
 
 class ExperienceUpdateView(UpdateView):
     model = TourExperience
-    fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
+    fields = ('tourTitle', 'tourCity', 'tourCategory', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
     success_url = reverse_lazy("dashboardGuide")
 
 
 class ExperienceDeleteView(DeleteView):
-    pass
+    model = TourExperience
+    success_url = reverse_lazy("dashboardGuide")
 
-########################################################################
+
+############################ WISHLIST VIEWS ###################################
 
 def wishList(request):
     allWishList = WishList.objects.filter(endUser=request.user)
@@ -152,23 +159,18 @@ def wishListAdd(request, idTour):
     return render(request, 'main_app/wishList.html', context)
 
 
+class WishListDropView(DeleteView):
+    model = WishList
+    success_url = reverse_lazy("wishList")
+
+
 class ExperienceListView(ListView):
     model = TourExperience
     template_name = "main_app/experienceList.html"
     context_object_name = "allToursList"
 
 
-class ExperienceCreateView(CreateView):
-    model = TourExperience
-    fields = ('tourTitle', 'tourCity', 'tourCategory', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
-    initial = {"tourAvailableDate":"YYYY-MM-DD"}
-    template_name = "main_app/experienceCreate.html"
-    success_url = reverse_lazy("dashboardGuide")
-
-    def form_valid(self, form):
-        form.instance.tourGuide = TourGuide.objects.get(id=self.request.user.id)
-        return super(ExperienceCreateView, self).form_valid(form)
-
+############################ PAYMENT VIEWS ###################################
 
 class ExperienceDetails(DetailView):
     model = TourExperience

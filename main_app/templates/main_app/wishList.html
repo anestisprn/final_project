@@ -6,17 +6,17 @@
 <div class="container">
     {% if allWishList %}
     <div class="row">
-        {% for tour in allWishList %}
+        {% for wish in allWishList %}
         <div class="col-sm-4">
             <div class="card">
-                <img src="{{tour.tourExperience.tourImage.url}}" class="card-img-top" alt="..."> 
+                <img src="{{wish.tourExperience.tourImage.url}}" class="card-img-top" alt="..."> 
                 <div class="card-body">
-                    <h4 class="card-title">{{tour.tourExperience.tourTitle}}</h4>
-                    <p class="card-text">{{tour.tourExperience.tourDescription}}</p>
+                    <h4 class="card-title">{{wish.tourExperience.tourTitle}}</h4>
+                    <p class="card-text">{{wish.tourExperience.tourDescription}}</p>
                 </div>
                 <div class="card-footer d-flex">
-                    <a href="{% url 'experienceDetails' id=tour.tourExperience.id %}" class="btn btn-primary ml-auto">Buy Now</a>
-                    <a href="{% url 'wishListDrop' id=tour.tourExperience.id %}" class="btn btn-danger ml-auto">Remove</a>
+                    <a href="{% url 'experienceDetails' id=wish.tourExperience.id %}" class="btn btn-primary ml-auto">Buy Now</a>
+                    <a href="{% url 'wishListDrop' pk=wish.id %}" class="btn btn-danger ml-auto" type="submit">Remove</a>
                 </div>
             </div>
             <br>
