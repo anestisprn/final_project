@@ -7,7 +7,7 @@ from django.core import validators
 
 class EndUser(User):
     userDateOfBirth = models.DateField(blank=True, null=True)
-
+    
     class Meta:
         verbose_name = 'EndUser'
 
@@ -68,6 +68,8 @@ class OrderDetail(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.customer_email
 
 class WishList(models.Model):
     tourExperience = models.ForeignKey(TourExperience, on_delete=models.CASCADE, blank=True)

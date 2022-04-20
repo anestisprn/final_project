@@ -26,6 +26,11 @@ class GuideRegistrationForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'guideDescription')
 
 
+class ExperienceRegistrationForm(forms.ModelForm):
+    class meta:
+        model = TourExperience
+        exclude = ('endUser', 'tourGuide')
+
 # class RegistrationForm(ModelForm):
 #     class Meta:
 #         model = CustomUser

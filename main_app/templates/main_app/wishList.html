@@ -2,19 +2,30 @@
 {% load static %}
 
 {% block content %}
-
-{{book.endUser.id}}
-
-{% for item in allWishList %}
-
-<li>
-    <span class="tourName"> Tour Name: {{item.tourExperience.tourTitle}} </span>
-</li>
-<li>
-    <span class="TourLocation"> Tour Location: {{item.tourExperience.tourLocation}} </span>
-</li>
-</br>
-
-{% endfor %}
-
+<h1 class="text-center">My Wish List</h1>
+<div class="container">
+    {% if allWishList %}
+    <div class="row">
+        {% for tour in allWishList %}
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="{{tour.tourExperience.tourImage.url}}" class="card-img-top" alt="..."> 
+                <div class="card-body">
+                    <h4 class="card-title">{{tour.tourExperience.tourTitle}}</h4>
+                    <p class="card-text">{{tour.tourExperience.tourDescription}}</p>
+                </div>
+                <div class="card-footer d-flex">
+                    <a href="{% url 'experienceDetails' id=tour.tourExperience.id %}" class="btn btn-primary ml-auto">Buy Now</a>
+                    <a href="{% url 'wishListDrop' id=tour.tourExperience.id %}" class="btn btn-danger ml-auto">Remove</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center mt-5">
+        The experience list is empty.
+    </div>
+    {% endif %}
+</div>
 {% endblock content %}
