@@ -218,14 +218,14 @@ class ExperienceListView(ListView):
 
 class ExperienceCreateView(CreateView):
     model = TourExperience
-    # form_class = ExperienceRegistrationForm
-    # def get_initial(self, *args, **kwargs):
-    #     initial = super(ExperienceCreateView, self).get_initial(**kwargs)
-    #     initial['tourGuide']=self.request.user
-    fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage', 'tourGuide')
-    # fields = '__all__'
+    fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
+    initial = {"tourAvailableDate":"YYYY-MM-DD"}
     template_name = "main_app/experienceCreate.html"
     success_url = reverse_lazy("dashboardGuide")
+
+    def form_valid(self, form):
+        form.instance.tourGuide = TourGuide.objects.get(id=self.request.user.id)
+        return super(ExperienceCreateView, self).form_valid(form)
 
 
 class ExperienceDetails(DetailView):

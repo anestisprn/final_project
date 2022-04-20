@@ -29,7 +29,7 @@ class GuideRegistrationForm(UserCreationForm):
 class ExperienceRegistrationForm(forms.ModelForm):
     class meta:
         model = TourExperience
-        exclude = ('endUser', 'tourGuide')
+        fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
 
 # class RegistrationForm(ModelForm):
 #     class Meta:
