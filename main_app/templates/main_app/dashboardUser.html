@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %} User Dashboard {% endblock %}
+
 {% block content %}
 <h2 class="text-center"> {{ request.user.username }} dashboard </h2>
     <div class="container">

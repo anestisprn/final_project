@@ -284,7 +284,7 @@ def sortByNumberOfPeopleDescending(request):
 
 
 def sortByDurationAscending(request):
-    all_tours_list = TourExperience.objects.order_by('-tourDuration')
+    all_tours_list = TourExperience.objects.order_by('tourDuration')
     context = {'all_tours_list': all_tours_list}
     return render(request, 'main_app/sortBy.html', context)
 

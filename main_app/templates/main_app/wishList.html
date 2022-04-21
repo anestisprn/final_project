@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}WishList{% endblock title %}
+
 {% block content %}
-<h1 class="text-center">My Wish List</h1>
+<h1 class="text-center">My WishList</h1>
 <div class="container">
     {% if allWishList %}
     <div class="row">
