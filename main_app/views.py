@@ -24,6 +24,10 @@ def contactUs(request):
     context = {}
     return render(request, 'main_app/contactUs.html', context)
 
+def team(request):
+    context = {}
+    return render(request, 'team.html', context)
+
 
 ############################ REGISTRATION VIEWS ###################################
 
@@ -285,7 +289,7 @@ def sortByNumberOfPeopleDescending(request):
 
 
 def sortByDurationAscending(request):
-    all_tours_list = TourExperience.objects.order_by('-tourDuration')
+    all_tours_list = TourExperience.objects.order_by('tourDuration')
     context = {'all_tours_list': all_tours_list}
     return render(request, 'main_app/sortBy.html', context)
 

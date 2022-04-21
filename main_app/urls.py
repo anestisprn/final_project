@@ -5,13 +5,12 @@ urlpatterns = [
     path('', homepage, name='homepage'),
     path('experienceList/', ExperienceListView.as_view(), name='experienceList'),
     path("contactUs/", contactUs, name="contactUs"),
+    path("team/", team, name="team"),
 
     path("login/", loginUser, name="loginUser"),
     path("logout/", logoutUser, name="logoutUser"),
     path("signupUser/", signupUser, name="signupUser"),
     path("signupGuide/", signupGuide, name="signupGuide"),
-
-
 
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/wishList/", wishList, name="wishList"),
