@@ -16,7 +16,7 @@ from django.contrib import messages
 # Create your views here.
 
 def homepage(request):
-    context = {'allToursList': TourExperience.objects.all()}
+    context = {'allToursList': TourExperience.objects.all(), 'num_of_tours': len(TourExperience.objects.all()), 'num_of_guides': len(TourGuide.objects.all())}
     return render(request, 'main_app/homepage.html', context)
 
 
@@ -174,6 +174,7 @@ class ExperienceListView(ListView):
     model = TourExperience
     template_name = "main_app/experienceList.html"
     context_object_name = "allToursList"
+    
 
 
 ############################ PAYMENT VIEWS ###################################
