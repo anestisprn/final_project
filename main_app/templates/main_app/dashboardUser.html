@@ -4,12 +4,12 @@
 {% block title %} User Dashboard {% endblock %}
 
 {% block content %}
-<h2 class="text-center"> {{ request.user.username }} dashboard </h2>
-    <div class="container">
-        <p><a href="{% url 'editUser' %}">edit my details</a></p>
+<h2 class="text-center"> {{ request.user.username }} | Dashboard </h2>
+    <div class="container justify-content-end me-5">
+        <a class="nav-link text-primary" href="{% url 'editUser' %}" tabindex="-1" aria-disabled="true"> Edit My Details</a>
         <hr>
-        <p><a href="{% url 'orderHistory' %}">order history</a></p>
+        <a class="nav-link text-primary" href="{%  url 'orderHistory' %}" tabindex="-1" aria-disabled="true"> Order History</a>
         <hr>
-        <p><a href="/dashboardUser/wishList/">wishList</a></p>
+        <a class="nav-link text-primary" href="{%  url 'wishList' %}" tabindex="-1" aria-disabled="true"> My WishList</a>
     </div>
 {% endblock content %}

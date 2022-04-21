@@ -14,13 +14,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav_icon/favicon-16x16.png' %}">
     <title>e-tours |{% block title %} {% endblock %} </title>
 </head>
-<body style="min-height:100%">
+<body>
 
   {% include 'navbar.html' %}
-
+  {% block carouzel %} {% endblock carouzel %}
+  <main>
   <!-- BLOCK CONTENT -->
-  {% block content %}
-  {% endblock content %}
+  {% block content %} {% endblock content %}
+  </main>
 
   {% include 'footer.html' %}
       

@@ -3,11 +3,13 @@
 
 {% block title %} Homepage {% endblock %}
 
+{% block carouzel %} 
+    {% include 'carouzel.html' %}
+{% endblock carouzel %}
+
 {% block content %}
 
-  {% include 'carouzel.html' %}
-  
-  <h2 class="text-center">Some Popular Experiences</h2>
+  <h2 class="text-center">Most Popular Experiences</h2>
   <div class="container p-4">
     {% if allToursList %}
     <div class="row">

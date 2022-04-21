@@ -15,6 +15,8 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(UserCreationForm):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
     email = forms.EmailField(required=True)
     class Meta:
         model = EndUser
@@ -22,6 +24,8 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class GuideRegistrationForm(UserCreationForm):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
     email = forms.EmailField(required=True)
     class Meta:
         model = TourGuide
