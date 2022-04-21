@@ -11,8 +11,6 @@ urlpatterns = [
     path("signupUser/", signupUser, name="signupUser"),
     path("signupGuide/", signupGuide, name="signupGuide"),
 
-
-
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/wishList/", wishList, name="wishList"),
     path("dashboardUser/wishList/<int:idTour>", wishListAdd, name="wishListAdd"),

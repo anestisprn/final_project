@@ -22,9 +22,10 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class GuideRegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
     class Meta:
         model = TourGuide
-        fields = ('username', 'first_name', 'last_name', 'guideDescription')
+        fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class ExperienceRegistrationForm(forms.ModelForm):
