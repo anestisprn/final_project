@@ -44,6 +44,9 @@ class TourExperience(models.Model):
     tourDuration = models.IntegerField(verbose_name='Tour Duration')
     tourPrice = models.FloatField(verbose_name='Tour Price',  validators=[
                                   validators.MinValueValidator(1), validators.MaxValueValidator(10000)])
+
+    tourRating = models.IntegerField(verbose_name = 'Tour Rating', blank = True, validators=[
+                                  validators.MinValueValidator(0), validators.MaxValueValidator(5)])
     tourAvailableDate = models.DateField(verbose_name='Tour Available Date')
     tourMaxNumberOfPeople = models.IntegerField(verbose_name='Tour Max Number of People', validators=[
                                                 validators.MinValueValidator(1), validators.MaxValueValidator(20)])
