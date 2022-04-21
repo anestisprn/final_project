@@ -15,14 +15,14 @@
     <div class="container-fluid" >
         <div class="row">
           {% for tour in allToursList %}
-          <div class="card m-3 p-3 rounded col-4">
+          <div class="card p-3 rounded col-sm-4">
             <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{tour.tourTitle}} </h5>
               <p class="card-text">{{tour.tourDescription}}</p>
               <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-primary float-end stretched-link">Book now</a>
               {% if user.is_active %}
-              <a href="{% url 'wishListAdd' idUser=request.user.id idTour=tour.id  %}" class="btn btn-success float-end">Favourite</a>
+              <a href="{% url 'wishListAdd' idTour=tour.id  %}" class="btn btn-success float-end">Favourite</a>
               {% endif %} 
             </div>
           </div>
