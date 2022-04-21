@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
+    'chat_app',
     'crispy_forms',
     "crispy_bootstrap5",
     "location_field.apps.DefaultConfig",
