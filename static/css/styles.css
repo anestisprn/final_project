@@ -1,7 +1,9 @@
-.card:hover{
-    border: 3px solid #37CAEC;
+.card{
+  transition: transform .3s;
 }
-
+.card:hover{
+  transform: scale(1.05);
+}
 @media (min-width: 1400px){
 .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
   max-width: 1600px;
@@ -9,7 +11,7 @@
 }
 
 .bg-light{
-    background-color: #ADD9D8 !important;
+    background-color: #b5dcfc !important;
 }
 /* THIS WILL MAKE THE HEADER BE ON THE MAXIMUM VIEWPORT HEIGHT 100% AND MOVE THE NAVBAR -200 PX UP*/
 #carouselCaptions{
