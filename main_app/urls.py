@@ -5,6 +5,7 @@ urlpatterns = [
     path('', homepage, name='homepage'),
     path('experienceList/', ExperienceListView.as_view(), name='experienceList'),
     path("contactUs/", contactUs, name="contactUs"),
+    path("aboutUs/", aboutUs, name="aboutUs"),
     path("team/", team, name="team"),
 
     path("login/", loginUser, name="loginUser"),
