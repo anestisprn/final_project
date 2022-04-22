@@ -60,11 +60,7 @@
                         <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="{% static 'media/images/pexels-pixabay-164041.jpg' %}">
                     </div>
                     <div class="col-6 text-start">
-<<<<<<< HEAD
-                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="static/media/images/pexels-pixabay-164336.jpg">
-=======
                         <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="{% static 'media/images/pexels-pixabay-164336.jpg' %}">
->>>>>>> richter-from-stef-with-about-page
                     </div>
                 </div>
             </div>
@@ -86,7 +82,7 @@
                 <div class="room-item shadow rounded overflow-hidden">
                     <div class="position-relative">
                         <img class="img-fluid" src="{{tour.tourImage.url}}" alt="">
-                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">${{tour.tourPrice}}/Per Person</small>
+                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">€ {{tour.tourPrice}}/Per Person</small>
                     </div>
                     <div class="p-4 mt-2">
                         <div class="d-flex justify-content-between mb-3">
@@ -109,7 +105,7 @@
                             {% if user.enduser %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
-                            <a href="{% url 'wishListAdd' idTour=tour.id %}" class="text-primary fa fa-heart position-absolute top-0 start-100 translate-middle"></a>
+                            <a href="{% url 'wishListAdd' id=tour.id %}" class="text-primary fa fa-heart position-absolute top-0 start-100 translate-middle"></a>
                             {% else %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
                             {% endif %}

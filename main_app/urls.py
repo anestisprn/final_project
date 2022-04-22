@@ -6,7 +6,6 @@ urlpatterns = [
     path('experienceList/', ExperienceListView.as_view(), name='experienceList'),
     path("contactUs/", contactUs, name="contactUs"),
     path("aboutUs/", aboutUs, name="aboutUs"),
-    path("team/", team, name="team"),
 
     path("login/", loginUser, name="loginUser"),
     path("logout/", logoutUser, name="logoutUser"),
@@ -15,7 +14,7 @@ urlpatterns = [
 
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/wishList/", wishList, name="wishList"),
-    path("dashboardUser/wishList/<int:idTour>", wishListAdd, name="wishListAdd"),
+    path("dashboardUser/wishList/<int:id>", wishListAdd, name="wishListAdd"),
     path("<pk>/dashboardUser/delete", WishListDeleteView.as_view(), name="wishListDelete"),
     path('dashboardUser/editUser/', editUser, name='editUser'),
     path('dashboardUser/orderHistory/', OrderHistoryListView.as_view(), name='orderHistory'),

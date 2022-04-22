@@ -28,10 +28,6 @@ def aboutUs(request):
     context = {}
     return render(request, 'main_app/aboutUs.html', context)
 
-def team(request):
-    context = {}
-    return render(request, 'team.html', context)
-
 
 ############################ REGISTRATION VIEWS ###################################
 
@@ -156,11 +152,11 @@ def wishList(request):
     return render(request, 'main_app/wishList.html', context)
 
 
-def wishListAdd(request, idTour):
+def wishListAdd(request, id):
     context = {}
     if request.method == 'GET':
         currentUser = EndUser.objects.get(id=request.user.id)
-        currentExperience = TourExperience.objects.get(id=idTour)
+        currentExperience = TourExperience.objects.get(id=id)
         addWishList = WishList(endUser=currentUser,
                             tourExperience=currentExperience)
         addWishList.save()
