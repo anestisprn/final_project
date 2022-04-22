@@ -122,8 +122,8 @@
                         <div class="d-flex justify-content-between position-relative">
                             {% if user.enduser %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                            <a href="{% url 'wishListAdd' id=tour.id %}" class="display-6 text-success fa fa-heart position-absolute top-50 start-50 translate-middle"></a>
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
-                            <a href="{% url 'wishListAdd' id=tour.id %}" class="text-primary fa fa-heart position-absolute top-0 start-100 translate-middle"></a>
                             {% else %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
                             {% endif %}
