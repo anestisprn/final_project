@@ -6,10 +6,7 @@
 
 {% block content %}
 
-<h2 class="text-center"> Edit my Profile </h2>
-
 {% if user_form.errors %}
-
 <div class="alert alert-danger alert-dismissible" role="alert">
     <div id="form_errors">
         {% for key, value in user_form.errors.items %}
@@ -22,7 +19,8 @@
 </div>
 {% endif %}
 
-<div class="conteiner w-50 p-3">
+<div class="container w-50 p-3">
+    <h1 class="mb-4 text-center text-primary text-uppercase">Edit my Profile</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group ">
@@ -31,10 +29,10 @@
             {{ user_form.username }}
             <label class="small mb-1">Email:</label>
             {{ user_form.email}}
+            <br>
+            <button type="submit" class="btn btn-primary"> Save Changes </button>
+            <button type="reset" class="btn btn-secondary"> reset </button>
         </div>
-        <br><br>
-        <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
-        <button type="reset" class="btn btn-dark btn-lg">Reset</button>
     </form>
 </div>
 

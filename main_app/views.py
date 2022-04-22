@@ -24,6 +24,7 @@ def contactUs(request):
     context = {}
     return render(request, 'main_app/contactUs.html', context)
 
+
 def team(request):
     context = {}
     return render(request, 'team.html', context)
@@ -112,10 +113,8 @@ def dashboardGuide(request):
 
 
 def dashboardUser(request):
-    allToursList = TourExperience.objects.all()
     allWishList = WishList.objects.all()
     context = {
-        'allToursList': allToursList,
         'allWishList': allWishList
     }
     return render(request, 'main_app/dashboardUser.html', context)

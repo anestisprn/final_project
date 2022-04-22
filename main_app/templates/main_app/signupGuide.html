@@ -5,9 +5,9 @@
 {% block title %} Sign up as guide {% endblock %}
 
 {% block content %}
-<h1 class="mb-4 text-center text-primary text-uppercase">Become a guide</h1>
 
 <div class="container w-50 p-3">
+    <h1 class="mb-4 text-center text-primary text-uppercase">Become a guide</h1>
     <form method='post'>
         {% csrf_token %}
         <div class="form-group">
@@ -18,4 +18,5 @@
         </div>
     </form>
 </div>
+
 {% endblock %}

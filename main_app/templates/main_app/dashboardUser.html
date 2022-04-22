@@ -2,10 +2,9 @@
 {% load static %}
 
 {% block content %}
-<h1 class="mb-4 text-center">{{ request.user.username }} <span class="text-primary text-uppercase">dashboard</span></h1>
 
-    <div class="container">
-        
+    <div class="container p-3">
+        <h1 class="mb-4 text-center">{{ request.user.username }} <span class="text-primary text-uppercase">dashboard</span></h1>
         <p><a href="{% url 'editUser' %}">edit my details</a></p>
         <hr>
         <p><a href="{% url 'orderHistory' %}">order history</a></p>

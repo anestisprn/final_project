@@ -67,7 +67,6 @@ class TourExperience(models.Model):
         verbose_name = 'TourExperience'
 
  
-
 class OrderDetail(models.Model):
     id = models.BigAutoField(primary_key=True)
     # You can change as a Foreign Key to the user model
@@ -84,6 +83,7 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return self.customer_email
+
 
 class WishList(models.Model):
     tourExperience = models.ForeignKey(TourExperience, on_delete=models.CASCADE, blank=True)

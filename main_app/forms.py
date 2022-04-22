@@ -15,16 +15,21 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    email = forms.EmailField()
     class Meta:
         model = EndUser
         fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class GuideRegistrationForm(UserCreationForm):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    email = forms.EmailField()
     class Meta:
         model = TourGuide
-        fields = ('username', 'first_name', 'last_name', 'guideDescription')
+        fields = ('username', 'first_name', 'last_name', 'guideDescription', 'email')
 
 
 class ExperienceRegistrationForm(forms.ModelForm):

@@ -102,8 +102,9 @@
                         </div>
                         <p class="text-body mb-3">{{tour.tourDescription}}</p>
                         <div class="d-flex justify-content-between">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                            <a href="{% url 'wishListAdd' idTour=tour.id %}" class="text-success fa fa-heart"></a>
                         </div>
                     </div>
                 </div>

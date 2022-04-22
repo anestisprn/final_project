@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block content %}
-<h1 class="mb-4 text-center">{{ request.user.username }} <span class="text-primary text-uppercase">WishList</span></h1>
 
-<div class="container">
+<div class="container p-3">
+    <h1 class="mb-4 text-center">{{ request.user.username }} <span class="text-primary text-uppercase">WishList</span></h1>
     {% if allWishList %}
     <div class="row g-4">
         {% if allWishList %}

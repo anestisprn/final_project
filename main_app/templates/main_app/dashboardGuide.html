@@ -4,9 +4,12 @@
 {% block title %} guide dashboard {% endblock %}
 
 {% block content %}
-<h1 class="mb-4 text-center">{{ request.user.username }} <span class="text-primary text-uppercase">dashboard</span></h1>
 
-{%if user.tourguide.isGuideApproved == 'Approved' %}
+
+<div class="container p-3">
+    {%if user.tourguide.isGuideApproved == 'Approved' %}
+    <h1 class="mb-4 text-center">{{ request.user.username }} <span class="text-primary text-uppercase">dashboard</span></h1>
+
     <span><a href="/dashboardGuide/experienceCreate/">create new activity</a></span>
     <h2> My tours: </h2>
 
@@ -50,9 +53,14 @@
         </div>
         {% endif %}
     </div>
-{% else %}
-<div class="text-danger">
-    <h5 class="text-center"> You have not been approved yet. Please contact us at support@e-tours.gr</h5>
+
+    {% else %}
+    <div class="jumbotron text-center mt-5">
+        <h1 class="text-danger">Oops!.. Access Denied</h1>
+        <p>You have not been approved yet. Please contact us at support@e-tours.gr 
+            <a href="{% url 'homepage' %}"> | home page</a>.
+        </p>
+    </div>
 </div>
 
 {% endif %}
