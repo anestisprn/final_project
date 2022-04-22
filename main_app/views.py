@@ -24,6 +24,9 @@ def contactUs(request):
     context = {}
     return render(request, 'main_app/contactUs.html', context)
 
+def aboutUs(request):
+    context = {}
+    return render(request, 'main_app/aboutUs.html', context)
 
 def team(request):
     context = {}
