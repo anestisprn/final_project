@@ -2,7 +2,8 @@
 {% load static%}
 
 {% block content %}
-    <div class="container p-4" >
+    <div class="container" >
+      {% include 'main_app/sortbyNavbar.html' %}
       <div class="row">
         {% for tour in all_tours_list %}
         <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">

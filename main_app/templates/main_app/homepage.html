@@ -102,9 +102,13 @@
                         </div>
                         <p class="text-body mb-3">{{tour.tourDescription}}</p>
                         <div class="d-flex justify-content-between">
+                            {% if user.enduser %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
                             <a href="{% url 'wishListAdd' idTour=tour.id %}" class="text-success fa fa-heart"></a>
+                            {% else %}
+                            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -134,7 +138,6 @@
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -150,7 +153,6 @@
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -166,7 +168,6 @@
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -182,7 +183,6 @@
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -198,7 +198,6 @@
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
