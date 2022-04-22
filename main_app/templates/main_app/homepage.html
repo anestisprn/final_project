@@ -60,7 +60,7 @@
                         <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="static/media/images/pexels-pixabay-164041.jpg">
                     </div>
                     <div class="col-6 text-start">
-                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="static/media/images/pexels-pixabay-164336_nXP5gYh.jpg">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="static/media/images/pexels-pixabay-164336.jpg">
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                             {% if user.enduser %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
-                            <a href="{% url 'wishListAdd' idTour=tour.id %}" class="text-success fa fa-heart position-absolute top-0 start-100 translate-middle"></a>
+                            <a href="{% url 'wishListAdd' idTour=tour.id %}" class="text-primary fa fa-heart position-absolute top-0 start-100 translate-middle"></a>
                             {% else %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
                             {% endif %}
