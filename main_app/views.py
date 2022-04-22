@@ -16,7 +16,12 @@ from django.contrib import messages
 # Create your views here.
 
 def homepage(request):
-    context = {'allToursList': TourExperience.objects.all(), 'num_of_tours': len(TourExperience.objects.all()), 'num_of_guides': len(TourGuide.objects.all())}
+    context = {
+        'allToursList': TourExperience.objects.all(), 
+        'num_of_tours': len(TourExperience.objects.all()), 
+        'num_of_guides': len(TourGuide.objects.all()),
+        'num_of_purshases': len(OrderDetail.objects.all())
+        }
     return render(request, 'main_app/homepage.html', context)
 
 

@@ -21,7 +21,7 @@
                     <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                         <div class="border rounded p-1">
                             <div class="border rounded text-center p-4">
-                                <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
+                                <i class="fa fa-suitcase fa-2x text-primary mb-2"></i>
                                 <h2 class="mb-1" data-toggle="counter-up">{{num_of_tours}}</h2>
                                 <p class="mb-0">Tour experience</p>
                             </div>
@@ -30,7 +30,7 @@
                     <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
                         <div class="border rounded p-1">
                             <div class="border rounded text-center p-4">
-                                <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
+                                <i class="fa fa-users fa-2x text-primary mb-2"></i>
                                 <h2 class="mb-1" data-toggle="counter-up">{{num_of_guides}}</h2>
                                 <p class="mb-0">Guides</p>
                             </div>
@@ -39,8 +39,8 @@
                     <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
                         <div class="border rounded p-1">
                             <div class="border rounded text-center p-4">
-                                <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                <h2 class="mb-1" data-toggle="counter-up">X</h2>
+                                <i class="fa fa-credit-card fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">{{num_of_purshases}}</h2>
                                 <p class="mb-0">Purchases</p>
                             </div>
                         </div>
@@ -88,6 +88,9 @@
                         <div class="d-flex justify-content-between mb-3">
                             <h5 class="mb-0">{{tour.tourTitle}}</h5>
                             <div class="ps-2">
+                                {% comment %} {% for i in tour.tourRating %}
+                                <small class="fa fa-star text-primary"></small>
+                                {% endfor %} {% endcomment %}
                                 {%if tour.tourRating == 1%}
                                 <small class="fa fa-star text-primary"></small>
                                 {%elif tour.tourRating == 2%}
@@ -114,8 +117,8 @@
                             </div>
                         </div>
                         <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{tour.tourMaxNumberOfPeople}}</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>{{tour.tourDuration}}</small>
+                            <small class="border-end me-3 pe-3"><i class="fa fa-users text-primary me-2"></i>{{tour.tourMaxNumberOfPeople}}</small>
+                            <small class="border-end me-3 pe-3"><i class="fa fa-hourglass-start text-primary me-2"></i>{{tour.tourDuration}}</small>
                             <small><i class="fa fa-wifi text-primary me-2"></i>{{tour.tourCategory}}</small>
                         </div>
                         <p class="text-body mb-3">{{tour.tourDescription}}</p>
@@ -142,20 +145,22 @@
     <!-- Experience End -->
 
 
+
     <!-- Team Start -->
     <div class="container-xxl py-5">
+        
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">The Brains behind the idea</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Team</span></h1>
         </div>
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="row g-4 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="rounded shadow overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="static/media/images/pexels-alex-azabache-3722809.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -164,13 +169,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="rounded shadow overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="static/media/images/pexels-alex-azabache-3722809.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -179,13 +184,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="rounded shadow overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="static/media/images/pexels-alex-azabache-3722809.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -194,13 +199,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                 <div class="rounded shadow overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="static/media/images/pexels-alex-azabache-3722809.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -209,13 +214,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                 <div class="rounded shadow overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="static/media/images/pexels-alex-azabache-3722809.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-github"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -226,7 +231,6 @@
             </div>
         </div>
     </div>
-
     <!-- Team End -->
     
 {% endblock %}
