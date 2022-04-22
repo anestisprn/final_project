@@ -12,6 +12,13 @@
         {% csrf_token %}
         <div class="form-group">
             {{form|crispy}}
+            {% if messages %}
+            <div class="messages text-danger">
+                {% for message in messages %}
+                <smal {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</smal>
+                {% endfor %}
+            </div>
+            {% endif %}
             <br>
             <button type="submit" class="btn btn-primary"> login </button>
             <button type="reset" class="btn btn-secondary"> reset </button>

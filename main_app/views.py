@@ -24,6 +24,7 @@ def contactUs(request):
     context = {}
     return render(request, 'main_app/contactUs.html', context)
 
+
 def aboutUs(request):
     context = {}
     return render(request, 'main_app/aboutUs.html', context)
@@ -72,10 +73,10 @@ def loginUser(request):
             if user is not None:
                 login(request, user)
                 return redirect("homepage")
-        else:
-            messages.warning(request, 'Your profile is wrong')
-            # return render(request, "main_app/login.html", {'error': 'mitsotaki gamiesai'})
-            return redirect('loginUser')
+            else:
+                messages.warning(request, 'Wrong input try again')
+                # return render(request, "main_app/login.html", {'error': 'mitsotaki gamiesai'})
+                return redirect('loginUser')
     else:
         form = LoginForm()
     return render(request, "main_app/login.html", {'form': form})
