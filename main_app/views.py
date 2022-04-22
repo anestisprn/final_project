@@ -123,9 +123,15 @@ def dashboardUser(request):
 class ExperienceCreateView(CreateView):
     model = TourExperience
     fields = ('tourTitle', 'tourCity', 'tourCategory', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
-    initial = {"tourAvailableDate":"YYYY-MM-DD"}
+    # initial = {"tourAvailableDate":"%d/%m/%Y"}
     template_name = "main_app/experienceCreate.html"
     success_url = reverse_lazy("dashboardGuide")
+    
+    def get_form(self):
+        from django.forms.widgets import SelectDateWidget
+        form = super(ExperienceCreateView, self).get_form()
+        form.fields['tourAvailableDate'].widget = SelectDateWidget()
+        return form
 
     def form_valid(self, form):
         form.instance.tourGuide = TourGuide.objects.get(id=self.request.user.id)
