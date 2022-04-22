@@ -37,16 +37,17 @@ class ExperienceRegistrationForm(forms.ModelForm):
         model = TourExperience
         fields = ('tourTitle','tourLocation', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
 
-# class RegistrationForm(ModelForm):
-#     class Meta:
-#         model = CustomUser
-#         fields = ('username', 'password')
-
-# class UpdateUserForm(UserRegistrationForm):
-#     pass
 
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100,
+                               required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    first_name = forms.CharField(max_length=100,
+                               required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    last_name = forms.CharField(max_length=100,
                                required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
 
@@ -55,4 +56,4 @@ class UpdateUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']

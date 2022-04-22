@@ -2,26 +2,78 @@
 {% load static%}
 
 {% block content %}
-    <div class="container" >
+<div class="container">
+  <div class="container-xxl py-5">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+          <h6 class="section-title text-center text-primary text-uppercase">Our list of experiences</h6>
+          <h1 class="mb-5"> <span class="text-primary text-uppercase">Explore all experiences</span></h1>
+      </div>
       {% include 'main_app/sortbyNavbar.html' %}
-      <div class="row">
-        {% for tour in all_tours_list %}
-        <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
-          <img src="{{tour.tourImage.url}}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Title: {{tour.tourTitle}} </h5>
-            <h5 class="card-title">Price: {{tour.tourPrice}} </h5>
-            <h5 class="card-title">Max Number of People: {{tour.tourMaxNumberOfPeople}} </h5>
-            <h5 class="card-title">Duration: {{tour.tourDuration}} </h5>
-            <h5 class="card-title">Date:{{tour.tourAvailableDate}} </h5>
-            <h5 class="card-title">Category: {{tour.tourCategory}} </h5>
-            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-primary">Book now</a>
-            {% if user.is_active %}
-            <a href="{% url 'wishListAdd' idTour=tour.id  %}" class="btn btn-success">Favourite</a>
-            {% endif %} 
-          </div>
+      <div class="row g-4">
+        {% if allToursList %}
+        {% for tour in allToursList %}
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="room-item shadow rounded overflow-hidden">
+                <div class="position-relative">
+                    <img class="img-fluid" src="{{tour.tourImage.url}}" alt="">
+                    <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">€ {{tour.tourPrice}}/Per Person</small>
+                </div>
+                <div class="p-4 mt-2">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="mb-0">{{tour.tourTitle}}</h5>
+                        <div class="ps-2">
+                            {%if tour.tourRating == 1%}
+                            <small class="fa fa-star text-primary"></small>
+                            {%elif tour.tourRating == 2%}
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            {%elif tour.tourRating == 3%}
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            {%elif tour.tourRating == 4%}
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            {%elif tour.tourRating == 5%} 
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            {%else%}
+                            <p> no rating </p>
+                            {%endif%}
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{tour.tourMaxNumberOfPeople}}</small>
+                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>{{tour.tourDuration}}</small>
+                        <small><i class="fa fa-wifi text-primary me-2"></i>{{tour.tourCategory}}</small>
+                    </div>
+                    <p class="text-body mb-3">{{tour.tourDescription}}</p>
+                    <div class="d-flex justify-content-between position-relative">
+                        {% if user.enduser %}
+                        <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                        <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                        <a href="{% url 'wishListAdd' id=tour.id %}" class="text-primary fa fa-heart position-absolute top-0 start-100 translate-middle"></a>
+                        {% else %}
+                        <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}   
+        {%endfor%}
+        {% else %}
+        <div class="alert alert-info text-center mt-5">
+            The experience list is empty.
+        </div>
+        {% endif %}
       </div>
     </div>
+  </div>
+</div>
 {% endblock %}
+

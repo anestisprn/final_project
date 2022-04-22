@@ -264,46 +264,46 @@ def create_checkout_session(request, id):
 ############################ SORTING VIEWS ####################################
 
 def sortByPriceAscending(request):
-    all_tours_list = TourExperience.objects.order_by('tourPrice')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('tourPrice')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 def sortByPriceDescending(request):
-    all_tours_list = TourExperience.objects.order_by('-tourPrice')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('-tourPrice')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 
 def sortByNumberOfPeopleAscending(request):
-    all_tours_list = TourExperience.objects.order_by('tourMaxNumberOfPeople')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('tourMaxNumberOfPeople')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 
 def sortByNumberOfPeopleDescending(request):
-    all_tours_list = TourExperience.objects.order_by('-tourMaxNumberOfPeople')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('-tourMaxNumberOfPeople')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 
 def sortByDurationAscending(request):
-    all_tours_list = TourExperience.objects.order_by('tourDuration')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('tourDuration')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 def sortByDurationDescending(request):
-    all_tours_list = TourExperience.objects.order_by('-tourDuration')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('-tourDuration')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 def sortByDateAscending(request):
-    all_tours_list = TourExperience.objects.order_by('tourAvailableDate')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('tourAvailableDate')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 def sortByDateDescending(request):
-    all_tours_list = TourExperience.objects.order_by('-tourAvailableDate')
-    context = {'all_tours_list': all_tours_list}
+    allToursList = TourExperience.objects.order_by('-tourAvailableDate')
+    context = {'allToursList': allToursList}
     return render(request, 'main_app/sortBy.html', context)
 
 
