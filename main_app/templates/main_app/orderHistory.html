@@ -3,9 +3,11 @@
 
 {% block content %}
 
-<div class="container w-75 p-3">
-    <h1 class="mb-4 text-center text-primary text-uppercase">Order History</h1>
-
+<div class="container-xxl py-5">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title text-center text-dark ">{{ request.user.username }} <span class="text-primary text-uppercase">| Order History</span></h6>
+    </div>
+    <br>
     {% if object_list %}
     <table class="table table-striped table-bordered table-hover">
         <thead>
