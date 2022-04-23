@@ -20,6 +20,7 @@ urlpatterns = [
     path('dashboardUser/orderHistory/', OrderHistoryListView.as_view(), name='orderHistory'),
 
     path("dashboardGuide/", dashboardGuide, name="dashboardGuide"),
+    path("dashboardGuide/experienceManage", experienceManage, name="experienceManage"),
     path('dashboardGuide/experienceCreate/', ExperienceCreateView.as_view(), name='experienceCreate'),
     path("<pk>/dashboardGuide/update", ExperienceUpdateView.as_view(), name="experienceUpdate"),
     path("<pk>/dashboardGuide/delete", ExperienceDeleteView.as_view(), name="experienceDelete"),

@@ -112,26 +112,38 @@ def logoutUser(request):
 ############################ DASHBOARD VIEWS ###################################
 
 def dashboardGuide(request):
-    guideToursList = TourExperience.objects.filter(tourGuide=request.user)
     labels = []
     data = []
     context = {
-        'guideToursList': guideToursList,
         'labels': labels,
         'data': data,
         }
-    queryset = TourExperience.objects.order_by('-tourPrice')[:5]
+    queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')
     for tour in queryset:
         labels.append(tour.tourTitle)
         data.append(tour.tourPrice)
     return render(request, 'main_app/dashboardGuide.html', context) 
 
 
-def dashboardUser(request):
-    allWishList = WishList.objects.all()
+def experienceManage(request):
+    guideToursList = TourExperience.objects.filter(tourGuide=request.user)
     context = {
-        'allWishList': allWishList
-    }
+            'guideToursList': guideToursList,
+            }
+    return render(request, 'main_app/experienceManage.html', context) 
+
+
+def dashboardUser(request):
+    labels = []
+    data = []
+    context = {
+        'labels': labels,
+        'data': data,
+        }
+    queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')
+    for wish in queryset:
+        labels.append(wish.tourExperience.tourTitle)
+        data.append(wish.tourExperience.tourPrice)
     return render(request, 'main_app/dashboardUser.html', context)
 
 

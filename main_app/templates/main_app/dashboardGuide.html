@@ -11,85 +11,74 @@
     </div>
     <br>
     {%if user.tourguide.isGuideApproved == 'Approved' %}
-    <p><a href="{% url 'editUser' %}">edit my profile</a></p>
-    <hr>
-    <p><a href="/dashboardGuide/experienceCreate/">create new activity</a></p>
-    <hr>
-    <p><a href="#">manage my tours</a></p>
-
-
-        <h1> </h1>
-        <canvas id="pie-chart"></canvas>
-    
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-    <script>
-        var config = {
-            type: 'pie',
-            data: {
-            datasets: [{
-                data: {{ data|safe }},
-                backgroundColor: [
-                '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
-                ],
-                label: 'Population'
-            }],
-            labels: {{ labels|safe }}
-            },
-            options: {
-            responsive: true
-            }
-        };
-
-        window.onload = function() {
-            var ctx = document.getElementById('pie-chart').getContext('2d');
-            window.myPie = new Chart(ctx, config);
-        };
-    </script>
-
     <div class="row g-4">
-        {% if guideToursList %}
-        {% for tour in guideToursList %}
-        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="room-item shadow rounded overflow-hidden">
-                <div class="position-relative">
-                    <img class="img-fluid" src="{{tour.tourImage.url}}" alt="">
-                    <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">${{tour.tourPrice}}/Per Person</small>
-                </div>
-                <div class="p-4 mt-2">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h5 class="mb-0">{{tour.tourTitle}}</h5>
-                        <div class="ps-2">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
+        <div class="col-lg-6">
+            <br><br>
+            <p><a href="{% url 'editUser' %}">edit my profile</a></p>
+            <hr>
+            <p><a href="/dashboardGuide/experienceCreate/">create new activity</a></p>
+            <hr>
+            <p><a href="{% url 'experienceManage' %}">manage my tours</a></p>
+            <br><br>
+            <div class="row g-3 pb-4">
+                <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="border rounded p-1">
+                        <div class="border rounded text-center p-4">
+                            <i class="fa fa-suitcase fa-2x text-primary mb-2"></i>
+                            <h2 class="mb-1" data-toggle="counter-up">{{num_of_tours}}</h2>
+                            <p class="mb-0">Tour experience</p>
                         </div>
                     </div>
-                    <div class="d-flex mb-3">
-                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{tour.tourMaxNumberOfPeople}}</small>
-                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>{{tour.tourDuration}}</small>
-                        <small><i class="fa fa-wifi text-primary me-2"></i>{{tour.tourCategory}}</small>
+                </div>
+                <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="border rounded p-1">
+                        <div class="border rounded text-center p-4">
+                            <i class="fa fa-users fa-2x text-primary mb-2"></i>
+                            <h2 class="mb-1" data-toggle="counter-up">{{num_of_bookings}}</h2>
+                            <p class="mb-0">Bookings</p>
+                        </div>
                     </div>
-                    <p class="text-body mb-3">{{tour.tourDescription}}</p>
-                    <div class="d-flex justify-content-between">
-                        <a href="{% url 'experienceDelete' pk=tour.id %}" class="btn btn-sm btn-danger rounded py-2 px-4" href="">Delete</a>
-                        <a href="{% url 'experienceUpdate' pk=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4" href="">Update</a>
+                </div>
+                <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="border rounded p-1">
+                        <div class="border rounded text-center p-4">
+                            <i class="fa fa-credit-card fa-2x text-primary mb-2"></i>
+                            <h2 class="mb-1" data-toggle="counter-up">{{num_of_income}}</h2>
+                            <p class="mb-0">Income</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        {%endfor%}
-        {% else %}
-        <div class="alert alert-info text-center mt-5">
-            The experience list is empty.
+        <div class="col-lg-6">
+            <canvas id="pieChart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+            <script>
+                var config = {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: {{ data|safe }},
+                            backgroundColor: [
+                            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+                            ],
+                            label: 'Population'
+                        }],
+                        labels: {{ labels|safe }}
+                        },
+                        options: {
+                        responsive: true
+                        }
+                    };
+                    window.onload = function() {
+                        var ctx = document.getElementById('pieChart').getContext('2d');
+                        window.myPie = new Chart(ctx, config);
+                };
+            </script>
         </div>
-        {% endif %}
     </div>
-
+    <br>
+    
     {% else %}
     <div class="jumbotron text-center mt-5">
         <h1 class="text-danger">Oops!.. Access Denied</h1>
