@@ -130,7 +130,7 @@ def dashboardUser(request):
     queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')[:5]
     for wish in queryset:
         labels.append(wish.tourExperience.tourTitle)
-        data.append(wish.tourExperience.tourPrice)
+        data.append(wish.tourExperience.tourRating)
     return render(request, 'main_app/dashboardUser.html', context)
 
 
