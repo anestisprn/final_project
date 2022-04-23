@@ -20,7 +20,7 @@ def homepage(request):
         'allToursList': TourExperience.objects.all(), 
         'num_of_tours': len(TourExperience.objects.all()), 
         'num_of_guides': len(TourGuide.objects.all()),
-        'num_of_purshases': len(OrderDetail.objects.all())
+        'num_of_purshases': len(OrderDetail.objects.filter(has_paid=True))
         }
     return render(request, 'main_app/homepage.html', context)
 
