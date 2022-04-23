@@ -113,8 +113,18 @@ def logoutUser(request):
 
 def dashboardGuide(request):
     guideToursList = TourExperience.objects.filter(tourGuide=request.user)
-    context = {'guideToursList': guideToursList}
-    return render(request, 'main_app/dashboardGuide.html', context)
+    labels = []
+    data = []
+    context = {
+        'guideToursList': guideToursList,
+        'labels': labels,
+        'data': data,
+        }
+    queryset = TourExperience.objects.order_by('-tourPrice')[:5]
+    for tour in queryset:
+        labels.append(tour.tourTitle)
+        data.append(tour.tourPrice)
+    return render(request, 'main_app/dashboardGuide.html', context) 
 
 
 def dashboardUser(request):
@@ -154,6 +164,12 @@ class ExperienceDeleteView(DeleteView):
     success_url = reverse_lazy("dashboardGuide")
 
 
+class ExperienceListView(ListView):
+    model = TourExperience
+    template_name = "main_app/experienceList.html"
+    context_object_name = "allToursList"
+    
+
 ############################ WISHLIST VIEWS ###################################
 
 def wishList(request):
@@ -182,13 +198,6 @@ def wishListAdd(request, id):
 class WishListDeleteView(DeleteView):
     model = WishList
     success_url = reverse_lazy("wishList")
-
-
-class ExperienceListView(ListView):
-    model = TourExperience
-    template_name = "main_app/experienceList.html"
-    context_object_name = "allToursList"
-    
 
 
 ############################ PAYMENT VIEWS ###################################

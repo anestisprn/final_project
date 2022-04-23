@@ -37,7 +37,7 @@ class TourExperience(models.Model):
         ('Activities in Nature', 'activities_in_nature'),
         ('Drinking experience', 'drinking_experience'),
         ('Spiritual experience', 'spiritual_experience'),
-        ('Sighseeing experience', 'sightseeing_experience')
+        ('Sightseeing experience', 'sightseeing_experience')
     )
     tourCategory = models.CharField(max_length=50, choices=tourTypeOptions)
     tourLocation = PlainLocationField(based_fields=['tourCity'], zoom=7, blank = True)

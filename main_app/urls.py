@@ -15,7 +15,7 @@ urlpatterns = [
     path("dashboardUser/", dashboardUser, name="dashboardUser"),
     path("dashboardUser/wishList/", wishList, name="wishList"),
     path("dashboardUser/wishList/<int:id>", wishListAdd, name="wishListAdd"),
-    path("<pk>/dashboardUser/delete", WishListDeleteView.as_view(), name="wishListDelete"),
+    path("<pk>/dashboardUser/wishList/delete", WishListDeleteView.as_view(), name="wishListDelete"),
     path('dashboardUser/editUser/', editUser, name='editUser'),
     path('dashboardUser/orderHistory/', OrderHistoryListView.as_view(), name='orderHistory'),
 

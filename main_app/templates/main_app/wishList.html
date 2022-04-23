@@ -53,7 +53,7 @@
                     </div>
                     <p class="text-body mb-3">{{wish.tourExperience.tourDescription}}</p>
                     <div class="d-flex justify-content-between position-relative">
-                        <a href="{% url 'wishListDelete' pk=wish.tourExperience.id %}" class="btn btn-sm btn-danger rounded py-2 px-4" href="">Remove</a>
+                        <a href="{% url 'wishListDelete' pk=wish.id %}" class="btn btn-sm btn-danger rounded py-2 px-4" href="">Remove</a>
                         <a href="{% url 'experienceDetails' id=wish.tourExperience.id %}" class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                     </div>
                 </div>

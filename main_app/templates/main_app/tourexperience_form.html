@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container w-50 p-3">
-    <h1 class="mb-4 text-center text-primary text-uppercase">Update Experience</h1>
+<div class="container-xxl w-50 py-5">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title text-center text-dark ">{{ request.user.username }} <span class="text-primary text-uppercase">| Update Experience</span></h6>
+    </div>
+    <br>
     <form method="post" enctype="multipart/form-data">
         {{ form.as_p }}
         {% csrf_token %}
