@@ -25,6 +25,12 @@ def homepage(request):
     return render(request, 'main_app/homepage.html', context)
 
 
+class ExperienceListView(ListView):
+    model = TourExperience
+    template_name = "main_app/experienceList.html"
+    context_object_name = "allToursList"
+    
+
 def contactUs(request):
     context = {}
     return render(request, 'main_app/contactUs.html', context)
@@ -109,7 +115,54 @@ def logoutUser(request):
     return redirect("homepage")
 
 
-############################ DASHBOARD VIEWS ###################################
+############################ DASHBOARD USER VIEWS ###################################
+
+def dashboardUser(request):
+    labels = []
+    data = []
+    context = {
+        'labels': labels,
+        'data': data,
+        'num_of_tours': len(WishList.objects.filter(endUser=request.user)), 
+        'num_of_bookings': len(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True)),
+        # 'num_of_outcome': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(amount=True))
+        }
+    queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')
+    for wish in queryset:
+        labels.append(wish.tourExperience.tourTitle)
+        data.append(wish.tourExperience.tourPrice)
+    return render(request, 'main_app/dashboardUser.html', context)
+
+
+def wishList(request):
+    allWishList = WishList.objects.filter(endUser=request.user)
+    context = {
+        'allWishList': allWishList
+    }
+    return render(request, 'main_app/wishList.html', context)
+
+
+def wishListAdd(request, id):
+    context = {}
+    if request.method == 'GET':
+        currentUser = EndUser.objects.get(id=request.user.id)
+        currentExperience = TourExperience.objects.get(id=id)
+        addWishList = WishList(endUser=currentUser,
+                            tourExperience=currentExperience)
+        addWishList.save()
+        context = {
+            'addWishList': addWishList
+        }
+        return redirect("homepage")
+    return render(request, 'main_app/wishList.html', context)
+
+
+class WishListDeleteView(DeleteView):
+    model = WishList
+    success_url = reverse_lazy("wishList")
+
+
+############################ DASHBOARD GUIDE VIEWS ###################################
 
 def dashboardGuide(request):
     labels = []
@@ -117,6 +170,9 @@ def dashboardGuide(request):
     context = {
         'labels': labels,
         'data': data,
+        'num_of_tours': len(TourExperience.objects.filter(tourGuide = request.user)), 
+        # 'num_of_bookings': len(OrderDetail.objects.filter().filter(has_paid=True)),
+        # 'num_of_income': len(OrderDetail.objects.all())
         }
     queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')
     for tour in queryset:
@@ -131,20 +187,6 @@ def experienceManage(request):
             'guideToursList': guideToursList,
             }
     return render(request, 'main_app/experienceManage.html', context) 
-
-
-def dashboardUser(request):
-    labels = []
-    data = []
-    context = {
-        'labels': labels,
-        'data': data,
-        }
-    queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')
-    for wish in queryset:
-        labels.append(wish.tourExperience.tourTitle)
-        data.append(wish.tourExperience.tourPrice)
-    return render(request, 'main_app/dashboardUser.html', context)
 
 
 class ExperienceCreateView(CreateView):
@@ -174,42 +216,6 @@ class ExperienceUpdateView(UpdateView):
 class ExperienceDeleteView(DeleteView):
     model = TourExperience
     success_url = reverse_lazy("dashboardGuide")
-
-
-class ExperienceListView(ListView):
-    model = TourExperience
-    template_name = "main_app/experienceList.html"
-    context_object_name = "allToursList"
-    
-
-############################ WISHLIST VIEWS ###################################
-
-def wishList(request):
-    allWishList = WishList.objects.filter(endUser=request.user)
-    context = {
-        'allWishList': allWishList
-    }
-    return render(request, 'main_app/wishList.html', context)
-
-
-def wishListAdd(request, id):
-    context = {}
-    if request.method == 'GET':
-        currentUser = EndUser.objects.get(id=request.user.id)
-        currentExperience = TourExperience.objects.get(id=id)
-        addWishList = WishList(endUser=currentUser,
-                            tourExperience=currentExperience)
-        addWishList.save()
-        context = {
-            'addWishList': addWishList
-        }
-        return redirect("homepage")
-    return render(request, 'main_app/wishList.html', context)
-
-
-class WishListDeleteView(DeleteView):
-    model = WishList
-    success_url = reverse_lazy("wishList")
 
 
 ############################ PAYMENT VIEWS ###################################
