@@ -127,7 +127,7 @@ def dashboardUser(request):
         'num_of_bookings': len(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True)),
         # 'num_of_outcome': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(amount=True))
         }
-    queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')
+    queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')[:5]
     for wish in queryset:
         labels.append(wish.tourExperience.tourTitle)
         data.append(wish.tourExperience.tourPrice)
@@ -174,7 +174,7 @@ def dashboardGuide(request):
         # 'num_of_bookings': len(OrderDetail.objects.filter().filter(has_paid=True)),
         # 'num_of_income': len(OrderDetail.objects.all())
         }
-    queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')
+    queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')[:5]
     for tour in queryset:
         labels.append(tour.tourTitle)
         data.append(tour.tourPrice)

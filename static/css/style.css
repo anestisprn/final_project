@@ -1,16 +1,8 @@
 /********** Template CSS **********/
-/* .card:hover{
-    border: 3px solid #37CAEC;
-}
-
-.bg-light{
-    background-color: #ADD9D8 !important;
-} */
-
-.carousel{
+/* .carousel{
   height:100%;
   margin-top: -175px;
-}
+} */
 
 :root {
     --primary: #FEA116;

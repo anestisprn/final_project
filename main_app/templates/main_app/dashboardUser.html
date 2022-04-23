@@ -13,11 +13,11 @@
     <div class="row g-4">
         <div class="col-lg-6">
             <br><br>
-            <p><a href="{% url 'editUser' %}">edit my profile</a></p>
+            <p><a href="{% url 'editUser' %}" class="text-primary text-uppercase">edit my profile</a></p>
             <hr>
-            <p><a href="{% url 'orderHistory' %}">order history</a></p>
+            <p><a href="{% url 'orderHistory' %}" class="text-primary text-uppercase">order history</a></p>
             <hr>
-            <p><a href="{% url 'wishList' %}">my wishList</a></p>
+            <p><a href="{% url 'wishList' %}" class="text-primary text-uppercase">my wishList</a></p>
 
             <div class="row g-3 pb-4">
                 <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
@@ -59,7 +59,7 @@
                         datasets: [{
                             data: {{ data|safe }},
                             backgroundColor: [
-                            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+                            '#ffa500', '#e59400', '#cc8400', '#b27300', '#996300'
                             ],
                             label: 'Population'
                         }],
