@@ -14,15 +14,14 @@
     <br>
     <div class="card">
         <div class="card-header">
-            <h2>Experience Detail</h2>
+            <h1>{{object.tourTitle}}</h1>
         </div>
         <div class="card-body">
             <div class="container row">
-                <div class="col-md-2">
+                <div class="col-md-6">
                     <img src="{{object.tourImage.url}}" class="card-img-top" alt="..."> 
                 </div>
-                <div class="col-md-10">
-                    <h1>Name: {{object.tourTitle}}</h1>
+                <div class="col-md-6">
                     <p>Description: {{object.tourDescription}}</p>
                     <p>Category: {{object.tourCategory}}</p>
                     <p>Location: {{object.tourLocation}}</p>
