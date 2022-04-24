@@ -7,7 +7,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
 import stripe
 from django.conf import settings
-from django.http.response import HttpResponseNotFound, JsonResponse, HttpResponse
+from django.http.response import HttpResponseNotFound, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.urls import reverse, reverse_lazy
@@ -85,7 +85,7 @@ def loginUser(request):
                 login(request, user)
                 return redirect("homepage")
             else:
-                messages.warning(request, 'Wrong input try again')
+                messages.warning(request, 'Oops!.. Wrong input try again')
                 # return render(request, "main_app/login.html", {'error': 'mitsotaki gamiesai'})
                 return redirect('loginUser')
     else:
@@ -125,7 +125,7 @@ def dashboardUser(request):
         'data': data,
         'num_of_tours': len(WishList.objects.filter(endUser=request.user)), 
         'num_of_bookings': len(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True)),
-        # 'num_of_outcome': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(amount=True))
+        'num_of_outcome': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True).filter(amount=True))
         }
     queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')[:5]
     for wish in queryset:
@@ -171,8 +171,8 @@ def dashboardGuide(request):
         'labels': labels,
         'data': data,
         'num_of_tours': len(TourExperience.objects.filter(tourGuide = request.user)), 
-        # 'num_of_bookings': len(OrderDetail.objects.filter().filter(has_paid=True)),
-        # 'num_of_income': len(OrderDetail.objects.all())
+        'num_of_bookings': len(OrderDetail.objects.filter(customer_email=request.user.email)),
+        'num_of_income': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True).filter(amount=True))
         }
     queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')[:5]
     for tour in queryset:
@@ -192,7 +192,6 @@ def experienceManage(request):
 class ExperienceCreateView(CreateView):
     model = TourExperience
     fields = ('tourTitle', 'tourCity', 'tourCategory', 'tourDuration', 'tourPrice', 'tourAvailableDate', 'tourMaxNumberOfPeople', 'tourDescription', 'tourImage')
-    # initial = {"tourAvailableDate":"%d/%m/%Y"}
     template_name = "main_app/experienceCreate.html"
     success_url = reverse_lazy("dashboardGuide")
     

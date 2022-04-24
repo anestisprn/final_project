@@ -6,7 +6,6 @@ from django.core import validators
 from location_field.models.plain import PlainLocationField
 
 
-
 class EndUser(User):
     userDateOfBirth = models.DateField(blank=True, null=True)
     
@@ -66,20 +65,22 @@ class TourExperience(models.Model):
     class Meta:
         verbose_name = 'TourExperience'
 
- 
+
 class OrderDetail(models.Model):
     id = models.BigAutoField(primary_key=True)
     # You can change as a Foreign Key to the user model
     customer_email = models.EmailField(verbose_name='Customer Email')
-    tourExperience = models.ForeignKey(
-        to=TourExperience, verbose_name='TourExperience', on_delete=models.PROTECT)
     amount = models.IntegerField(verbose_name='Amount')
     stripe_payment_intent = models.CharField(max_length=200)
-    # This field can be changed as status
     has_paid = models.BooleanField(
         default=False, verbose_name='Payment Status')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
+
+    tourExperience = models.ForeignKey(
+        to=TourExperience, verbose_name='Tour Experience', on_delete=models.PROTECT)
+    # seller_email = models.ForeignKey(
+    #     to=TourGuide, verbose_name='Seller Email', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.customer_email
