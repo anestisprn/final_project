@@ -50,7 +50,7 @@ class TourExperience(models.Model):
     tourMaxNumberOfPeople = models.IntegerField(verbose_name='Tour Max Number of People', validators=[
                                                 validators.MinValueValidator(1), validators.MaxValueValidator(20)])
     tourDescription = models.TextField(
-        max_length=500, verbose_name='Tour Title')
+        max_length=500, verbose_name='Tour Description')
     tourImage = models.ImageField(
         upload_to="static/media/images/", height_field=None, width_field=None, max_length=100, blank=True, null=True, verbose_name='Tour Image')
 
