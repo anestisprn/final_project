@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load customFilters %}
 
 {% block content %}
 
@@ -26,7 +27,7 @@
                 <tr>
                     <td>{{ item.tourExperience.tourTitle }}</td>
                     <td>{{ item.customer_email }}</td>
-                    <td>{{ item.amount }}</td>
+                    <td>{{ item.amount|makeInt|floatformat:2 }}</td>
                     <td>
                         {% if item.has_paid %}
                             <b class="text-success">Success</b>
@@ -37,7 +38,7 @@
                     <td>{{ item.created_on }}</td>
                 </tr>
             {% endif %}
-            {% endfor %}  
+            {% endfor %} 
         </tbody>
     </table>
 

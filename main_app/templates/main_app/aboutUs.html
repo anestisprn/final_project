@@ -12,7 +12,6 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center text-uppercase">
                         <li class="breadcrumb-item"><a href="{% url "homepage" %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url "experienceList" %}">Experiences</a></li>
                         <li class="breadcrumb-item text-white active" aria-current="page">About</li>
                     </ol>
                 </nav>
@@ -20,6 +19,93 @@
         </div>
     </div>
     <!-- Page Header End -->
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">      
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">The Brains behind the idea</h6>
+            <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Team</span></h1>
+        </div>
+        <div class="row g-4 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/philippos_richter.jpg' %}" alt="Philippos Richter">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="https://www.linkedin.com/in/philippos-richter/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="https://github.com/rich-ter" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Philippos J Richter</h5>
+                        <small>Team Coordinator</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/stefanos_dimitriou.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="https://www.linkedin.com/in/stefanos-dimitriou-27a59922b/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="https://github.com/TheraOzz" target="_blank"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="{% static 'media/images/stefanos_dimitriou_CV.pdf' %}" target="_blank"><i class="fab fa-file-lines">CV</i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Stefanos Dimitriou</h5>
+                        <small>Tech Lead</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
 
     <!-- BENEFITS FOR BOOKERS -->
     <div class="container-xxl py-5">
@@ -112,93 +198,6 @@
         </div>
     </div>
     <!-- BENEFITS FOR GUIDES End -->
-
-    <!-- Team Start -->
-    <div class="container-xxl py-5">      
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title text-center text-primary text-uppercase">The Brains behind the idea</h6>
-            <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Team</span></h1>
-        </div>
-        <div class="row g-4 d-flex justify-content-center">
-            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="rounded shadow overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'media/images/philippos_richter.jpg' %}" alt="Philippos Richter">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href="https://www.linkedin.com/in/philippos-richter/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href="https://github.com/rich-ter" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Philippos J Richter</h5>
-                        <small>Team Coordinator</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="rounded shadow overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="rounded shadow overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="rounded shadow overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="rounded shadow overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'media/images/stefanos_dimitriou.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href="https://www.linkedin.com/in/stefanos-dimitriou-27a59922b/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href="https://github.com/TheraOzz" target="_blank"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href="{% static 'media/images/stefanos_dimitriou_CV.pdf' %}" target="_blank"><i class="fab fa-file-lines">CV</i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Stefanos Dimitriou</h5>
-                        <small>Tech Lead</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
 
 {%endblock%}
 

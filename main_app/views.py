@@ -171,7 +171,7 @@ def dashboardGuide(request):
         'labels': labels,
         'data': data,
         'num_of_tours': len(TourExperience.objects.filter(tourGuide = request.user)), 
-        'num_of_bookings': len(OrderDetail.objects.filter(customer_email=request.user.email)),
+        'num_of_bookings': len(TourExperience.objects.filter(tourGuide = request.user).filter()),
         'num_of_income': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True).filter(amount=True))
         }
     queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')[:5]
