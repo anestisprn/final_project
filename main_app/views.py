@@ -224,6 +224,11 @@ class ExperienceDetails(DetailView):
     template_name = "main_app/experienceDetail.html"
     pk_url_kwarg = 'id'
 
+    def get(self, *args, **kwargs):
+        response = super(ExperienceDetails, self).get(*args, **kwargs)
+        response ['Content-Security-Policy'] = "frame-ancestors 'self' https://www.openstreetmap.org"
+        return response
+
     def get_context_data(self, **kwargs):
         context = super(ExperienceDetails, self).get_context_data(**kwargs)
         context['stripe_publishable_key'] = settings.STRIPE_PUBLISHABLE_KEY

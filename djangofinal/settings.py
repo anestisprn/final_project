@@ -168,3 +168,5 @@ LOCATION_FIELD = {
     'map.provider': 'openstreetmap',
     'search.provider': 'nominatim',
 }
+
+X_FRAME_OPTIONS = 'ALLOW-FROM https://www.openstreetmap.org'
