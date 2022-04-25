@@ -494,3 +494,8 @@
     padding-right: 0;
     border-right: none;
 }
+
+.imageCrop {
+    max-width: 405px;
+    height: auto;
+}

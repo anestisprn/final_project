@@ -14,7 +14,7 @@
         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="room-item shadow rounded overflow-hidden">
                 <div class="position-relative">
-                    <img class="img-fluid" src="{{tour.tourImage.url}}" alt="">
+                    <img class="img-fluid imageCrop" src="{{tour.tourImage.url}}" alt="">
                     <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">€ {{tour.tourPrice|floatformat:2}}/Per Person</small>
                     {% if user.enduser %}
                     <a href="{% url 'wishListAdd' id=tour.id %}" style="margin-left:-20px;" class="fa fa-heart position-absolute start-100 top-0 translate-middle-x bg-primary text-white rounded py-1 px-1 my-2"></a>
