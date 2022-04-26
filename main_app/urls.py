@@ -29,8 +29,6 @@ urlpatterns = [
     path('experienceDetails/success/', PaymentSuccessView.as_view(), name="success"),
     path('experienceDetails/failed/', PaymentFailedView.as_view(), name='failed'),
 
-    path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
-
     #sorting paths for price
     path('experienceList/sortByPriceAscending/', sortByPriceAscending, name="sortByPriceAscending"),
     path('experienceList/sortByPriceDescending/', sortByPriceDescending, name="sortByPriceDescending"),
@@ -46,4 +44,13 @@ urlpatterns = [
     #sorting paths for maximum number of people
     path('experienceList/sortByDateAscending/', sortByDateAscending, name="sortByDateAscending"),
     path('experienceList/sortByDateDescending/', sortByDateDescending, name="sortByDateDescending"),
+
+    # API
+    path('api/', homepage, name="homepage"),
+    path('api/tours/', getTours, name="getTours"),
+    path('api/tours/<id>/', getTour, name="getTour"),
+    path('api/guides', getGuides, name="getGuides"),
+    path('api/guide/<id>', getGuide, name="getGuide"),
+
+    path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
 ]

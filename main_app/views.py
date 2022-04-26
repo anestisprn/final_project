@@ -1,17 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import *
-from .models import *
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
-import stripe
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+from .serializers import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+import json
+import stripe
+from .forms import *
+from .models import *
+
 
 # Create your views here.
 
@@ -352,6 +357,46 @@ def sortByDateDescending(request):
     return render(request, 'main_app/sortBy.html', context)
 
 
+# API View
+@api_view(['GET'])
+def getTours(request):
+    tours = TourExperience.objects.all()
+    tours_serialized = TourSerializer(tours, many=True)
+    return Response(tours_serialized.data)
+
+@api_view(['GET'])
+def getTour(request, id):
+    tour = TourExperience.objects.get(pk=id)
+    tour_serialized = TourSerializer(tour, many=False)
+    return Response(tour_serialized.data)
+
+@api_view(['GET'])
+def getGuides(request):
+    guides = TourGuide.objects.all()
+    guides_serialized = GuideSerializer(guides, many=True)
+    return Response(guides_serialized.data)
+
+@api_view(['GET'])
+def getGuide(request, id):
+    guide = TourGuide.objects.get(pk=id)
+    guide_serialized = GuideSerializer(guide, many=False)
+    return Response(guide_serialized.data)
+
+@api_view(['POST'])
+def createTour(request):
+    serializer = TourSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createGuide(request):
+    serializer = GuideSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+    
 # def sortByCategoryDrinking(request):
 #     all_tours_list = TourExperience.objects.filter(tourCategory = 'drinking')
 

@@ -48,7 +48,10 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",   
+    "allauth.socialaccount.providers.google",
+    "rest_framework",
+    "corsheaders", 
+    "django_filters",
 ]
 
 SITE_ID = 1
@@ -62,6 +65,8 @@ AUTHENTICATION_BACKENDS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -185,4 +190,5 @@ LOCATION_FIELD = {
 
 X_FRAME_OPTIONS = 'ALLOW-FROM https://www.openstreetmap.org'
 
+ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True
