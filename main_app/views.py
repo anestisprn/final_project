@@ -147,9 +147,11 @@ def wishListAdd(request, id):
     if request.method == 'GET':
         currentUser = EndUser.objects.get(id=request.user.id)
         currentExperience = TourExperience.objects.get(id=id)
-        addWishList = WishList(endUser=currentUser,
+        addWishList = WishList(endUser=currentUser, tourExperience=currentExperience)
+        objects = WishList.objects.filter(endUser=currentUser,
                             tourExperience=currentExperience)
-        addWishList.save()
+        if objects.count() == 0:
+            addWishList.save()
         context = {
             'addWishList': addWishList
         }
