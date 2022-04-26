@@ -47,6 +47,7 @@ class TourExperience(models.Model):
     tourRating = models.IntegerField(verbose_name = 'Tour Rating', default=0, blank = True, null=True, validators=[
                                   validators.MinValueValidator(0), validators.MaxValueValidator(5)])
     tourAvailableDate = models.DateField(verbose_name='Tour Available Date')
+    tourBookings = models.IntegerField(verbose_name='Tour Bookings', default=0)
     tourMaxNumberOfPeople = models.IntegerField(verbose_name='Tour Max Number of People', validators=[
                                                 validators.MinValueValidator(1), validators.MaxValueValidator(20)])
     tourDescription = models.TextField(
