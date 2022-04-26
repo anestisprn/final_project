@@ -84,8 +84,9 @@
                     <h6>Category: <span class="text-primary text-uppercase">{{object.tourCategory}}</span></h6>
                     <h6>Duration: <span class="text-primary text-uppercase">{{object.tourDuration}}</span></h6>
                     <h6>Rating: <span class="text-primary text-uppercase">{{object.tourRating}} /5</span></h6>
-                    <h6>Price: <span class="text-primary text-uppercase">{{object.tourPrice}}</span></h6>
+                    <h6>Price: <span class="text-primary text-uppercase">{{object.tourPrice|floatformat:2}}</span></h6>
                     <h6>Available Date: <span class="text-primary text-uppercase">{{object.tourAvailableDate}}</span></h6>
+                    <h6>Max Number of People: <span class="text-primary text-uppercase">{{object.tourMaxNumberOfPeople}}</span></h6>
                     <h6>Place: <span class="text-primary text-uppercase">{{object.tourCity}}</span></h6>
                     <h6>Description: <span class="text-primary text-uppercase">{{object.tourDescription}}</span></h6>
                     <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/#map=14/{{object.tourLocation|map}}" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=14/{{object.tourLocation|map}}" target="_blank">View Larger Map</a></small>
