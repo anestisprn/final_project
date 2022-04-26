@@ -136,7 +136,7 @@
     </div>
     <div class="text-center p-2"> <span>Please fill out the form to start chatting with us!</span> </div>
     <div class="chat-form">
-        <form method="post" onsubmit="return startchat()">
+        <form method="post">
             {% csrf_token %}
             <input type="text" class="form-control" placeholder="Name" required>
             <input type="text" class="form-control" placeholder="Email" required>
@@ -150,14 +150,13 @@
     <div class="chat-header">
         <h6>E-Tours.gr - Chat</h6>
     </div>
-    <div class="chat-form"><textarea class="form-control" id="msg-area" placeholder="Welcome to E-tours.gr chat"></textarea><textarea class="form-control" id="msg-line" placeholder="Your Text Message"></textarea><button type='submit' class="btn btn-success btn-block float-end">Send</button></div>
+    <div class="chat-form">
+        <textarea readonly class="form-control" id="msg-area" placeholder="Welcome to E-tours.gr chat {{ request.user.first_name }}!"></textarea>
+        <textarea class="form-control" id="msg-line" placeholder="Your Text Message"></textarea>
+        <button type='submit' class="btn btn-success btn-block float-end">Send</button>
+    </div>
 </div>
 {% endif %}
-<script>
-    function startchat() {
-        alert("Submit button clicked!");
-        return true;
-     }
-</script>
+
 <!-- Chat-app End-->
 {% endblock %}

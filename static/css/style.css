@@ -507,7 +507,7 @@
     z-index: 4;
     right: 14px;
     bottom: 30px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .chat-btn .close {
@@ -593,7 +593,7 @@ button {
 .btn:hover {
     background-color: #FEA116;
     color: #0F172B;
-    border: #0F172B
+    border: #FEA116;
 }
 
 #check {
