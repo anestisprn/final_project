@@ -29,7 +29,7 @@ class ExperienceListView(ListView):
     model = TourExperience
     template_name = "main_app/experienceList.html"
     context_object_name = "allToursList"
-    
+
 
 def contactUs(request):
     context = {}
@@ -120,12 +120,18 @@ def logoutUser(request):
 def dashboardUser(request):
     labels = []
     data = []
+    tourList = TourExperience.objects.filter(endUser = request.user)
+
+    num_of_bookings = OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True)
+    num_of_expences = 0.0
+    for book in num_of_bookings:
+        num_of_expences += book.amount/100
     context = {
         'labels': labels,
         'data': data,
         'num_of_tours': len(WishList.objects.filter(endUser=request.user)), 
-        'num_of_bookings': len(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True)),
-        'num_of_outcome': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True).filter(amount=True))
+        'num_of_bookings': len(num_of_bookings),
+        'num_of_expences': num_of_expences
         }
     queryset = WishList.objects.filter(endUser=request.user).order_by('-tourExperience')[:5]
     for wish in queryset:
@@ -169,12 +175,23 @@ class WishListDeleteView(DeleteView):
 def dashboardGuide(request):
     labels = []
     data = []
+    tourList = TourExperience.objects.filter(tourGuide = request.user)
+    
+    num_of_bookings = 0
+    num_of_income = 0.0
+    for tour in tourList:
+        num_of_bookings += int(tour.tourBookings)
+        tourTotalIncome = float(tour.tourBookings)*float(tour.tourPrice)
+        num_of_income += tourTotalIncome
+
+    
     context = {
         'labels': labels,
         'data': data,
         'num_of_tours': len(TourExperience.objects.filter(tourGuide = request.user)), 
-        'num_of_bookings': len(TourExperience.objects.filter(tourGuide = request.user).filter()),
-        'num_of_income': sum(OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True).filter(amount=True))
+        'num_of_bookings': num_of_bookings,
+        # 'num_of_bookings': len(TourExperience.objects.filter(tourGuide = request.user).filter()),
+        'num_of_income': num_of_income
         }
     queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')[:5]
     for tour in queryset:
@@ -251,6 +268,9 @@ class PaymentSuccessView(TemplateView):
         order = get_object_or_404(
             OrderDetail, stripe_payment_intent=session.payment_intent)
         order.has_paid = True
+        currentExperience = TourExperience.objects.get(id = order.tourExperience.id)
+        currentExperience.tourBookings +=1
+        currentExperience.save()
         order.save()
         return render(request, self.template_name)
 
