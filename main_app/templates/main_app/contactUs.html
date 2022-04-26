@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %} Contact us {% endblock %}
-
+{% block title %}Contact us{% endblock %}
 {% block content %}
     <!-- Page Header Start -->
-    <div class="container-fluid page-header mb-5 p-0" style="background-image: url('../static/media/images/pexels-alex-azabache-3722809.jpg');">
-        <div class="container-fluid page-header-inner py-5"> 
+    <div class="container-fluid page-header mb-5 p-0"
+         style="background-image: url('../static/media/images/pexels-alex-azabache-3722809.jpg');">
+        <div class="container-fluid page-header-inner py-5">
             <div class="container text-center pb-5">
                 <h1 class="display-3 text-white mb-3 animated slideInDown">Contact Us</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center text-uppercase">
-                        <li class="breadcrumb-item"><a href="{% url "homepage" %}">Home</a></li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url "homepage" %}">Home</a>
+                        </li>
                         <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
                     </ol>
                 </nav>
@@ -20,138 +21,143 @@
     </div>
     <!-- Page Header End -->
 
-    <!-- Booking Start -->
-    <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="bg-white shadow" style="padding: 35px;">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-3">
-                                <div class="date" id="date1" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
-                                        placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="date" id="date2" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Adult</option>
-                                    <option value="1">Adult 1</option>
-                                    <option value="2">Adult 2</option>
-                                    <option value="3">Adult 3</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Child</option>
-                                    <option value="1">Child 1</option>
-                                    <option value="2">Child 2</option>
-                                    <option value="3">Child 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-primary w-100">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Booking End -->
-
     <!-- Contact Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="section-title text-center text-primary text-uppercase">Contact Us</h6>
-                <h1 class="mb-5"><span class="text-primary text-uppercase">Contact</span> For Any Query</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-12">
-                    <div class="row gy-4">
-                        <div class="col-md-4">
-                            <h6 class="section-title text-start text-primary text-uppercase">Booking</h6>
-                            <p><i class="fa fa-envelope-open text-primary me-2"></i>book@e-tours.gr</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h6 class="section-title text-start text-primary text-uppercase">General</h6>
-                            <p><i class="fa fa-envelope-open text-primary me-2"></i>info@e-tours.gr</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h6 class="section-title text-start text-primary text-uppercase">Technical</h6>
-                            <p><i class="fa fa-envelope-open text-primary me-2"></i>tech@e-tours.gr</p>
-                        </div>
-                    </div>
+                <h1 class="mb-5">
+                    <span class="text-primary text-uppercase">Contact</span> For Any Query
+            </h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="row gy-4">
+                    <div class="col-md-4">
+                        <h6 class="section-title text-start text-primary text-uppercase">Booking</h6>
+                        <p>
+                            <i class="fa fa-envelope-open text-primary me-2"></i>book@e-tours.gr
+                    </p>
                 </div>
-                <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                    <iframe class="position-relative rounded w-100 h-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50310.604001579304!2d23.703319872891647!3d37.990832008340874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd1f067043f1%3A0x2736354576668ddd!2zzpHOuM6uzr3OsQ!5e0!3m2!1sel!2sgr!4v1650894991730!5m2!1sel!2sgr"
-                        frameborder="0" style="min-height: 350px; border:0;" allowfullscreen="" aria-hidden="false"
-                        tabindex="0"></iframe>
+                <div class="col-md-4">
+                    <h6 class="section-title text-start text-primary text-uppercase">General</h6>
+                    <p>
+                        <i class="fa fa-envelope-open text-primary me-2"></i>info@e-tours.gr
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h6 class="section-title text-start text-primary text-uppercase">Technical</h6>
+                <p>
+                    <i class="fa fa-envelope-open text-primary me-2"></i>tech@e-tours.gr
+            </p>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
+    <iframe class="position-relative rounded w-100 h-100"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50310.604001579304!2d23.703319872891647!3d37.990832008340874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd1f067043f1%3A0x2736354576668ddd!2zzpHOuM6uzr3OsQ!5e0!3m2!1sel!2sgr!4v1650894991730!5m2!1sel!2sgr"
+            frameborder="0"
+            style="min-height: 350px;
+                   border:0;"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"></iframe>
+</div>
+<div class="col-md-6">
+    <div class="wow fadeInUp" data-wow-delay="0.2s">
+        <form>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                        <label for="name">Your Name</label>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                        <label for="subject">Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                        <label for="email">Your Email</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                        <label for="subject">Subject</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="form-control"
+                                  placeholder="Leave a message here"
+                                  id="message"
+                                  style="height: 150px"></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact End -->
+<!-- Newsletter Start -->
+<div class="container newsletter mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 border rounded p-1">
+            <div class="border rounded text-center p-1">
+                <div class="bg-white rounded text-center p-5">
+                    <h4 class="mb-4">
+                        Subscribe Our <span class="text-primary text-uppercase">Newsletter</span>
+                    </h4>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control w-100 py-3 ps-4 pe-5"
+                               type="text"
+                               placeholder="Enter your email">
+                        <button type="button"
+                                class="btn btn-primary py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Contact End -->
-
-    <!-- Newsletter Start -->
-    <div class="container newsletter mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 border rounded p-1">
-                <div class="border rounded text-center p-1">
-                    <div class="bg-white rounded text-center p-5">
-                        <h4 class="mb-4">Subscribe Our <span class="text-primary text-uppercase">Newsletter</span></h4>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
-                            <button type="button" class="btn btn-primary py-2 px-3 position-absolute top-0 end-0 mt-2 me-2">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+</div>
+<!-- Newsletter Start -->
+<!-- Chat-app Start -->
+{% if not user.is_active %}
+<input type="checkbox" id="check"> <label class="chat-btn" for="check"> <i class="fa fa-commenting-o comment"></i> <i class="fa fa-close close"></i> </label>
+<div class="wrapper">
+    <div class="chat-header">
+        <h6>E-Tours.gr - Chat</h6>
     </div>
-    
-    <!-- Newsletter Start -->
-
+    <div class="text-center p-2"> <span>Please fill out the form to start chatting with us!</span> </div>
+    <div class="chat-form">
+        <form method="post" onsubmit="return startchat()">
+            {% csrf_token %}
+            <input type="text" class="form-control" placeholder="Name" required>
+            <input type="text" class="form-control" placeholder="Email" required>
+            <button class="btn btn-success btn-block">Start Chatting</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<input type="checkbox" id="check"> <label class="chat-btn" for="check"> <i class="fa fa-commenting-o comment"></i> <i class="fa fa-close close"></i> </label>
+<div class="wrapper">
+    <div class="chat-header">
+        <h6>E-Tours.gr - Chat</h6>
+    </div>
+    <div class="chat-form"><textarea class="form-control" id="msg-area" placeholder="Welcome to E-tours.gr chat"></textarea><textarea class="form-control" id="msg-line" placeholder="Your Text Message"></textarea><button type='submit' class="btn btn-success btn-block float-end">Send</button></div>
+</div>
+{% endif %}
+<script>
+    function startchat() {
+        alert("Submit button clicked!");
+        return true;
+     }
+</script>
+<!-- Chat-app End-->
 {% endblock %}
