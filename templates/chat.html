@@ -1,0 +1,53 @@
+{% load static %}
+
+<!-- Chat-app Start -->
+{% if not user.is_active %}
+    <input type="checkbox" id="check">
+    <label class="chat-btn" for="check">
+        <i class="fas fa-comment-dots"></i> <i class="fa fa-close close"></i>
+    </label>
+    <div class="wrapper">
+        <div class="chat-header">
+            <h6>E-Tours.gr - Chat</h6>
+        </div>
+        <div class="text-center p-2">
+            <span>Please fill out the form to start chatting with us!</span>
+        </div>
+        <div class="chat-form">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control" placeholder="Name" required>
+                <input type="text" class="form-control" placeholder="Email" required>
+                <button class="btn btn-success btn-block">Start Chatting</button>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <input type="checkbox" id="check">
+    <label class="chat-btn" for="check">
+        <i class="fas fa-comment-dots"></i> <i class="fa fa-close close"></i>
+    </label>
+    <div class="wrapper">
+        <div class="chat-header">
+            <h6>E-Tours.gr - Chat</h6>
+        </div>
+        <div class="chat-form">
+            <textarea readonly
+                        class="form-control"
+                        id="msg-area"
+                        placeholder="Welcome to E-tours.gr chat {{ request.user.first_name }}!"></textarea>
+            <textarea class="form-control" id="msg-line" placeholder="Your Text Message"></textarea>
+            <button id='sendButton' class="btn btn-success btn-block float-end">Send</button>
+        </div>
+    </div>
+{% endif %}
+<script>
+    var sendMessage = document.getElementById("msg-line");
+        sendMessage.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+
+        }
+})
+</script>
+<!-- Chat-app End-->
