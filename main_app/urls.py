@@ -46,7 +46,6 @@ urlpatterns = [
     path('experienceList/sortByDateDescending/', sortByDateDescending, name="sortByDateDescending"),
 
     # API
-    path('api/', homepage, name="homepage"),
     path('api/tours/', getTours, name="getTours"),
     path('api/tours/<id>/', getTour, name="getTour"),
     path('api/guides', getGuides, name="getGuides"),
