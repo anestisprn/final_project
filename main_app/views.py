@@ -248,11 +248,6 @@ class ExperienceDetails(DetailView):
     template_name = "main_app/experienceDetail.html"
     pk_url_kwarg = 'id'
 
-    def get(self, *args, **kwargs):
-        response = super(ExperienceDetails, self).get(*args, **kwargs)
-        response ['Content-Security-Policy'] = "frame-ancestors 'self' https://www.openstreetmap.org"
-        return response
-
     def get_context_data(self, **kwargs):
         context = super(ExperienceDetails, self).get_context_data(**kwargs)
         context['stripe_publishable_key'] = settings.STRIPE_PUBLISHABLE_KEY
@@ -416,24 +411,3 @@ def createGuide(request):
         serializer.save()
     return Response(serializer.data)
 
-    
-# def sortByCategoryDrinking(request):
-#     all_tours_list = TourExperience.objects.filter(tourCategory = 'drinking')
-
-#########################################################################
-
-
-
-# class SortByView(ListView):
-#     all_tours_list = TourExperience.objects.all()
-#     sortByPriceAscending = all_tours_list.order_by('-tourPrice')
-#     sortByPriceDescending = all_tours_list.order_by('tourPrice')
-#     def sortBy():
-#         if sortByPriceAscending:
-#             context = {'sorted_tour_list': sortByPriceAscending}
-#         elif sortByPriceDescending:
-#             context = {'sorted_tour_list': sortByPriceDescending}
-
-#         return render(request,'main_app/sortBy.html', context)
-
-###############################################################################
