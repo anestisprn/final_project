@@ -44,6 +44,20 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap5",
     "location_field.apps.DefaultConfig",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",   
+]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'dashboardUser'
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 MIDDLEWARE = [
