@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-0nlh&hi3g*xd%%r#=7d#u=oc=2ru@gd8y=pgnyzqt#%6ejzat8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
+    'chat_app',
     'crispy_forms',
+    "crispy_bootstrap5",
+    "location_field.apps.DefaultConfig",
 ]
 
 MIDDLEWARE = [
@@ -108,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 
@@ -128,5 +132,43 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
-AUTH_USER_MODEL = 'main_app.CustomUser'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# AUTH_USER_MODEL = 'main_app.CustomUser'
+
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51KpxvVJLOsvnT9wMQXRBItRC2HG7XbBdC3lKTnLxWtKFB0aGaI2HumRIBd2APpe0AblL4oNZxMhiZmIHLQ9dm4dM0095DnJNYP'
+STRIPE_SECRET_KEY = 'sk_test_51KpxvVJLOsvnT9wMSeGI2CMhftaKi6k9P3XbnVqmwpdlwaSGALKH8dK96uCagfSekiR1I0J8qpojyEjEfjCm6ur700gy8F416r'
+
+LOCATION_FIELD_PATH = settings.STATIC_URL + 'location_field'
+
+LOCATION_FIELD = {
+    'map.provider': 'google',
+    'map.zoom': 13,
+
+    'search.provider': 'google',
+    'search.suffix': '',
+
+    # OpenStreetMap
+    'provider.openstreetmap.max_zoom': 18,
+
+    # misc
+    'resources.root_path': LOCATION_FIELD_PATH,
+    'resources.media': {
+        'js': (
+            LOCATION_FIELD_PATH + '/js/form.js',
+        ),
+    },
+}
+
+LOCATION_FIELD = {
+    'map.provider': 'openstreetmap',
+    'search.provider': 'nominatim',
+}
+
+X_FRAME_OPTIONS = 'ALLOW-FROM https://www.openstreetmap.org'
+
+CORS_ORIGIN_ALLOW_ALL = True

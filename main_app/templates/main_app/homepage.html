@@ -1,59 +1,219 @@
 {% extends 'base.html' %}
-{%load static%}
-{% block title %} Homepage {% endblock %}
-{% block content %}
-<div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{% static 'media/images/pexels-cátia-matos-984888.jpg' %}" class="d-block w-100 h-100 " alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'media/images/pexels-jimmy-teoh-971008.jpg'%}" class="d-block w-100 h-100 " alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'media/images/pexels-pixabay-164336.jpg'%}" class="d-block w-100 h-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+{% load static %}
+{% load customFilters %}
 
-  <div class="container p-4" >
-    <div class="row">
-      {%for tour in allToursList%}
-      <div class="card col-sm mx-auto p-3" style="width: 18rem; max-width: 400px;">
-        <img src="{{tour.tourImage}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          
-          <h5 class="card-title">{{tour.tourTitle}} </h5>
-          <p class="card-text">{{tour.tourDescription}}</p>
-          <a href="#" class="btn btn-primary">Book now</a>
+{% block title %} Homepage {% endblock %}
+
+{% block carouzel %}
+    {% include 'carouzel.html' %}
+{% endblock carouzel %}
+
+{% block content %}
+  
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <h6 class="section-title text-start text-primary text-uppercase">About Our Platform</h6>
+                <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">e-tours.gr</span></h1>
+                <p class="mb-4">proprietary technology with an intuitive design adjusted for the optimal user experience while at the same time leveraging the highest conversion rates possible</p>
+                <div class="row g-3 pb-4">
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-suitcase fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">{{num_of_tours}}</h2>
+                                <p class="mb-0">Tour Experiences</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-users fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">{{num_of_guides}}</h2>
+                                <p class="mb-0">Tour Guides</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-credit-card fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">{{num_of_purshases}}</h2>
+                                <p class="mb-0">Purchases</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="{% url "experienceList" %}">Explore More</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6 text-end">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" style="margin-top: 25%;">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="{% static 'media/images/pexels-valdemaras-d-2897548.jpg' %}">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="{% static 'media/images/pexels-pixabay-164041.jpg' %}">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="{% static 'media/images/pexels-pixabay-164336.jpg' %}">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      {%endfor%}   
     </div>
-  </div>
+    <!-- About End -->
+
+    <!-- Experience Start -->
+    <div class="container-xxl py-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Our Experiences</h6>
+            <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Unique Experiences</span></h1>
+        </div>
+        <div class="row g-4">
+            {% if allToursList %}
+            {% for tour in allToursList %}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="room-item shadow rounded overflow-hidden">
+                    <div class="position-relative">                       
+                        <img class="img-fluid imageCrop" src="{{tour.tourImage.url}}" alt="">                       
+                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">€ {{tour.tourPrice|floatformat:2}}/Per Person</small>
+                        {% if user.enduser %}
+                        <a href="{% url 'wishListAdd' id=tour.id %}" style="margin-left:-20px;" class="fa fa-heart position-absolute start-100 top-0 translate-middle-x bg-primary text-white rounded py-1 px-1 my-2"></a>
+                        {% endif %}
+                    </div>
+                    <div class="p-4 mt-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">{{tour.tourTitle}}</h5>
+                            <div class="ps-2">
+                                {% if tour.tourRating == 0 %}
+                                    <p class="text-primary"> no rating yet</p>
+                                {%else%}
+                                    {% for i in tour.tourRating|makeList %}
+                                    <small class="fa fa-star text-primary"></small>
+                                    {% endfor %}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <small class="border-end me-3 pe-3"><i class="fa fa-users text-primary me-2"></i>{{tour.tourMaxNumberOfPeople}}</small>
+                            <small class="border-end me-3 pe-3"><i class="fa fa-hourglass-start text-primary me-2"></i>{{tour.tourDuration}}</small>
+                            <small><i class="fa fa-eye text-primary me-2"></i>{{tour.tourCategory}}</small>
+                        </div>
+                        <p class="text-body mb-3">{{tour.tourDescription}}</p>
+                        <div class="d-flex justify-content-between position-relative">
+                            {% if user.enduser %}
+                            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-dark rounded py-2 px-4">Book Now</a>
+                            {% else %}
+                            <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            {% else %}
+            <div class="alert alert-info text-center mt-5">
+                The experience list is empty.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Experience End -->
+
+
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
+        
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">The Brains behind the idea</h6>
+            <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Team</span></h1>
+        </div>
+        <div class="row g-4 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="rounded shadow overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="{% static 'media/images/pexels-alex-azabache-3722809.jpg' %}" alt="">
+                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href="" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 mt-3">
+                        <h5 class="fw-bold mb-0">Full Name</h5>
+                        <small>Designation</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+    
 {% endblock %}
+
