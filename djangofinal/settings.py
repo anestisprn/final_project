@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-0nlh&hi3g*xd%%r#=7d#u=oc=2ru@gd8y=pgnyzqt#%6ejzat8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,6 +44,20 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap5",
     "location_field.apps.DefaultConfig",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",   
+]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'dashboardUser'
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 MIDDLEWARE = [
@@ -112,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 
@@ -170,3 +184,5 @@ LOCATION_FIELD = {
 }
 
 X_FRAME_OPTIONS = 'ALLOW-FROM https://www.openstreetmap.org'
+
+CORS_ORIGIN_ALLOW_ALL = True
