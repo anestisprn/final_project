@@ -23,9 +23,9 @@ from .models import *
 
 def homepage(request):
     allTourList = TourExperience.objects.all()
-    homeTourList = allTourList[:6]
+    homeTourList = allTourList[::-1]
     context = {
-        'homeTourList': homeTourList, 
+        'homeTourList': homeTourList[:6], 
         'num_of_tours': len(TourExperience.objects.all()), 
         'num_of_guides': len(TourGuide.objects.all()),
         'num_of_purshases': len(OrderDetail.objects.filter(has_paid=True))
