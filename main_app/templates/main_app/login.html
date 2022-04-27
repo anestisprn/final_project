@@ -9,7 +9,7 @@
 {% block content %}
 
 {% get_providers as socialaccount_providers %}
-
+{% comment %} 
 {% if socialaccount_providers %}
 <p>Please sign in with one
 of your existing accounts.<br>Or, <a href="{{ signup_url }}">sign up</a>
@@ -25,7 +25,7 @@ for an account and sign in below:</p>
 {% else %}
 <p>If you have not created an account yet, then please
 <a href="{{ signup_url }}">sign up</a> first.</p>
-{% endif %}
+{% endif %} {% endcomment %}
 
 <div class="container-xxl py-5 w-50 p-3">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -46,6 +46,11 @@ for an account and sign in below:</p>
             <br>
             <button type="submit" class="btn btn-primary"> login </button>
             <button type="reset" class="btn btn-secondary"> reset </button>
+            {% if socialaccount_providers %}
+            <div class="btn btn-primary socialaccount_providers float-end" id='providers'>
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </div>
+            {% endif %}
         </div>
     </form>
 </div>

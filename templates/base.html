@@ -38,6 +38,9 @@
 </head>
 
 <body>
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/6210328.js"></script>
+<!-- End of HubSpot Embed Code -->
   {% include 'navbar.html' %}
 
   {% block carouzel %}{% endblock carouzel %}
@@ -46,13 +49,13 @@
     {% block content %}{% endblock content %}
   </main>
 
-  {% if not user.is_active %}
+  {% comment %} {% if not user.is_active %}
     {% include 'chat_app/lobby.html' %}
     {% block lobbycontent %}{% endblock %}
   {% else %}
     {% include 'chat_app/room.html' %}
     {% block chatcontent %}{% endblock %}
-  {% endif %}
+  {% endif %} {% endcomment %}
 
   {% include 'footer.html' %}
 
