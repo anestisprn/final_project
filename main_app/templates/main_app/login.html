@@ -9,23 +9,6 @@
 {% block content %}
 
 {% get_providers as socialaccount_providers %}
-{% comment %} 
-{% if socialaccount_providers %}
-<p>Please sign in with one
-of your existing accounts.<br>Or, <a href="{{ signup_url }}">sign up</a>
-for an account and sign in below:</p>
-
- <div class="socialaccount_ballot">
-
-      <div class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-      </div>
-      <a href="https://accounts.google.com/o/oauth2/auth/identifier?client_id=840507429687-vg0aeqmefc68qrru0japhrr8k67j8hg3.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=profile&response_type=code&state=VxKRwVTVFPoK&flowName=GeneralOAuthFlow"> CLick me</a>
-
-{% else %}
-<p>If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.</p>
-{% endif %} {% endcomment %}
 
 <div class="container-xxl py-5 w-50 p-3">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">

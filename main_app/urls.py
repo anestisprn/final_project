@@ -17,9 +17,11 @@ urlpatterns = [
     path("dashboardUser/wishList/<int:id>", wishListAdd, name="wishListAdd"),
     path("<pk>/dashboardUser/wishList/delete", WishListDeleteView.as_view(), name="wishListDelete"),
     path('dashboardUser/editUser/', editUser, name='editUser'),
+    path('dashboardUser/editPass/', editPass, name='editPass'),
     path('dashboardUser/orderHistory/', OrderHistoryListView.as_view(), name='orderHistory'),
 
     path("dashboardGuide/", dashboardGuide, name="dashboardGuide"),
+    path('dashboardGuide/editGuide/', editGuide, name='editGuide'),
     path("dashboardGuide/experienceManage", experienceManage, name="experienceManage"),
     path('dashboardGuide/experienceCreate/', ExperienceCreateView.as_view(), name='experienceCreate'),
     path("<pk>/dashboardGuide/update", ExperienceUpdateView.as_view(), name="experienceUpdate"),

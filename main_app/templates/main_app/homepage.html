@@ -75,8 +75,8 @@
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Unique Experiences</span></h1>
         </div>
         <div class="row g-4">
-            {% if allToursList %}
-            {% for tour in allToursList %}
+            {% if homeTourList %}
+            {% for tour in homeTourList %}
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="room-item shadow rounded overflow-hidden">
                     <div class="position-relative">                       
@@ -91,7 +91,7 @@
                             <h5 class="mb-0">{{tour.tourTitle}}</h5>
                             <div class="ps-2">
                                 {% if tour.tourRating == 0 %}
-                                    <p class="text-primary"> no rating yet</p>
+                                    <p class="text-primary"></p>
                                 {%else%}
                                     {% for i in tour.tourRating|makeList %}
                                     <small class="fa fa-star text-primary"></small>

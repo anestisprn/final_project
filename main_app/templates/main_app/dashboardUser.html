@@ -13,6 +13,8 @@
     <div class="row g-4">
         <div class="col-lg-6">
             <br><br>
+            <p><a href="{% url 'editPass' %}" class="text-primary text-uppercase">change password</a></p>
+            <hr>
             <p><a href="{% url 'editUser' %}" class="text-primary text-uppercase">edit my profile</a></p>
             <hr>
             <p><a href="{% url 'orderHistory' %}" class="text-primary text-uppercase">order history</a></p>
@@ -42,8 +44,8 @@
                     <div class="border rounded p-1">
                         <div class="border rounded text-center p-4">
                             <i class="fa fa-credit-card fa-2x text-primary mb-2"></i>
-                            <h2 class="mb-1" data-toggle="counter-up">{{num_of_expences|floatformat:2}}</h2>
-                            <p class="mb-0">Outcome</p>
+                            <h2 class="mb-1" data-toggle="counter-up">${{num_of_expences|floatformat:2}}</h2>
+                            <p class="mb-0">Expenses</p>
                         </div>
                     </div>
                 </div>

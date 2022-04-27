@@ -1,5 +1,6 @@
+from importlib.machinery import FrozenImporter
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import UpdateView, DeleteView, ListView, CreateView, DetailView, TemplateView
@@ -21,8 +22,10 @@ from .models import *
 # Create your views here.
 
 def homepage(request):
+    allTourList = TourExperience.objects.all()
+    homeTourList = allTourList[:6]
     context = {
-        'allToursList': TourExperience.objects.all(), 
+        'homeTourList': homeTourList, 
         'num_of_tours': len(TourExperience.objects.all()), 
         'num_of_guides': len(TourGuide.objects.all()),
         'num_of_purshases': len(OrderDetail.objects.filter(has_paid=True))
@@ -109,6 +112,20 @@ def editUser(request):
         user_form = UpdateUserForm(instance=request.user)
     return render(request, 'main_app/editUser.html', {'user_form': user_form})
 
+def editPass(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, "Successfully changed password")
+            return redirect("editPass")
+
+        else:
+            messages.error(request, "Please try again")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'main_app/editPass.html', {'form':form})
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangeForm
@@ -125,8 +142,6 @@ def logoutUser(request):
 def dashboardUser(request):
     labels = []
     data = []
-    tourList = TourExperience.objects.filter(endUser = request.user)
-
     num_of_bookings = OrderDetail.objects.filter(customer_email=request.user.email).filter(has_paid=True)
     num_of_expences = 0.0
     for book in num_of_bookings:
@@ -195,7 +210,6 @@ def dashboardGuide(request):
         'data': data,
         'num_of_tours': len(TourExperience.objects.filter(tourGuide = request.user)), 
         'num_of_bookings': num_of_bookings,
-        # 'num_of_bookings': len(TourExperience.objects.filter(tourGuide = request.user).filter()),
         'num_of_income': num_of_income
         }
     queryset = TourExperience.objects.filter(tourGuide=request.user).order_by('-tourPrice')[:5]
@@ -204,6 +218,16 @@ def dashboardGuide(request):
         data.append(tour.tourPrice)
     return render(request, 'main_app/dashboardGuide.html', context) 
 
+def editGuide(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='dashboardGuide')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+    return render(request, 'main_app/editUser.html', {'user_form': user_form})
 
 def experienceManage(request):
     guideToursList = TourExperience.objects.filter(tourGuide=request.user)

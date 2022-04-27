@@ -46,7 +46,7 @@
                             <h5 class="mb-0">{{tour.tourTitle}}</h5>
                             <div class="ps-2">
                             {% if tour.tourRating == 0 %}
-                                <p class="text-primary"> no rating yet</p>
+                                <p class="text-primary"></p>
                             {%else%}
                                 {% for i in tour.tourRating|makeList %}
                                 <small class="fa fa-star text-primary"></small>
