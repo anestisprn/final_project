@@ -104,7 +104,7 @@
                             <small class="border-end me-3 pe-3"><i class="fa fa-hourglass-start text-primary me-2"></i>{{tour.tourDuration}}</small>
                             <small><i class="fa fa-eye text-primary me-2"></i>{{tour.tourCategory}}</small>
                         </div>
-                        <p class="text-body mb-3">{{tour.tourDescription}}</p>
+                        <p class="text-body mb-3"> <b> Tour by: </b> {{tour.tourGuide.username}}</p>
                         <div class="d-flex justify-content-between position-relative">
                             {% if user.enduser %}
                             <a href="{% url 'experienceDetails' id=tour.id %}" class="btn btn-sm btn-primary rounded py-2 px-4">View Detail</a>
