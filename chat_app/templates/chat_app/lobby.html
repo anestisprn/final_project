@@ -1,52 +1,23 @@
-{% extends 'base.html' %}
+
 {% load static %}
 
-{% block content %}
+{% block lobbycontent %}
 
-<div class="container w-50 p-3">
-  <h1 class="mb-4 text-center text-primary text-uppercase">E-TOURS Chat</h1>
-
-    <style>
-    #post-form input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    }
-
-    #post-form input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    }
-
-    #post-form input[type=submit]:hover {
-    background-color: #45a049;
-    }
-
-    #post-form div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    }
-    </style>
-
-    <form id="post-form" method="POST" action="checkview">
-        {% csrf_token %}
-        <label>Room Name</label>
-        <input type="text" name="room_name" id="room_name" width="100px" />
-        <label>Username</label>
-        <input type="text" name="username" id="username" width="100px" />
-        <input type="submit" value="Enter Room">
-    </form>
+<input type="checkbox" id="check">
+<label class="chat-btn" for="check">
+    <i class="fas fa-comment-dots"></i> <i class="fa fa-close close"></i>
+</label>
+<div class="wrapper">
+    <div class="chat-header">
+        <h6>E-Tours.gr - Chat</h6>
+    </div>
+    <div class="text-center p-2">
+        <span>Please login or sign-up to chat with us!</span>
+    </div>
+    <div class="chat-form text-center">
+        <a href="{% url 'signupUser' %}"><button class="btn btn-success btn-block">Sign up</button></a>
+        <a href="{% url 'loginUser' %}"><button class="btn btn-success btn-block ms-2">Login</button></a>
+    </div>
 </div>
 
 {% endblock %}

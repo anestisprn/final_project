@@ -6,14 +6,18 @@ from django.http import HttpResponse, JsonResponse
 def lobby(request):
     return render(request, 'chat_app/lobby.html')
 
-def room(request, room):
-    username = request.GET.get('username')
-    room_details = Room.objects.get(name=room)
-    return render(request, 'chat_app/room.html', {
-        'username': username,
-        'room': room,
-        'room_details': room_details
-    })
+def room(request):
+    context = {}
+    return render(request, 'chat_app/room.html', context)
+
+# def room(request, room):
+#     username = request.GET.get('username')
+#     room_details = Room.objects.get(name=room)
+#     return render(request, 'chat_app/room.html', {
+#         'username': username,
+#         'room': room,
+#         'room_details': room_details
+#     })
 
 def checkview(request):
     room = request.POST['room_name']

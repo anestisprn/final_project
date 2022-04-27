@@ -1,114 +1,44 @@
-{% extends 'base.html' %}
 {% load static %}
 
 
-
-
-{% block content %}
-
-<div class="container w-50 p-3">
-  <h1 class="mb-4 text-center text-primary text-uppercase">{{room}} room</h1>
-
-
-<div id="display">
-
-<!-- <div class="container darker">
-  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
-  <span class="time-left">20th, April 2021</span>
-</div> -->
-
+{% block chatcontent %}
+<input type="checkbox" id="check">
+<label class="chat-btn" for="check">
+    <i class="fas fa-comment-dots"></i> <i class="fa fa-close close"></i>
+</label>
+<div class="wrapper">
+    <div class="chat-header">
+        <h6>E-Tours.gr - Chat</h6>
+    </div>
+    <div class="chat-form">
+        {% comment %} <form method="POST">
+            {% csrf_token %} {% endcomment %}
+            <textarea readonly class="form-control" id="msg-area" placeholder="Welcome to E-tours.gr chat {{ request.user.first_name }}!"></textarea>
+            <textarea class="form-control" id="msg-line" placeholder="Your Text Message"></textarea>
+            <button id='sendButton' class="btn btn-success btn-block float-end">Send</button>
+        {% comment %} </form> {% endcomment %}
+    </div>
 </div>
-
 <script>
-$(document).ready(function(){
-
-setInterval(function(){
-    $.ajax({
-        type: 'GET',
-        url : "/getMessages/{{room}}/",
-        success: function(response){
-            console.log(response);
-            $("#display").empty();
-            for (var key in response.messages)
-            {
-                var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
-                $("#display").append(temp);
-            }
-        },
-        error: function(response){
-            alert('An error occured')
-        }
+    var input = document.getElementById("msg-line");
+    input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("sendButton").click();
+    }
     });
-},1000);
-})
-</script>
 
-
-<div class="container">
-    <style>
-    #post-form input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    }
-
-    #post-form input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    }
-
-    #post-form input[type=submit]:hover {
-    background-color: #45a049;
-    }
-
-    #post-form div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    }
-    </style>
-
-    <form id="post-form">
-        {% csrf_token %}
-        <input type="hidden" name="username" id="username" value="{{username}}"/>
-        <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
-        <input type="text" name="message" id="message" width="100px" />
-        <input type="submit" value="Send">
-    </form>
-</div>
-
-
-</body>
-
-<script type="text/javascript">
-  $(document).on('submit','#post-form',function(e){
-    e.preventDefault();
-
-    $.ajax({
-      type:'POST',
-      url:'/send',
-      data:{
-          username:$('#username').val(),
-          room_id:$('#room_id').val(),
-          message:$('#message').val(),
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-      },
-      success: function(data){
-         //alert(data)
-      }
-    });
-    document.getElementById('message').value = ''
-  });
+    var textarea = document.getElementById("msg-area"),
+    mymsg = document.getElementById("msg-line"),
+    myBtn = document.getElementById("sendButton");
+    myBtn.addEventListener("click", function(){
+        var today = new Date();
+        var date = today.getDate() + '/' + (today.getMonth()+1) + '/' + today.getFullYear();
+        var time = today.getHours() + ":" + String(today.getMinutes()).padStart(2, "0") + ":" + today.getSeconds();
+        textarea.value += "{{ request.user.first_name }}: " + mymsg.value + '\r\n' + '[' + time + ' - ' + date +']' + '\r\n';
+        mymsg.value = "";
+        mymsg.focus();
+    }, false);
 </script>
 
 {% endblock %}

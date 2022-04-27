@@ -46,8 +46,13 @@
     {% block content %}{% endblock content %}
   </main>
 
-  {% include 'chat.html' %}
-  {% block chat %}{% endblock chat %}
+  {% if not user.is_active %}
+    {% include 'chat_app/lobby.html' %}
+    {% block lobbycontent %}{% endblock %}
+  {% else %}
+    {% include 'chat_app/room.html' %}
+    {% block chatcontent %}{% endblock %}
+  {% endif %}
 
   {% include 'footer.html' %}
 

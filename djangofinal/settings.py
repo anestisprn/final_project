@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'chat_app',
+    # 'channels',
     'crispy_forms',
     "crispy_bootstrap5",
     "location_field.apps.DefaultConfig",

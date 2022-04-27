@@ -577,7 +577,6 @@ textarea,
 button {
     margin-bottom: 10px
 }
-
 .chat-form textarea {
     resize: none
 }
@@ -599,12 +598,29 @@ button {
     display: none !important
 }
 
-/* messages */
+/************** messages **************/
 
+#check_msg:checked~.chat-btn i {
+    display: block;
+    pointer-events: auto;
+    transform: rotate(180deg)
+}
+
+#check_msg:checked~.chat-btn .comment {
+    display: none
+}
+#check_msg {
+    display: none !important
+}
+#check_msg:checked~.wrapper {
+    opacity: 1
+}
 #msg-area {
     height: 300px;
+    color:#000000;
 }
 #msg-line{
+    color:#000000;
     min-height: 15px;
     max-height: 40px;
 }
