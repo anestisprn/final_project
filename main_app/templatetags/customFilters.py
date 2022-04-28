@@ -4,7 +4,7 @@ register = template.Library()
 
 @register.filter
 def map(value):
-    return value.replace(",","/")
+    return value.replace(",","~")
 
 @register.filter
 def makeList(value):
